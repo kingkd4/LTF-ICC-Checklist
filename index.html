@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ICC Strategy Checklist</title>
+<title>ICC Checklist</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <!-- For browser tab icon -->
@@ -15,6 +15,7 @@
 
 <!-- Optional: For Android Chrome -->
 <link rel="manifest" href="manifest.json">
+  
   
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -427,16 +428,14 @@ const sellSteps = [
 let activeTab = 'buy';
 let checked = { buy: {}, sell: {} };
 
-async function saveProgress() {
-  try {
-    await window.storage.set('icc-checked', JSON.stringify(checked));
-  } catch(e) {}
+function saveProgress() {
+  try { localStorage.setItem('icc-checked', JSON.stringify(checked)); } catch(e) {}
 }
 
-async function loadProgress() {
+function loadProgress() {
   try {
-    const res = await window.storage.get('icc-checked');
-    if (res) checked = JSON.parse(res.value);
+    const res = localStorage.getItem('icc-checked');
+    if (res) checked = JSON.parse(res);
   } catch(e) {}
 }
 
@@ -520,8 +519,8 @@ function updateProgress() {
 
 function resetAll() { checked[activeTab] = {}; renderAll(activeTab); updateProgress(); saveProgress(); }
 
-async function init() {
-  await loadProgress();
+function init() {
+  loadProgress();
   renderAll('buy'); renderAll('sell'); updateProgress();
 }
 init();
