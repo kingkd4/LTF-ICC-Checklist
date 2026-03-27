@@ -16,7 +16,6 @@
 <!-- Optional: For Android Chrome -->
 <link rel="manifest" href="manifest.json">
   
-  
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -429,13 +428,18 @@ let activeTab = 'buy';
 let checked = { buy: {}, sell: {} };
 
 function saveProgress() {
-  try { localStorage.setItem('icc-checked', JSON.stringify(checked)); } catch(e) {}
+  try {
+    const val = encodeURIComponent(JSON.stringify(checked));
+    const exp = new Date();
+    exp.setFullYear(exp.getFullYear() + 2);
+    document.cookie = `icc=${val};expires=${exp.toUTCString()};path=/;SameSite=Lax`;
+  } catch(e) {}
 }
 
 function loadProgress() {
   try {
-    const res = localStorage.getItem('icc-checked');
-    if (res) checked = JSON.parse(res);
+    const match = document.cookie.split(';').find(c => c.trim().startsWith('icc='));
+    if (match) checked = JSON.parse(decodeURIComponent(match.split('=')[1]));
   } catch(e) {}
 }
 
