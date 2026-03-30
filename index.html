@@ -7,7 +7,6 @@
 <title>ICC Checklist</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<!-- For browser tab icon -->
 <link rel="icon" href="IMG_5307.jpeg" type="image/x-icon">
 
 <!-- For Apple devices (Add to Home Screen) -->
@@ -15,13 +14,14 @@
 
 <!-- Optional: For Android Chrome -->
 <link rel="manifest" href="manifest.json">
-
+  
+ 
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
 background: #ffffff;
-color: #5a1a3a;
+color: #659ea5;
 font-family: ‘Montserrat’, sans-serif;
 min-height: 100vh;
 padding: 36px 16px 60px;
@@ -29,149 +29,134 @@ padding: 36px 16px 60px;
 
 .container { max-width: 620px; margin: 0 auto; }
 
-/* Header */
 header { text-align: center; margin-bottom: 30px; }
-.label { font-size: 10px; letter-spacing: 5px; color: #e991bc; text-transform: uppercase; margin-bottom: 8px; font-weight: 600; }
-h1 { font-family: ‘Cormorant Garamond’, serif; font-size: 44px; font-weight: 700; color: #d63384; line-height: 1; letter-spacing: 2px; }
-.subtitle { font-size: 10px; color: #b48faa; margin-top: 6px; letter-spacing: 3px; font-weight: 500; }
-.divider { width: 80px; height: 1.5px; background: linear-gradient(90deg, #fbc8dc, #d4a8f0, #a8c8f0); margin: 12px auto 0; border-radius: 99px; }
+.label { font-size: 10px; letter-spacing: 5px; color: #03468F; text-transform: uppercase; margin-bottom: 8px; font-weight: 600; opacity: 0.6; }
+h1 { font-family: ‘Cormorant Garamond’, serif; font-size: 44px; font-weight: 700; color: #659ea5; line-height: 1; letter-spacing: 2px; }
+.subtitle { font-size: 10px; color: #03468F; margin-top: 6px; letter-spacing: 3px; font-weight: 500; opacity: 0.5; }
+.divider { width: 80px; height: 1.5px; background: linear-gradient(90deg, #659ea5, #03468F55, #659ea5); margin: 12px auto 0; border-radius: 99px; }
 .heart { font-size: 18px; display: block; margin-top: 8px; }
 
-/* Progress */
 .progress-bar {
 background: #ffffff;
-border: 1.5px solid #f7c5dd;
-border-radius: 18px; padding: 18px 22px; margin-bottom: 24px;
-box-shadow: 0 4px 20px #f4a8cc20;
+border: 1.5px solid #659ea5;
+border-radius: 18px; padding: 18px 22px; margin-bottom: 10px;
+box-shadow: 0 4px 20px #659ea520;
 }
 .progress-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-.progress-label { font-size: 10px; color: #c090aa; letter-spacing: 2px; font-weight: 700; }
-.progress-count { font-size: 13px; font-weight: 700; color: #d63384; }
-.bar-track { background: #fce8f2; border-radius: 99px; height: 7px; }
-.bar-fill { height: 7px; border-radius: 99px; background: linear-gradient(90deg, #f4a8cc, #c9a0e8, #a0c4f4); transition: width 0.4s ease; }
-.pct { font-family: ‘Cormorant Garamond’, serif; font-size: 16px; font-weight: 700; color: #d63384; margin-top: 8px; text-align: right; }
+.progress-label { font-size: 10px; color: #03468F; letter-spacing: 2px; font-weight: 700; opacity: 0.5; }
+.progress-count { font-size: 13px; font-weight: 700; color: #659ea5; }
+.bar-track { background: #e6f2f3; border-radius: 99px; height: 7px; }
+.bar-fill { height: 7px; border-radius: 99px; background: linear-gradient(90deg, #659ea5, #03468F); transition: width 0.4s ease; }
+.pct { font-family: ‘Cormorant Garamond’, serif; font-size: 16px; font-weight: 700; color: #659ea5; margin-top: 8px; text-align: right; }
 
-/* Tabs */
 .tab-row { display: flex; gap: 10px; margin-bottom: 20px; }
 .tab {
 flex: 1; padding: 13px; border-radius: 14px;
-border: 1.5px solid #f7c5dd; background: #ffffff;
-color: #c090aa; font-family: ‘Montserrat’, sans-serif;
+border: 1.5px solid #659ea540; background: #ffffff;
+color: #03468F; font-family: ‘Montserrat’, sans-serif;
 font-size: 11px; font-weight: 700; letter-spacing: 2px;
 text-transform: uppercase; cursor: pointer; transition: all 0.25s;
-box-shadow: 0 2px 10px #f4a8cc15;
+opacity: 0.5;
 }
-.tab.active-buy {
-background: #fff0f6;
-border-color: #f4a8cc; color: #c2185b;
-box-shadow: 0 4px 18px #f4a8cc30;
-}
-.tab.active-sell {
-background: #f8f0ff;
-border-color: #c9a0e8; color: #7b1fa2;
-box-shadow: 0 4px 18px #c9a0e830;
+.tab.active-buy, .tab.active-sell {
+background: #f0f8f8;
+border-color: #659ea5; color: #659ea5;
+box-shadow: 0 4px 18px #659ea530; opacity: 1;
 }
 
-/* Section */
 .section {
 background: #ffffff;
-border: 1.5px solid #f7c5dd;
+border: 1.5px solid #659ea5;
 border-radius: 18px; margin-bottom: 12px;
 overflow: hidden; transition: border-color 0.3s, box-shadow 0.3s;
-box-shadow: 0 2px 12px #f4a8cc12;
+box-shadow: 0 2px 12px #659ea515;
 }
-.section.complete { border-color: #90d4a0; box-shadow: 0 2px 16px #90d4a030; }
+.section.complete { border-color: #659ea5; box-shadow: 0 2px 20px #659ea535; }
 .section-header {
 display: flex; align-items: center; gap: 10px;
-padding: 14px 18px; border-bottom: 1.5px solid #fce8f2;
-background: #fffafc;
+padding: 14px 18px; border-bottom: 1.5px solid #659ea520;
+background: #f8fcfc;
 }
 .dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; transition: background 0.3s; }
-.section-title { font-family: ‘Cormorant Garamond’, serif; font-size: 18px; font-weight: 700; flex: 1; transition: color 0.3s; }
-.done-tag { font-size: 9px; color: #43a047; letter-spacing: 2px; font-weight: 700; white-space: nowrap; }
+.section-title { font-family: ‘Cormorant Garamond’, serif; font-size: 18px; font-weight: 700; flex: 1; }
+.done-tag { font-size: 9px; color: #659ea5; letter-spacing: 2px; font-weight: 700; white-space: nowrap; }
 .items { padding: 10px 14px 16px; }
 
-/* Tip */
 .tip {
-background: #fff8fc;
-border-left: 3px solid #f4a8cc;
+background: #f4fafa;
+border-left: 3px solid #659ea5;
 border-radius: 0 10px 10px 0;
 padding: 10px 14px; margin: 8px 10px 12px;
-font-size: 13px; color: #b06890;
+font-size: 13px; color: #03468F;
 line-height: 1.7; font-style: italic;
-font-family: ‘Cormorant Garamond’, serif;
+font-family: ‘Cormorant Garamond’, serif; opacity: 0.7;
 }
 
-/* Alert box */
 .alert-box {
-background: #fffbec;
-border: 1.5px solid #fce08a;
+background: #f0f8f8;
+border: 1.5px solid #659ea560;
 border-radius: 10px; padding: 10px 14px;
 margin: 6px 10px 12px; font-size: 11px;
-color: #d47000; font-weight: 600; line-height: 1.6;
+color: #659ea5; font-weight: 600; line-height: 1.6;
 display: flex; gap: 8px; align-items: flex-start;
 }
 
-/* Candle sequence */
 .candle-sequence {
-background: #f8f2ff;
-border: 1.5px solid #d4b0f0;
+background: #f0f8f8;
+border: 1.5px solid #659ea5;
 border-radius: 14px; padding: 16px 18px;
 margin: 6px 10px 14px;
 }
 .candle-sequence-title {
 font-size: 10px; font-weight: 700; letter-spacing: 2px;
-color: #8e24aa; text-transform: uppercase; margin-bottom: 12px;
-font-family: ‘Montserrat’, sans-serif;
+color: #659ea5; text-transform: uppercase; margin-bottom: 12px;
 }
 .candle-steps { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
 .candle-step {
 display: flex; flex-direction: column; align-items: center; gap: 4px;
 background: #ffffff; border-radius: 10px; padding: 10px 12px;
-border: 1.5px solid #f7c5dd; flex: 1; min-width: 80px;
-box-shadow: 0 2px 8px #f4a8cc12;
+border: 1.5px solid #659ea540; flex: 1; min-width: 80px;
+box-shadow: 0 2px 8px #659ea510;
 }
-.candle-step .num { font-size: 9px; font-weight: 700; color: #c090aa; letter-spacing: 1px; font-family: ‘Montserrat’, sans-serif; }
+.candle-step .num { font-size: 9px; font-weight: 700; color: #03468F; letter-spacing: 1px; opacity: 0.5; }
 .candle-step .candle-icon { font-size: 22px; line-height: 1; }
-.candle-step .candle-label { font-size: 10px; font-weight: 700; text-align: center; line-height: 1.4; font-family: ‘Montserrat’, sans-serif; }
-.candle-arrow { font-size: 18px; color: #c9a0e8; flex-shrink: 0; }
-.candle-step.entry-step { border-color: #f4a8cc; background: #fff0f6; }
+.candle-step .candle-label { font-size: 10px; font-weight: 700; text-align: center; line-height: 1.4; color: #659ea5; }
+.candle-arrow { font-size: 18px; color: #659ea5; flex-shrink: 0; }
+.candle-step.entry-step { border-color: #659ea5; background: #f0f8f8; }
 
-/* Item */
 .item {
 display: flex; align-items: flex-start; gap: 12px;
 padding: 10px 8px; border-radius: 10px;
 cursor: pointer; transition: background 0.15s;
 margin-bottom: 3px; user-select: none;
 }
-.item:hover { background: #fff5fb; }
-.item.checked { background: #fdf8fb; }
+.item:hover { background: #f4fafa; }
+.item.checked { background: #f8fcfc; }
 .checkbox {
 width: 20px; height: 20px; border-radius: 6px;
-border: 1.5px solid #f7c5dd; flex-shrink: 0; margin-top: 2px;
+border: 1.5px solid #659ea560; flex-shrink: 0; margin-top: 2px;
 display: flex; align-items: center; justify-content: center;
 transition: all 0.2s; background: #ffffff;
 }
 .tick { display: none; color: #ffffff; font-size: 11px; font-weight: 900; }
 .item.checked .tick { display: block; }
-.item-text { font-size: 12px; line-height: 1.65; color: #7a3050; transition: all 0.2s; font-weight: 500; }
-.item.checked .item-text { color: #c8a8b8; text-decoration: line-through; }
-.item-why { font-size: 12px; color: #b890a8; margin-top: 4px; font-style: italic; line-height: 1.55; font-family: ‘Cormorant Garamond’, serif; transition: color 0.2s; }
-.item.checked .item-why { color: #ddc8d4; }
+.item-text { font-size: 12px; line-height: 1.65; color: #2a6478; transition: all 0.2s; font-weight: 500; }
+.item.checked .item-text { color: #659ea560; text-decoration: line-through; }
+.item-why { font-size: 12px; color: #03468F; margin-top: 4px; font-style: italic; line-height: 1.55; font-family: ‘Cormorant Garamond’, serif; opacity: 0.45; transition: opacity 0.2s; }
+.item.checked .item-why { opacity: 0.2; }
 
-/* Reset */
 .reset-btn {
 width: 100%; padding: 14px; border-radius: 14px;
-border: 1.5px solid #f7c5dd; background: #ffffff;
-color: #c090aa; font-family: ‘Montserrat’, sans-serif;
+border: 1.5px solid #659ea540; background: #ffffff;
+color: #03468F; font-family: ‘Montserrat’, sans-serif;
 font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
 cursor: pointer; margin-top: 8px; transition: all 0.2s; font-weight: 600;
-box-shadow: 0 2px 10px #f4a8cc12;
+opacity: 0.5;
 }
-.reset-btn:hover { border-color: #f4a8cc; color: #d63384; box-shadow: 0 4px 16px #f4a8cc25; }
+.reset-btn:hover { border-color: #659ea5; color: #659ea5; opacity: 1; box-shadow: 0 4px 16px #659ea520; }
 
 .hidden { display: none; }
-footer { text-align: center; font-size: 9px; color: #d4a8c0; margin-top: 20px; letter-spacing: 2px; }
+footer { text-align: center; font-size: 9px; color: #03468F; margin-top: 20px; letter-spacing: 2px; opacity: 0.35; }
 </style>
 
 </head>
@@ -182,7 +167,7 @@ footer { text-align: center; font-size: 9px; color: #d4a8c0; margin-top: 20px; l
     <h1>ICC Strategy</h1>
     <div class="subtitle">INDICATION · CORRECTION · CONTINUATION</div>
     <div class="divider"></div>
-    <span class="heart">💜🩷💙</span>
+    <span class="heart">🩵💙🩵</span>
   </header>
 
   <div class="progress-bar">
@@ -194,13 +179,13 @@ footer { text-align: center; font-size: 9px; color: #d4a8c0; margin-top: 20px; l
     <div class="pct" id="pct">0%</div>
   </div>
 
-  <div style="text-align:right;margin:-16px 0 14px">
-    <button onclick="resetAll()" style="background:none;border:none;cursor:pointer;font-size:10px;color:#c090aa;letter-spacing:2px;font-family:'Montserrat',sans-serif;font-weight:600;padding:4px 8px;border-radius:8px;transition:color 0.2s" onmouseover="this.style.color='#d63384'" onmouseout="this.style.color='#c090aa'">↺ RESET</button>
+  <div style="text-align:right;margin:-6px 0 14px">
+    <button onclick="resetAll()" style="background:none;border:none;cursor:pointer;font-size:10px;color:#03468F;letter-spacing:2px;font-family:'Montserrat',sans-serif;font-weight:600;padding:4px 8px;border-radius:8px;transition:all 0.2s;opacity:0.45" onmouseover="this.style.opacity='1';this.style.color='#659ea5'" onmouseout="this.style.opacity='0.45';this.style.color='#03468F'">↺ RESET</button>
   </div>
 
   <div class="tab-row">
-    <button class="tab active-buy" id="tab-buy" onclick="switchTab('buy')">🩷 Buy Setup</button>
-    <button class="tab" id="tab-sell" onclick="switchTab('sell')">💜 Sell Setup</button>
+    <button class="tab active-buy" id="tab-buy" onclick="switchTab('buy')">💙 Buy Setup</button>
+    <button class="tab" id="tab-sell" onclick="switchTab('sell')">💙 Sell Setup</button>
   </div>
 
   <div id="checklist-buy"></div>
@@ -208,9 +193,7 @@ footer { text-align: center; font-size: 9px; color: #d4a8c0; margin-top: 20px; l
 
 <button class="reset-btn" onclick="resetAll()">↺ Reset Checklist</button>
 
-  <footer>For educational purposes only · Not financial advice 🌸</footer>
-</div>
-  <footer>For educational purposes only · Not financial advice 🌸</footer>
+  <footer>For educational purposes only · Not financial advice</footer>
 </div>
 
 <script>
@@ -221,19 +204,19 @@ const candleSequenceBuy = `
       <div class="candle-step">
         <span class="num">CANDLE 1</span>
         <span class="candle-icon">🟢</span>
-        <span class="candle-label" style="color:#2e7d32">Close ABOVE<br/>Swing High</span>
+        <span class="candle-label">Close ABOVE<br/>Swing High</span>
       </div>
       <span class="candle-arrow">→</span>
       <div class="candle-step">
         <span class="num">CANDLE 2</span>
         <span class="candle-icon">🔴</span>
-        <span class="candle-label" style="color:#c62828">Close BELOW<br/>Swing High</span>
+        <span class="candle-label">Close BELOW<br/>Swing High</span>
       </div>
       <span class="candle-arrow">→</span>
       <div class="candle-step entry-step">
         <span class="num">CANDLE 3</span>
         <span class="candle-icon">🟢</span>
-        <span class="candle-label" style="color:#c2185b">Close ABOVE<br/>Swing High<br/>= ENTER ✅</span>
+        <span class="candle-label">Close ABOVE<br/>Swing High<br/>= ENTER ✅</span>
       </div>
     </div>
   </div>`;
@@ -245,183 +228,95 @@ const candleSequenceSell = `
       <div class="candle-step">
         <span class="num">CANDLE 1</span>
         <span class="candle-icon">🔴</span>
-        <span class="candle-label" style="color:#c62828">Close BELOW<br/>Swing Low</span>
+        <span class="candle-label">Close BELOW<br/>Swing Low</span>
       </div>
       <span class="candle-arrow">→</span>
       <div class="candle-step">
         <span class="num">CANDLE 2</span>
         <span class="candle-icon">🟢</span>
-        <span class="candle-label" style="color:#2e7d32">Close ABOVE<br/>Swing Low</span>
+        <span class="candle-label">Close ABOVE<br/>Swing Low</span>
       </div>
       <span class="candle-arrow">→</span>
       <div class="candle-step entry-step">
         <span class="num">CANDLE 3</span>
         <span class="candle-icon">🔴</span>
-        <span class="candle-label" style="color:#7b1fa2">Close BELOW<br/>Swing Low<br/>= ENTER ✅</span>
+        <span class="candle-label">Close BELOW<br/>Swing Low<br/>= ENTER ✅</span>
       </div>
     </div>
   </div>`;
 
 const buySteps = [
-  {
-    title: "Step 0 — Mark the 1H Chart",
-    emoji: "🖊️",
-    color: "#f4a8cc",
-    tip: "Always mark your chart before price reaches the level. Lines drawn in advance let you react instantly instead of scrambling.",
-    alert: null, candleSeq: null,
-    items: [
-      { text: "Open the 1H chart — this is your marking timeframe", why: "↳ The 1H gives you the key swing levels. You mark here, then drop to the 1M to execute." },
-      { text: "Mark the most recent significant 1H swing high — the level price rejected from", why: "↳ This is the level you watch for a breakout. When price breaks above it, you drop to the 1M immediately." },
-      { text: "Mark the most recent significant 1H swing low — where buyers previously stepped in", why: "↳ This is your limit order entry level on the 1M. Mark it now so it is ready before the setup triggers." },
-      { text: "Confirm uptrend structure on the 1H: higher highs AND higher lows", why: "↳ ICC is trend-continuation only. No confirmed uptrend = no setup." },
-      { text: "Mark any internal liquidity points between the swing low and swing high", why: "↳ Price may dip to these during the correction. Knowing them keeps you calm and in the trade." },
-    ]
-  },
-  {
-    title: "Step 1 — Indication: 1H Break",
-    emoji: "📈",
-    color: "#f4a8cc",
-    tip: "You do not wait for the 1H candle to close. The moment price pushes above the 1H swing high is your alert to drop to the 1M.",
-    alert: "⚡ Price breaks above the 1H swing high → Switch to the 1M chart immediately.",
-    candleSeq: null,
-    items: [
-      { text: "Price pushes above the 1H swing high you have marked", why: "↳ The break — not the close — is your cue. Drop to the 1M the moment you see this." },
-      { text: "Switch to the 1M chart immediately", why: "↳ The 1H told you where. The 1M tells you when. All execution from here is on the 1M." },
-      { text: "Confirm the 1H swing high level is visible and marked on the 1M chart", why: "↳ You need to track the exact candle closes above and below this level on the 1M." },
-    ]
-  },
-  {
-    title: "Step 2 — Watch the 1M Candle Sequence",
-    emoji: "🕯️",
-    color: "#c9a0e8",
-    tip: "Wait for all three candle closes in order. Do not enter early — the sequence is the confirmation.",
-    alert: null,
-    candleSeq: "buy",
-    items: [
-      { text: "🟢 Candle 1: 1M candle closes ABOVE the swing high — Indication on the 1M confirmed", why: "↳ Buyers have pushed through on your entry timeframe. Stay alert — two more closes needed." },
-      { text: "🔴 Candle 2: 1M candle closes BELOW the swing high — Correction underway", why: "↳ Sellers are testing the level. This is the pullback. Do not enter — wait for Candle 3." },
-      { text: "🟢 Candle 3: 1M candle closes ABOVE the swing high — Continuation confirmed", why: "↳ Buyers have reclaimed the level. This is your entry signal. The sequence is complete." },
-      { text: "All 3 closes confirmed in order before taking any action", why: "↳ Entering on Candle 1 or 2 is anticipating the setup, not trading it. Wait for the full sequence." },
-    ]
-  },
-  {
-    title: "Step 3 — Entry",
-    emoji: "✅",
-    color: "#f4a8cc",
-    tip: "Candle 3 has closed above the swing high. That close is your entry signal — at or near that swing high level.",
-    alert: null, candleSeq: null,
-    items: [
-      { text: "Entry Option A — Market order: Enter on the close of Candle 3 above the swing high", why: "↳ Fast execution at the swing high level. Use when price is moving quickly." },
-      { text: "Entry Option B (preferred) — Limit order: Set limit order AT the swing high level", why: "↳ Your primary method. You enter at the swing high — the level where Candle 3 just closed above. This is the ICC entry." },
-      { text: "Place the limit order at the swing high during or after Candle 2 so it is ready", why: "↳ Setting it in advance means you don't miss the fill if price returns briefly to retest the level." },
-      { text: "Confirm: entry is at the 1H swing high level — NOT below it at the swing low", why: "↳ The entry is at the swing high. The swing high is where the continuation is confirmed. That is your entry zone." },
-    ]
-  },
-  {
-    title: "Stop Loss Placement",
-    emoji: "🛡️",
-    color: "#a0c4f4",
-    tip: "Place your stop where the setup is proven wrong — not where price might just temporarily dip.",
-    alert: null, candleSeq: null,
-    items: [
-      { text: "Place stop loss BELOW the lowest point of the 1M correction", why: "↳ If price breaks below this, the correction was a reversal — not a retest. Setup is over." },
-      { text: "If the correction has multiple swing lows, use the absolute lowest one", why: "↳ Maximum room. Keeps you in through normal volatility during a valid setup." },
-      { text: "Add a small buffer of a few ticks below the swing low", why: "↳ Price often briefly dips below key lows to grab liquidity before reversing. The buffer protects you." },
-    ]
-  },
-  {
-    title: "Take Profit — 1:3 RR",
-    emoji: "🎯",
-    color: "#f4a8cc",
-    tip: "At 1:3 RR you only need to win 25% of your trades to break even. Never compromise this.",
-    alert: null, candleSeq: null,
-    items: [
-      { text: "Identify the next significant 1H resistance or swing high above entry as your TP", why: "↳ This is where sellers are likely to re-enter. Set TP just before that level." },
-      { text: "Confirm: TP distance is at least 3× the distance from your entry to your stop", why: "↳ If the math doesn't give 1:3 or better, the trade does not meet your criteria." },
-      { text: "If TP does NOT give 1:3 RR — skip the trade entirely", why: "↳ A setup with poor RR is a gamble, not a trade. Another setup will always come. 🌸" },
-    ]
-  },
+  { title:"Step 0 — Mark the 1H Chart", emoji:"🖊️", tip:"Always mark your chart before price reaches the level. Lines drawn in advance let you react instantly instead of scrambling.", alert:null, candleSeq:null, items:[
+    { text:"Open the 1H chart — this is your marking timeframe", why:"↳ The 1H gives you the key swing levels. You mark here, then drop to the 1M to execute." },
+    { text:"Mark the most recent significant 1H swing high — the level price rejected from", why:"↳ This is the level you watch for a breakout. When price breaks above it, you drop to the 1M immediately." },
+    { text:"Mark the most recent significant 1H swing low — where buyers previously stepped in", why:"↳ This is your limit order entry level on the 1M. Mark it now so it is ready before the setup triggers." },
+    { text:"Confirm uptrend structure on the 1H: higher highs AND higher lows", why:"↳ ICC is trend-continuation only. No confirmed uptrend = no setup." },
+    { text:"Mark any internal liquidity points between the swing low and swing high", why:"↳ Price may dip to these during the correction. Knowing them keeps you calm and in the trade." },
+  ]},
+  { title:"Step 1 — Indication: 1H Break", emoji:"📈", tip:"You do not wait for the 1H candle to close. The moment price pushes above the 1H swing high is your alert to drop to the 1M.", alert:"⚡ Price breaks above the 1H swing high → Switch to the 1M chart immediately.", candleSeq:null, items:[
+    { text:"Price pushes above the 1H swing high you have marked", why:"↳ The break — not the close — is your cue. Drop to the 1M the moment you see this." },
+    { text:"Switch to the 1M chart immediately", why:"↳ The 1H told you where. The 1M tells you when. All execution from here is on the 1M." },
+    { text:"Confirm the 1H swing high level is visible and marked on the 1M chart", why:"↳ You need to track the exact candle closes above and below this level on the 1M." },
+  ]},
+  { title:"Step 2 — Watch the 1M Candle Sequence", emoji:"🕯️", tip:"Wait for all three candle closes in order. Do not enter early — the sequence is the confirmation.", alert:null, candleSeq:"buy", items:[
+    { text:"🟢 Candle 1: 1M candle closes ABOVE the swing high — Indication on the 1M confirmed", why:"↳ Buyers have pushed through on your entry timeframe. Stay alert — two more closes needed." },
+    { text:"🔴 Candle 2: 1M candle closes BELOW the swing high — Correction underway", why:"↳ Sellers are testing the level. This is the pullback. Do not enter — wait for Candle 3." },
+    { text:"🟢 Candle 3: 1M candle closes ABOVE the swing high — Continuation confirmed", why:"↳ Buyers have reclaimed the level. This is your entry signal. The sequence is complete." },
+    { text:"All 3 closes confirmed in order before taking any action", why:"↳ Entering on Candle 1 or 2 is anticipating the setup, not trading it. Wait for the full sequence." },
+  ]},
+  { title:"Step 3 — Entry", emoji:"✅", tip:"Candle 3 has closed above the swing high. That close is your entry signal — at or near that swing high level.", alert:null, candleSeq:null, items:[
+    { text:"Entry Option A — Market order: Enter on the close of Candle 3 above the swing high", why:"↳ Fast execution at the swing high level. Use when price is moving quickly." },
+    { text:"Entry Option B (preferred) — Limit order: Set limit order AT the swing high level", why:"↳ Your primary method. You enter at the swing high — the level where Candle 3 just closed above. This is the ICC entry." },
+    { text:"Place the limit order at the swing high during or after Candle 2 so it is ready", why:"↳ Setting it in advance means you don't miss the fill if price returns briefly to retest the level." },
+    { text:"Confirm: entry is at the 1H swing high level — NOT below it at the swing low", why:"↳ The entry is at the swing high. The swing high is where the continuation is confirmed. That is your entry zone." },
+  ]},
+  { title:"Stop Loss Placement", emoji:"🛡️", tip:"Place your stop where the setup is proven wrong — not where price might just temporarily dip.", alert:null, candleSeq:null, items:[
+    { text:"Place stop loss BELOW the lowest point of the 1M correction", why:"↳ If price breaks below this, the correction was a reversal — not a retest. Setup is over." },
+    { text:"If the correction has multiple swing lows, use the absolute lowest one", why:"↳ Maximum room. Keeps you in through normal volatility during a valid setup." },
+    { text:"Add a small buffer of a few ticks below the swing low", why:"↳ Price often briefly dips below key lows to grab liquidity before reversing. The buffer protects you." },
+  ]},
+  { title:"Take Profit — 1:3 RR", emoji:"🎯", tip:"At 1:3 RR you only need to win 25% of your trades to break even. Never compromise this.", alert:null, candleSeq:null, items:[
+    { text:"Identify the next significant 1H resistance or swing high above entry as your TP", why:"↳ This is where sellers are likely to re-enter. Set TP just before that level." },
+    { text:"Confirm: TP distance is at least 3× the distance from your entry to your stop", why:"↳ If the math doesn't give 1:3 or better, the trade does not meet your criteria." },
+    { text:"If TP does NOT give 1:3 RR — skip the trade entirely", why:"↳ A setup with poor RR is a gamble, not a trade. Another setup will always come." },
+  ]},
 ];
 
 const sellSteps = [
-  {
-    title: "Step 0 — Mark the 1H Chart",
-    emoji: "🖊️",
-    color: "#c9a0e8",
-    tip: "Always mark your chart before price reaches the level. Lines drawn in advance let you react instantly instead of scrambling.",
-    alert: null, candleSeq: null,
-    items: [
-      { text: "Open the 1H chart — this is your marking timeframe", why: "↳ The 1H gives you the key swing levels. You mark here, then drop to the 1M to execute." },
-      { text: "Mark the most recent significant 1H swing low — the level price bounced from", why: "↳ This is the level you watch for a breakdown. When price breaks below it, you drop to the 1M immediately." },
-      { text: "Mark the most recent significant 1H swing high — where sellers previously stepped in", why: "↳ This is your limit order entry level on the 1M. Mark it now so it is ready before the setup triggers." },
-      { text: "Confirm downtrend structure on the 1H: lower highs AND lower lows", why: "↳ ICC is trend-continuation only. No confirmed downtrend = no setup." },
-      { text: "Mark any internal liquidity points between the swing high and swing low", why: "↳ Price may bounce to these during the correction. Knowing them keeps you calm and in the trade." },
-    ]
-  },
-  {
-    title: "Step 1 — Indication: 1H Break",
-    emoji: "📉",
-    color: "#c9a0e8",
-    tip: "You do not wait for the 1H candle to close. The moment price pushes below the 1H swing low is your alert to drop to the 1M.",
-    alert: "⚡ Price breaks below the 1H swing low → Switch to the 1M chart immediately.",
-    candleSeq: null,
-    items: [
-      { text: "Price pushes below the 1H swing low you have marked", why: "↳ The break — not the close — is your cue. Drop to the 1M the moment you see this." },
-      { text: "Switch to the 1M chart immediately", why: "↳ The 1H told you where. The 1M tells you when. All execution from here is on the 1M." },
-      { text: "Confirm the 1H swing low level is visible and marked on the 1M chart", why: "↳ You need to track the exact candle closes above and below this level on the 1M." },
-    ]
-  },
-  {
-    title: "Step 2 — Watch the 1M Candle Sequence",
-    emoji: "🕯️",
-    color: "#c9a0e8",
-    tip: "Wait for all three candle closes in order. Do not enter early — the sequence is the confirmation.",
-    alert: null,
-    candleSeq: "sell",
-    items: [
-      { text: "🔴 Candle 1: 1M candle closes BELOW the swing low — Indication on the 1M confirmed", why: "↳ Sellers have pushed through on your entry timeframe. Stay alert — two more closes needed." },
-      { text: "🟢 Candle 2: 1M candle closes ABOVE the swing low — Correction underway", why: "↳ Buyers are testing the level. This is the pullback. Do not enter — wait for Candle 3." },
-      { text: "🔴 Candle 3: 1M candle closes BELOW the swing low — Continuation confirmed", why: "↳ Sellers have reclaimed the level. This is your entry signal. The sequence is complete." },
-      { text: "All 3 closes confirmed in order before taking any action", why: "↳ Entering on Candle 1 or 2 is anticipating the setup, not trading it. Wait for the full sequence." },
-    ]
-  },
-  {
-    title: "Step 3 — Entry",
-    emoji: "✅",
-    color: "#c9a0e8",
-    tip: "Candle 3 has closed below the swing low. That close is your entry signal — at or near that swing low level.",
-    alert: null, candleSeq: null,
-    items: [
-      { text: "Entry Option A — Market order: Enter on the close of Candle 3 below the swing low", why: "↳ Fast execution at the swing low level. Use when price is moving quickly." },
-      { text: "Entry Option B (preferred) — Limit order: Set limit order AT the swing low level", why: "↳ Your primary method. You enter at the swing low — the level where Candle 3 just closed below. This is the ICC entry." },
-      { text: "Place the limit order at the swing low during or after Candle 2 so it is ready", why: "↳ Setting it in advance means you don't miss the fill if price returns briefly to retest the level." },
-      { text: "Confirm: entry is at the 1H swing low level — NOT above it at the swing high", why: "↳ The entry is at the swing low. The swing low is where the continuation is confirmed. That is your entry zone." },
-    ]
-  },
-  {
-    title: "Stop Loss Placement",
-    emoji: "🛡️",
-    color: "#a0c4f4",
-    tip: "Place your stop where the setup is proven wrong — not where price might just temporarily spike.",
-    alert: null, candleSeq: null,
-    items: [
-      { text: "Place stop loss ABOVE the highest point of the 1M correction", why: "↳ If price breaks above this, the correction was a reversal — not a retest. Setup is over." },
-      { text: "If the correction has multiple swing highs, use the absolute highest one", why: "↳ Maximum room. Keeps you in through normal volatility during a valid setup." },
-      { text: "Add a small buffer of a few ticks above the swing high", why: "↳ Price often briefly spikes above key highs to grab liquidity before reversing. The buffer protects you." },
-    ]
-  },
-  {
-    title: "Take Profit — 1:3 RR",
-    emoji: "🎯",
-    color: "#c9a0e8",
-    tip: "At 1:3 RR you only need to win 25% of your trades to break even. Never compromise this.",
-    alert: null, candleSeq: null,
-    items: [
-      { text: "Identify the next significant 1H support or swing low below entry as your TP", why: "↳ This is where buyers are likely to re-enter. Set TP just before that level." },
-      { text: "Confirm: TP distance is at least 3× the distance from your entry to your stop", why: "↳ If the math doesn't give 1:3 or better, the trade does not meet your criteria." },
-      { text: "If TP does NOT give 1:3 RR — skip the trade entirely", why: "↳ A setup with poor RR is a gamble, not a trade. Another setup will always come. 🌸" },
-    ]
-  },
+  { title:"Step 0 — Mark the 1H Chart", emoji:"🖊️", tip:"Always mark your chart before price reaches the level. Lines drawn in advance let you react instantly instead of scrambling.", alert:null, candleSeq:null, items:[
+    { text:"Open the 1H chart — this is your marking timeframe", why:"↳ The 1H gives you the key swing levels. You mark here, then drop to the 1M to execute." },
+    { text:"Mark the most recent significant 1H swing low — the level price bounced from", why:"↳ This is the level you watch for a breakdown. When price breaks below it, you drop to the 1M immediately." },
+    { text:"Mark the most recent significant 1H swing high — where sellers previously stepped in", why:"↳ This is your limit order entry level on the 1M. Mark it now so it is ready before the setup triggers." },
+    { text:"Confirm downtrend structure on the 1H: lower highs AND lower lows", why:"↳ ICC is trend-continuation only. No confirmed downtrend = no setup." },
+    { text:"Mark any internal liquidity points between the swing high and swing low", why:"↳ Price may bounce to these during the correction. Knowing them keeps you calm and in the trade." },
+  ]},
+  { title:"Step 1 — Indication: 1H Break", emoji:"📉", tip:"You do not wait for the 1H candle to close. The moment price pushes below the 1H swing low is your alert to drop to the 1M.", alert:"⚡ Price breaks below the 1H swing low → Switch to the 1M chart immediately.", candleSeq:null, items:[
+    { text:"Price pushes below the 1H swing low you have marked", why:"↳ The break — not the close — is your cue. Drop to the 1M the moment you see this." },
+    { text:"Switch to the 1M chart immediately", why:"↳ The 1H told you where. The 1M tells you when. All execution from here is on the 1M." },
+    { text:"Confirm the 1H swing low level is visible and marked on the 1M chart", why:"↳ You need to track the exact candle closes above and below this level on the 1M." },
+  ]},
+  { title:"Step 2 — Watch the 1M Candle Sequence", emoji:"🕯️", tip:"Wait for all three candle closes in order. Do not enter early — the sequence is the confirmation.", alert:null, candleSeq:"sell", items:[
+    { text:"🔴 Candle 1: 1M candle closes BELOW the swing low — Indication on the 1M confirmed", why:"↳ Sellers have pushed through on your entry timeframe. Stay alert — two more closes needed." },
+    { text:"🟢 Candle 2: 1M candle closes ABOVE the swing low — Correction underway", why:"↳ Buyers are testing the level. This is the pullback. Do not enter — wait for Candle 3." },
+    { text:"🔴 Candle 3: 1M candle closes BELOW the swing low — Continuation confirmed", why:"↳ Sellers have reclaimed the level. This is your entry signal. The sequence is complete." },
+    { text:"All 3 closes confirmed in order before taking any action", why:"↳ Entering on Candle 1 or 2 is anticipating the setup, not trading it. Wait for the full sequence." },
+  ]},
+  { title:"Step 3 — Entry", emoji:"✅", tip:"Candle 3 has closed below the swing low. That close is your entry signal — at or near that swing low level.", alert:null, candleSeq:null, items:[
+    { text:"Entry Option A — Market order: Enter on the close of Candle 3 below the swing low", why:"↳ Fast execution at the swing low level. Use when price is moving quickly." },
+    { text:"Entry Option B (preferred) — Limit order: Set limit order AT the swing low level", why:"↳ Your primary method. You enter at the swing low — the level where Candle 3 just closed below. This is the ICC entry." },
+    { text:"Place the limit order at the swing low during or after Candle 2 so it is ready", why:"↳ Setting it in advance means you don't miss the fill if price returns briefly to retest the level." },
+    { text:"Confirm: entry is at the 1H swing low level — NOT above it at the swing high", why:"↳ The entry is at the swing low. The swing low is where the continuation is confirmed. That is your entry zone." },
+  ]},
+  { title:"Stop Loss Placement", emoji:"🛡️", tip:"Place your stop where the setup is proven wrong — not where price might just temporarily spike.", alert:null, candleSeq:null, items:[
+    { text:"Place stop loss ABOVE the highest point of the 1M correction", why:"↳ If price breaks above this, the correction was a reversal — not a retest. Setup is over." },
+    { text:"If the correction has multiple swing highs, use the absolute highest one", why:"↳ Maximum room. Keeps you in through normal volatility during a valid setup." },
+    { text:"Add a small buffer of a few ticks above the swing high", why:"↳ Price often briefly spikes above key highs to grab liquidity before reversing. The buffer protects you." },
+  ]},
+  { title:"Take Profit — 1:3 RR", emoji:"🎯", tip:"At 1:3 RR you only need to win 25% of your trades to break even. Never compromise this.", alert:null, candleSeq:null, items:[
+    { text:"Identify the next significant 1H support or swing low below entry as your TP", why:"↳ This is where buyers are likely to re-enter. Set TP just before that level." },
+    { text:"Confirm: TP distance is at least 3× the distance from your entry to your stop", why:"↳ If the math doesn't give 1:3 or better, the trade does not meet your criteria." },
+    { text:"If TP does NOT give 1:3 RR — skip the trade entirely", why:"↳ A setup with poor RR is a gamble, not a trade. Another setup will always come." },
+  ]},
 ];
 
 let activeTab = 'buy';
@@ -430,8 +325,7 @@ let checked = { buy: {}, sell: {} };
 function saveProgress() {
   try {
     const val = encodeURIComponent(JSON.stringify(checked));
-    const exp = new Date();
-    exp.setFullYear(exp.getFullYear() + 2);
+    const exp = new Date(); exp.setFullYear(exp.getFullYear() + 2);
     document.cookie = `icc=${val};expires=${exp.toUTCString()};path=/;SameSite=Lax`;
   } catch(e) {}
 }
@@ -455,9 +349,7 @@ function switchTab(tab) {
 function toggle(tab, sIdx, iIdx) {
   const key = `${sIdx}-${iIdx}`;
   checked[tab][key] = !checked[tab][key];
-  renderAll(tab);
-  updateProgress();
-  saveProgress();
+  renderAll(tab); updateProgress(); saveProgress();
 }
 
 function renderAll(tab) {
@@ -470,10 +362,9 @@ function renderAll(tab) {
     div.className = 'section' + (allDone ? ' complete' : '');
 
     const itemsHTML = sec.items.map((item, ii) => {
-      const key = `${si}-${ii}`;
-      const on = !!checked[tab][key];
+      const on = !!checked[tab][`${si}-${ii}`];
       return `<div class="item${on ? ' checked' : ''}" onclick="toggle('${tab}',${si},${ii})">
-        <div class="checkbox" style="${on ? `border-color:${sec.color};background:${sec.color}` : ''}">
+        <div class="checkbox" style="${on ? 'border-color:#659ea5;background:#659ea5' : ''}">
           <span class="tick">✓</span>
         </div>
         <div style="flex:1">
@@ -483,32 +374,24 @@ function renderAll(tab) {
       </div>`;
     }).join('');
 
-    const alertHTML = sec.alert ? `
-      <div class="alert-box">
-        <span style="font-size:16px;flex-shrink:0">⚡</span>
-        <span>${sec.alert.replace('⚡ ','')}</span>
-      </div>` : '';
-
-    const seqHTML = sec.candleSeq === 'buy' ? candleSequenceBuy
-                  : sec.candleSeq === 'sell' ? candleSequenceSell : '';
+    const alertHTML = sec.alert ? `<div class="alert-box"><span style="font-size:16px;flex-shrink:0">⚡</span><span>${sec.alert.replace('⚡ ','')}</span></div>` : '';
+    const seqHTML = sec.candleSeq === 'buy' ? candleSequenceBuy : sec.candleSeq === 'sell' ? candleSequenceSell : '';
 
     div.innerHTML = `
       <div class="section-header">
-        <div class="dot" style="background:${allDone ? '#66bb6a' : sec.color}"></div>
-        <div class="section-title" style="color:${allDone ? '#43a047' : sec.color}">${sec.emoji} ${sec.title}</div>
-        ${allDone ? '<span class="done-tag">✓ DONE 🌸</span>' : ''}
+        <div class="dot" style="background:${allDone ? '#659ea5' : '#659ea5'}"></div>
+        <div class="section-title" style="color:${allDone ? '#659ea5' : '#659ea5'}">${sec.emoji} ${sec.title}</div>
+        ${allDone ? '<span class="done-tag">✓ DONE</span>' : ''}
       </div>
       ${sec.tip ? `<div class="tip">${sec.tip}</div>` : ''}
-      ${alertHTML}
-      ${seqHTML}
+      ${alertHTML}${seqHTML}
       <div class="items">${itemsHTML}</div>`;
     list.appendChild(div);
   });
 }
 
 function getTotal(tab) {
-  const steps = tab === 'buy' ? buySteps : sellSteps;
-  return steps.reduce((a, s) => a + s.items.length, 0);
+  return (tab === 'buy' ? buySteps : sellSteps).reduce((a, s) => a + s.items.length, 0);
 }
 
 function updateProgress() {
@@ -518,16 +401,12 @@ function updateProgress() {
   document.getElementById('count').textContent = `${done} / ${total}`;
   document.getElementById('bar').style.width = pct + '%';
   document.getElementById('pct').textContent = pct + '%';
-  document.getElementById('pct').style.color = pct === 100 ? '#43a047' : '#d63384';
 }
 
 function resetAll() { checked[activeTab] = {}; renderAll(activeTab); updateProgress(); saveProgress(); }
 
-function init() {
-  loadProgress();
-  renderAll('buy'); renderAll('sell'); updateProgress();
-}
-init();
+loadProgress();
+renderAll('buy'); renderAll('sell'); updateProgress();
 </script>
 
 </body>
