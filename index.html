@@ -51,53 +51,6 @@ margin: 12px auto 0; border-radius: 99px;
 }
 .heart { font-size: 18px; display: block; margin-top: 8px; }
 
-/* ── Progress Bar ── */
-.progress-bar {
-background: #ffffff; border: 1.5px solid #659ea5;
-border-radius: 18px; padding: 18px 22px; margin-bottom: 10px;
-box-shadow: 0 4px 20px #659ea520;
-}
-.progress-top {
-display: flex; justify-content: space-between;
-align-items: center; margin-bottom: 10px;
-}
-.progress-label { font-size: 10px; color: #03468F; letter-spacing: 2px; font-weight: 700; opacity: 0.5; }
-.progress-count { font-size: 13px; font-weight: 700; color: #659ea5; }
-.bar-track { background: #e6f2f3; border-radius: 99px; height: 7px; }
-.bar-fill {
-height: 7px; border-radius: 99px;
-background: linear-gradient(90deg, #659ea5, #03468F);
-transition: width 0.4s ease;
-}
-.pct {
-font-family: ‘Cormorant Garamond’, serif; font-size: 16px;
-font-weight: 700; color: #659ea5; margin-top: 8px; text-align: right;
-}
-
-/* ── Top Reset Button (small, right-aligned under progress bar) ── */
-.top-reset-wrap { text-align: right; margin: -6px 0 14px; }
-.top-reset-btn {
-background: none; border: none; cursor: pointer; font-size: 10px;
-color: #03468F; letter-spacing: 2px; font-family: ‘Montserrat’, sans-serif;
-font-weight: 600; padding: 4px 8px; border-radius: 8px;
-transition: all 0.2s; opacity: 0.45;
-}
-.top-reset-btn:hover { opacity: 1; color: #659ea5; }
-
-/* ── Buy / Sell Tab Buttons ── */
-.tab-row { display: flex; gap: 10px; margin-bottom: 16px; }
-.tab {
-flex: 1; padding: 13px; border-radius: 14px;
-border: 1.5px solid #659ea540; background: #ffffff;
-color: #03468F; font-family: ‘Montserrat’, sans-serif;
-font-size: 11px; font-weight: 700; letter-spacing: 2px;
-text-transform: uppercase; cursor: pointer; transition: all 0.25s; opacity: 0.5;
-}
-.tab.active-buy, .tab.active-sell {
-background: #f0f8f8; border-color: #659ea5; color: #659ea5;
-box-shadow: 0 4px 18px #659ea530; opacity: 1;
-}
-
 /* ── Pre-Market Check Dropdown ── */
 .premarket-wrap { margin-bottom: 20px; }
 
@@ -232,6 +185,53 @@ font-size: 0.78rem; color: #03468F; opacity: 0.55;
 line-height: 1.65; font-family: ‘Jost’, sans-serif; font-weight: 300;
 }
 
+/* ── Progress Bar ── */
+.progress-bar {
+background: #ffffff; border: 1.5px solid #659ea5;
+border-radius: 18px; padding: 18px 22px; margin-bottom: 10px;
+box-shadow: 0 4px 20px #659ea520;
+}
+.progress-top {
+display: flex; justify-content: space-between;
+align-items: center; margin-bottom: 10px;
+}
+.progress-label { font-size: 10px; color: #03468F; letter-spacing: 2px; font-weight: 700; opacity: 0.5; }
+.progress-count { font-size: 13px; font-weight: 700; color: #659ea5; }
+.bar-track { background: #e6f2f3; border-radius: 99px; height: 7px; }
+.bar-fill {
+height: 7px; border-radius: 99px;
+background: linear-gradient(90deg, #659ea5, #03468F);
+transition: width 0.4s ease;
+}
+.pct {
+font-family: ‘Cormorant Garamond’, serif; font-size: 16px;
+font-weight: 700; color: #659ea5; margin-top: 8px; text-align: right;
+}
+
+/* ── Top Reset Button (small, right-aligned under progress bar) ── */
+.top-reset-wrap { text-align: right; margin: -6px 0 14px; }
+.top-reset-btn {
+background: none; border: none; cursor: pointer; font-size: 10px;
+color: #03468F; letter-spacing: 2px; font-family: ‘Montserrat’, sans-serif;
+font-weight: 600; padding: 4px 8px; border-radius: 8px;
+transition: all 0.2s; opacity: 0.45;
+}
+.top-reset-btn:hover { opacity: 1; color: #659ea5; }
+
+/* ── Buy / Sell Tab Buttons ── */
+.tab-row { display: flex; gap: 10px; margin-bottom: 16px; }
+.tab {
+flex: 1; padding: 13px; border-radius: 14px;
+border: 1.5px solid #659ea540; background: #ffffff;
+color: #03468F; font-family: ‘Montserrat’, sans-serif;
+font-size: 11px; font-weight: 700; letter-spacing: 2px;
+text-transform: uppercase; cursor: pointer; transition: all 0.25s; opacity: 0.5;
+}
+.tab.active-buy, .tab.active-sell {
+background: #f0f8f8; border-color: #659ea5; color: #659ea5;
+box-shadow: 0 4px 18px #659ea530; opacity: 1;
+}
+
 /* ── Checklist Sections ── */
 .section {
 background: #ffffff; border: 1.5px solid #659ea5;
@@ -264,7 +264,7 @@ font-size: 13px; color: #03468F; line-height: 1.7;
 font-style: italic; font-family: ‘Cormorant Garamond’, serif; opacity: 0.7;
 }
 
-/* Alert box (e.g. “switch to 1M now”) */
+/* Alert box */
 .alert-box {
 background: #f0f8f8; border: 1.5px solid #659ea560;
 border-radius: 10px; padding: 10px 14px; margin: 6px 10px 12px;
@@ -292,7 +292,6 @@ box-shadow: 0 2px 8px #659ea510;
 .candle-step .candle-icon { font-size: 22px; line-height: 1; }
 .candle-step .candle-label { font-size: 10px; font-weight: 700; text-align: center; line-height: 1.4; color: #659ea5; }
 .candle-arrow { font-size: 18px; color: #659ea5; flex-shrink: 0; }
-/* Entry step highlight */
 .candle-step.entry-step { border-color: #659ea5; background: #f0f8f8; }
 
 /* ── Checklist Items ── */
@@ -305,7 +304,7 @@ margin-bottom: 3px; user-select: none;
 .item:hover { background: #f4fafa; }
 .item.checked { background: #f8fcfc; }
 
-/* Checkbox circle */
+/* Checkbox */
 .checkbox {
 width: 20px; height: 20px; border-radius: 6px;
 border: 1.5px solid #659ea560; flex-shrink: 0; margin-top: 2px;
@@ -319,7 +318,7 @@ transition: all 0.2s; background: #ffffff;
 .item-text { font-size: 12px; line-height: 1.65; color: #2a6478; transition: all 0.2s; font-weight: 500; }
 .item.checked .item-text { color: #659ea560; text-decoration: line-through; }
 
-/* Sub-text “why” explanation under each item */
+/* Sub-text “why” explanation */
 .item-why {
 font-size: 12px; color: #03468F; margin-top: 4px;
 font-style: italic; line-height: 1.55;
@@ -360,6 +359,7 @@ footer { text-align: center; font-size: 9px; color: #03468F; margin-top: 20px; l
 
   <div class="premarket-wrap">
 
+```
 <!-- Dropdown trigger -->
 <button class="dropdown-trigger" id="trigger" onclick="toggleDropdown()">
   <div class="trigger-left">
@@ -452,6 +452,7 @@ footer { text-align: center; font-size: 9px; color: #03468F; margin-top: 20px; l
 
   </div>
 </div>
+```
 
   </div>
   <!-- end premarket-wrap -->
@@ -495,8 +496,7 @@ footer { text-align: center; font-size: 9px; color: #03468F; margin-top: 20px; l
 <script>
 /* ════════════════════════════════════════
    CANDLE SEQUENCE VISUALS
-   Edit the labels/icons here if the
-   sequence logic changes.
+   Edit labels/icons here if logic changes.
 ════════════════════════════════════════ */
 const candleSequenceBuy = `
   <div class="candle-sequence">
@@ -524,16 +524,10 @@ const candleSequenceSell = `
 
 /* ════════════════════════════════════════
    CHECKLIST STEPS — BUY SETUP
-   Each object = one section.
-   Fields:
-     title    — section header text
-     emoji    — icon next to title
-     tip      — italic tip shown at top
-     alert    — alert box text (or null)
-     candleSeq — "buy", "sell", or null
-     items    — array of { text, why }
-       text   — main checkbox label
-       why    — subtext explanation below
+   Each object = one collapsible section.
+   Fields: title, emoji, tip, alert,
+   candleSeq ("buy"/"sell"/null), items[]
+     items: { text, why }
 ════════════════════════════════════════ */
 const buySteps = [
   { title:"Step 0 — Mark the 1H Chart", emoji:"🖊️",
@@ -639,26 +633,59 @@ const sellSteps = [
 
 /* ════════════════════════════════════════
    CHECKLIST STATE & COOKIE PERSISTENCE
-   Progress is saved to a cookie so it
-   survives closing/reopening on iOS PWA.
+   Both checklist and pre-market answers
+   are saved to cookies so they survive
+   closing/reopening on iOS PWA.
 ════════════════════════════════════════ */
 let activeTab = 'buy';
 let checked = { buy: {}, sell: {} };
 
-// Save checklist state to cookie
+// Save both checklist and pre-market state to cookies
 function saveProgress() {
   try {
-    const val = encodeURIComponent(JSON.stringify(checked));
     const exp = new Date(); exp.setFullYear(exp.getFullYear() + 2);
+    // Save checklist state
+    const val = encodeURIComponent(JSON.stringify(checked));
     document.cookie = `icc=${val};expires=${exp.toUTCString()};path=/;SameSite=Lax`;
+    // Save pre-market answers + max trades input
+    const pm = encodeURIComponent(JSON.stringify({
+      answers: pmAnswers,
+      maxTrades: document.getElementById('maxTrades').value
+    }));
+    document.cookie = `icc_pm=${pm};expires=${exp.toUTCString()};path=/;SameSite=Lax`;
   } catch(e) {}
 }
 
-// Load checklist state from cookie on page load
+// Load both checklist and pre-market state from cookies on page load
 function loadProgress() {
+  // Load checklist
   try {
     const match = document.cookie.split(';').find(c => c.trim().startsWith('icc='));
     if (match) checked = JSON.parse(decodeURIComponent(match.split('=')[1]));
+  } catch(e) {}
+  // Load pre-market answers
+  try {
+    const pmMatch = document.cookie.split(';').find(c => c.trim().startsWith('icc_pm='));
+    if (pmMatch) {
+      const data = JSON.parse(decodeURIComponent(pmMatch.split('=').slice(1).join('=')));
+      Object.assign(pmAnswers, data.answers);
+      // Restore max trades input value
+      if (data.maxTrades) {
+        document.getElementById('maxTrades').value = data.maxTrades;
+        document.getElementById('maxTrades').classList.add('filled');
+      }
+      // Re-highlight Yes/No buttons to match saved answers
+      for (let q in pmAnswers) {
+        if (pmAnswers[q]) {
+          document.querySelectorAll(`[data-q="${q}"]`).forEach(btn => {
+            btn.classList.remove('yes','no');
+            if (btn.dataset.val === pmAnswers[q]) btn.classList.add(pmAnswers[q]);
+          });
+        }
+      }
+      // Restore verdict badge
+      evaluate();
+    }
   } catch(e) {}
 }
 
@@ -688,8 +715,7 @@ function toggle(tab, sIdx, iIdx) {
 
 /* ════════════════════════════════════════
    RENDER CHECKLIST
-   Builds the HTML for all sections
-   of a given tab (buy or sell).
+   Builds HTML for all sections of a tab.
 ════════════════════════════════════════ */
 function renderAll(tab) {
   const steps = tab === 'buy' ? buySteps : sellSteps;
@@ -726,8 +752,7 @@ function renderAll(tab) {
 
 /* ════════════════════════════════════════
    PROGRESS BAR
-   Counts checked items for the active tab
-   and updates the bar + percentage.
+   Counts checked items for the active tab.
 ════════════════════════════════════════ */
 function getTotal(tab) {
   return (tab === 'buy' ? buySteps : sellSteps).reduce((a, s) => a + s.items.length, 0);
@@ -744,12 +769,11 @@ function updateProgress() {
 
 /* ════════════════════════════════════════
    GLOBAL RESET
-   Resets the active checklist tab AND
-   the pre-market check questions.
-   Called by both top and bottom reset buttons.
+   Resets checklist AND pre-market check.
+   Called by both top and bottom buttons.
 ════════════════════════════════════════ */
 function resetAll() {
-  // Reset checklist
+  // Reset active checklist tab
   checked[activeTab] = {};
   renderAll(activeTab);
   updateProgress();
@@ -773,13 +797,12 @@ function toggleDropdown() {
 
 /* ════════════════════════════════════════
    PRE-MARKET ANSWERS
-   Tracks responses to all 6 questions.
    null = unanswered, "yes"/"no" = answered.
-   Question 5 uses a number input instead.
+   Question 5 uses a number input.
 ════════════════════════════════════════ */
 const pmAnswers = { 1:null, 2:null, 3:null, 4:null, 5:null, 6:null };
 
-// Handle Yes/No button clicks
+// Handle Yes/No button clicks — saves to cookie after each answer
 function answer(q, val) {
   pmAnswers[q] = val;
   document.querySelectorAll(`[data-q="${q}"]`).forEach(btn => {
@@ -787,22 +810,23 @@ function answer(q, val) {
     if (btn.dataset.val === val) btn.classList.add(val);
   });
   evaluate();
+  saveProgress();
 }
 
-// Handle max trades number input
+// Handle max trades number input — saves to cookie after each change
 function answerNum() {
   const inp = document.getElementById('maxTrades');
   const v = parseInt(inp.value);
   pmAnswers[5] = v > 0 ? 'yes' : null;
   inp.classList.toggle('filled', v > 0);
   evaluate();
+  saveProgress();
 }
 
 /* ════════════════════════════════════════
    PRE-MARKET EVALUATE
-   Checks if all questions are answered,
-   then shows Cleared / Blocked verdict.
-   Any "no" = Blocked.
+   Shows Cleared / Blocked / Pending verdict.
+   Any "no" answer = Blocked.
 ════════════════════════════════════════ */
 function evaluate() {
   const result = document.getElementById('pmResult');
@@ -834,7 +858,7 @@ function evaluate() {
 /* ════════════════════════════════════════
    PRE-MARKET RESET
    Clears all answers and resets verdict.
-   Also called by the global resetAll().
+   Also called by global resetAll().
 ════════════════════════════════════════ */
 function resetForm() {
   for (let k in pmAnswers) pmAnswers[k] = null;
@@ -847,12 +871,13 @@ function resetForm() {
   setTimeout(() => result.classList.add('visible'), 50);
   document.getElementById('triggerBadge').className = 'trigger-badge';
   document.getElementById('triggerBadge').textContent = 'Pending';
+  saveProgress();
 }
 
 /* ════════════════════════════════════════
    INIT
-   Loads saved progress and renders
-   both checklists on page load.
+   Loads saved state and renders everything
+   on page load.
 ════════════════════════════════════════ */
 document.getElementById('pmResult').classList.add('visible');
 loadProgress();
