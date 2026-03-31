@@ -356,35 +356,10 @@ footer { text-align: center; font-size: 9px; color: #03468F; margin-top: 20px; l
     <span class="heart">🩵💙🩵</span>
   </header>
 
-  <!-- ══ PROGRESS BAR ══ -->
-
-  <div class="progress-bar">
-    <div class="progress-top">
-      <span class="progress-label">Progress</span>
-      <span class="progress-count" id="count">0 / 0</span>
-    </div>
-    <div class="bar-track"><div class="bar-fill" id="bar" style="width:0%"></div></div>
-    <div class="pct" id="pct">0%</div>
-  </div>
-
-  <!-- ══ TOP RESET BUTTON (resets checklist + pre-market) ══ -->
-
-  <div class="top-reset-wrap">
-    <button class="top-reset-btn" onclick="resetAll()">↺ RESET</button>
-  </div>
-
-  <!-- ══ BUY / SELL TAB BUTTONS ══ -->
-
-  <div class="tab-row">
-    <button class="tab active-buy" id="tab-buy" onclick="switchTab('buy')">💙 Buy Setup</button>
-    <button class="tab" id="tab-sell" onclick="switchTab('sell')">💙 Sell Setup</button>
-  </div>
-
   <!-- ══ PRE-MARKET CHECK DROPDOWN ══ -->
 
   <div class="premarket-wrap">
 
-```
 <!-- Dropdown trigger -->
 <button class="dropdown-trigger" id="trigger" onclick="toggleDropdown()">
   <div class="trigger-left">
@@ -477,10 +452,33 @@ footer { text-align: center; font-size: 9px; color: #03468F; margin-top: 20px; l
 
   </div>
 </div>
-```
 
   </div>
   <!-- end premarket-wrap -->
+
+  <!-- ══ PROGRESS BAR ══ -->
+
+  <div class="progress-bar">
+    <div class="progress-top">
+      <span class="progress-label">Progress</span>
+      <span class="progress-count" id="count">0 / 0</span>
+    </div>
+    <div class="bar-track"><div class="bar-fill" id="bar" style="width:0%"></div></div>
+    <div class="pct" id="pct">0%</div>
+  </div>
+
+  <!-- ══ TOP RESET BUTTON (resets checklist + pre-market) ══ -->
+
+  <div class="top-reset-wrap">
+    <button class="top-reset-btn" onclick="resetAll()">↺ RESET</button>
+  </div>
+
+  <!-- ══ BUY / SELL TAB BUTTONS ══ -->
+
+  <div class="tab-row">
+    <button class="tab active-buy" id="tab-buy" onclick="switchTab('buy')">💙 Buy Setup</button>
+    <button class="tab" id="tab-sell" onclick="switchTab('sell')">💙 Sell Setup</button>
+  </div>
 
   <!-- ══ CHECKLIST (Buy tab shown by default, Sell hidden) ══ -->
 
