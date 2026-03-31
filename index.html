@@ -4,9 +4,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ICC Checklist</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>ICC Strategy Checklist</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Montserrat:wght@400;500;600;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 
+<!-- For browser tab icon -->
 <link rel="icon" href="IMG_5307.jpeg" type="image/x-icon">
 
 <!-- For Apple devices (Add to Home Screen) -->
@@ -14,10 +15,10 @@
 
 <!-- Optional: For Android Chrome -->
 <link rel="manifest" href="manifest.json">
-  
- 
+
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  /* ── Reset & Base ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
 background: #ffffff;
@@ -29,83 +30,252 @@ padding: 36px 16px 60px;
 
 .container { max-width: 620px; margin: 0 auto; }
 
+/* ── Header ── */
 header { text-align: center; margin-bottom: 30px; }
-.label { font-size: 10px; letter-spacing: 5px; color: #03468F; text-transform: uppercase; margin-bottom: 8px; font-weight: 600; opacity: 0.6; }
-h1 { font-family: ‘Cormorant Garamond’, serif; font-size: 44px; font-weight: 700; color: #659ea5; line-height: 1; letter-spacing: 2px; }
-.subtitle { font-size: 10px; color: #03468F; margin-top: 6px; letter-spacing: 3px; font-weight: 500; opacity: 0.5; }
-.divider { width: 80px; height: 1.5px; background: linear-gradient(90deg, #659ea5, #03468F55, #659ea5); margin: 12px auto 0; border-radius: 99px; }
+.label {
+font-size: 10px; letter-spacing: 5px; color: #03468F;
+text-transform: uppercase; margin-bottom: 8px; font-weight: 600; opacity: 0.6;
+}
+h1 {
+font-family: ‘Cormorant Garamond’, serif; font-size: 44px;
+font-weight: 700; color: #659ea5; line-height: 1; letter-spacing: 2px;
+}
+.subtitle {
+font-size: 10px; color: #03468F; margin-top: 6px;
+letter-spacing: 3px; font-weight: 500; opacity: 0.5;
+}
+.divider {
+width: 80px; height: 1.5px;
+background: linear-gradient(90deg, #659ea5, #03468F55, #659ea5);
+margin: 12px auto 0; border-radius: 99px;
+}
 .heart { font-size: 18px; display: block; margin-top: 8px; }
 
+/* ── Progress Bar ── */
 .progress-bar {
-background: #ffffff;
-border: 1.5px solid #659ea5;
+background: #ffffff; border: 1.5px solid #659ea5;
 border-radius: 18px; padding: 18px 22px; margin-bottom: 10px;
 box-shadow: 0 4px 20px #659ea520;
 }
-.progress-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.progress-top {
+display: flex; justify-content: space-between;
+align-items: center; margin-bottom: 10px;
+}
 .progress-label { font-size: 10px; color: #03468F; letter-spacing: 2px; font-weight: 700; opacity: 0.5; }
 .progress-count { font-size: 13px; font-weight: 700; color: #659ea5; }
 .bar-track { background: #e6f2f3; border-radius: 99px; height: 7px; }
-.bar-fill { height: 7px; border-radius: 99px; background: linear-gradient(90deg, #659ea5, #03468F); transition: width 0.4s ease; }
-.pct { font-family: ‘Cormorant Garamond’, serif; font-size: 16px; font-weight: 700; color: #659ea5; margin-top: 8px; text-align: right; }
+.bar-fill {
+height: 7px; border-radius: 99px;
+background: linear-gradient(90deg, #659ea5, #03468F);
+transition: width 0.4s ease;
+}
+.pct {
+font-family: ‘Cormorant Garamond’, serif; font-size: 16px;
+font-weight: 700; color: #659ea5; margin-top: 8px; text-align: right;
+}
 
-.tab-row { display: flex; gap: 10px; margin-bottom: 20px; }
+/* ── Top Reset Button (small, right-aligned under progress bar) ── */
+.top-reset-wrap { text-align: right; margin: -6px 0 14px; }
+.top-reset-btn {
+background: none; border: none; cursor: pointer; font-size: 10px;
+color: #03468F; letter-spacing: 2px; font-family: ‘Montserrat’, sans-serif;
+font-weight: 600; padding: 4px 8px; border-radius: 8px;
+transition: all 0.2s; opacity: 0.45;
+}
+.top-reset-btn:hover { opacity: 1; color: #659ea5; }
+
+/* ── Buy / Sell Tab Buttons ── */
+.tab-row { display: flex; gap: 10px; margin-bottom: 16px; }
 .tab {
 flex: 1; padding: 13px; border-radius: 14px;
 border: 1.5px solid #659ea540; background: #ffffff;
 color: #03468F; font-family: ‘Montserrat’, sans-serif;
 font-size: 11px; font-weight: 700; letter-spacing: 2px;
-text-transform: uppercase; cursor: pointer; transition: all 0.25s;
-opacity: 0.5;
+text-transform: uppercase; cursor: pointer; transition: all 0.25s; opacity: 0.5;
 }
 .tab.active-buy, .tab.active-sell {
-background: #f0f8f8;
-border-color: #659ea5; color: #659ea5;
+background: #f0f8f8; border-color: #659ea5; color: #659ea5;
 box-shadow: 0 4px 18px #659ea530; opacity: 1;
 }
 
+/* ── Pre-Market Check Dropdown ── */
+.premarket-wrap { margin-bottom: 20px; }
+
+/* Dropdown trigger button */
+.dropdown-trigger {
+width: 100%; display: flex; align-items: center; justify-content: space-between;
+background: #f8fcfc; border: 1.5px solid #659ea5;
+border-radius: 14px; padding: 0.85rem 1.2rem;
+cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s, border-radius 0.3s;
+box-shadow: 0 2px 12px #659ea515;
+}
+.dropdown-trigger.open { border-radius: 14px 14px 0 0; }
+.dropdown-trigger:hover { box-shadow: 0 3px 16px #659ea525; }
+
+/* Left side: title */
+.trigger-left { display: flex; flex-direction: column; gap: 0.1rem; }
+.trigger-title {
+font-family: ‘Cormorant Garamond’, serif; font-size: 1.15rem;
+font-weight: 400; color: #2a6478; text-align: left;
+}
+.trigger-title em { font-style: italic; color: #03468F; opacity: 0.6; }
+
+/* Right side: badge + chevron */
+.trigger-right { display: flex; align-items: center; gap: 0.6rem; }
+.trigger-badge {
+font-size: 0.58rem; font-weight: 500; letter-spacing: 0.1em;
+text-transform: uppercase; padding: 0.18rem 0.55rem;
+border-radius: 50px; border: 1px solid #659ea540;
+color: #03468F; opacity: 0.5; transition: all 0.25s;
+}
+/* Badge states */
+.trigger-badge.cleared { border-color: #659ea5; color: #659ea5; background: #659ea510; opacity: 1; }
+.trigger-badge.blocked { border-color: #c47a7a; color: #c47a7a; background: rgba(196,122,122,0.08); opacity: 1; }
+
+/* Animated chevron arrow */
+.chevron { width: 15px; height: 15px; color: #659ea5; transition: transform 0.3s; flex-shrink: 0; }
+.chevron.open { transform: rotate(180deg); }
+
+/* Dropdown slide panel */
+.dropdown-panel {
+overflow: hidden; max-height: 0; opacity: 0;
+transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.25s ease;
+}
+.dropdown-panel.open { max-height: 900px; opacity: 1; }
+
+/* Card inside dropdown */
+.pm-card {
+background: #f8fcfc; border: 1.5px solid #659ea5;
+border-top: none; border-radius: 0 0 14px 14px;
+padding: 0.4rem 1.4rem 1.4rem;
+box-shadow: 0 6px 24px #659ea510;
+}
+
+/* Each question row */
+.question-item {
+display: flex; align-items: flex-start; gap: 1rem;
+padding: 0.82rem 0; border-bottom: 1px solid #659ea520;
+}
+.question-item:last-of-type { border-bottom: none; }
+
+/* Question number */
+.q-number {
+font-family: ‘Cormorant Garamond’, serif; font-size: 0.85rem;
+color: #659ea5; min-width: 1.2rem; padding-top: 0.1rem;
+}
+
+/* Question text */
+.q-text {
+flex: 1; font-size: 0.87rem; line-height: 1.5;
+color: #03468F; opacity: 0.6; font-family: ‘Jost’, sans-serif; font-weight: 300;
+}
+.q-text strong { display: block; font-weight: 400; color: #2a6478; font-size: 0.9rem; margin-bottom: 0.05rem; }
+
+/* Yes / No toggle buttons */
+.toggle-group { display: flex; gap: 0.35rem; align-items: center; }
+.toggle-btn {
+width: 44px; height: 27px; border-radius: 50px;
+border: 1px solid #659ea540; background: transparent;
+cursor: pointer; font-family: ‘Jost’, sans-serif;
+font-size: 0.63rem; font-weight: 500; letter-spacing: 0.06em;
+color: #03468F; opacity: 0.5; transition: all 0.2s;
+}
+/* Active toggle states */
+.toggle-btn.yes { border-color: #659ea5; background: #659ea510; color: #659ea5; opacity: 1; }
+.toggle-btn.no  { border-color: #c47a7a; background: rgba(196,122,122,0.1); color: #c47a7a; opacity: 1; }
+.toggle-btn:hover:not(.yes):not(.no) { border-color: #659ea5; color: #659ea5; opacity: 0.8; }
+
+/* Max trades number input */
+.q-input {
+width: 54px; height: 27px; border-radius: 50px;
+border: 1px solid #659ea540; background: transparent;
+text-align: center; font-family: ‘Jost’, sans-serif;
+font-size: 0.8rem; color: #2a6478; outline: none;
+transition: border-color 0.2s; padding: 0 0.4rem;
+}
+.q-input:focus { border-color: #659ea5; }
+.q-input.filled { border-color: #659ea5; color: #659ea5; }
+
+/* Pre-market result verdict */
+.pm-result {
+margin-top: 1rem; padding-top: 1rem;
+border-top: 1px solid #659ea520;
+text-align: center; min-height: 58px;
+display: flex; flex-direction: column;
+align-items: center; justify-content: center; gap: 0.25rem;
+opacity: 0; transform: translateY(5px); transition: all 0.35s;
+}
+.pm-result.visible { opacity: 1; transform: translateY(0); }
+.result-verdict {
+font-family: ‘Cormorant Garamond’, serif; font-size: 1.3rem;
+font-weight: 400; letter-spacing: 0.02em;
+}
+/* Verdict color states */
+.result-verdict.go      { color: #659ea5; }
+.result-verdict.stop    { color: #c47a7a; }
+.result-verdict.pending { color: #03468F; opacity: 0.4; font-style: italic; font-size: 0.9rem; }
+.result-sub { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: #03468F; opacity: 0.4; }
+
+/* ── Session Rule (inside dropdown) ── */
+.session-rule {
+margin-top: 1rem; padding: 0.85rem 1.1rem;
+background: #f0f8f8; border: 1.5px solid #659ea530;
+border-radius: 12px;
+}
+.session-rule .sr-label {
+font-size: 0.57rem; font-weight: 600; letter-spacing: 0.2em;
+text-transform: uppercase; color: #659ea5; margin-bottom: 0.3rem;
+font-family: ‘Montserrat’, sans-serif;
+}
+.session-rule p {
+font-size: 0.78rem; color: #03468F; opacity: 0.55;
+line-height: 1.65; font-family: ‘Jost’, sans-serif; font-weight: 300;
+}
+
+/* ── Checklist Sections ── */
 .section {
-background: #ffffff;
-border: 1.5px solid #659ea5;
+background: #ffffff; border: 1.5px solid #659ea5;
 border-radius: 18px; margin-bottom: 12px;
 overflow: hidden; transition: border-color 0.3s, box-shadow 0.3s;
 box-shadow: 0 2px 12px #659ea515;
 }
-.section.complete { border-color: #659ea5; box-shadow: 0 2px 20px #659ea535; }
+.section.complete { box-shadow: 0 2px 20px #659ea535; }
+
+/* Section header bar */
 .section-header {
 display: flex; align-items: center; gap: 10px;
 padding: 14px 18px; border-bottom: 1.5px solid #659ea520;
 background: #f8fcfc;
 }
-.dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; transition: background 0.3s; }
-.section-title { font-family: ‘Cormorant Garamond’, serif; font-size: 18px; font-weight: 700; flex: 1; }
+.dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; background: #659ea5; }
+.section-title {
+font-family: ‘Cormorant Garamond’, serif; font-size: 18px;
+font-weight: 700; flex: 1; color: #659ea5;
+}
+/* “Done” tag shown when all items in a section are checked */
 .done-tag { font-size: 9px; color: #659ea5; letter-spacing: 2px; font-weight: 700; white-space: nowrap; }
 .items { padding: 10px 14px 16px; }
 
+/* Italic tip shown at top of each section */
 .tip {
-background: #f4fafa;
-border-left: 3px solid #659ea5;
-border-radius: 0 10px 10px 0;
-padding: 10px 14px; margin: 8px 10px 12px;
-font-size: 13px; color: #03468F;
-line-height: 1.7; font-style: italic;
-font-family: ‘Cormorant Garamond’, serif; opacity: 0.7;
+background: #f4fafa; border-left: 3px solid #659ea5;
+border-radius: 0 10px 10px 0; padding: 10px 14px; margin: 8px 10px 12px;
+font-size: 13px; color: #03468F; line-height: 1.7;
+font-style: italic; font-family: ‘Cormorant Garamond’, serif; opacity: 0.7;
 }
 
+/* Alert box (e.g. “switch to 1M now”) */
 .alert-box {
-background: #f0f8f8;
-border: 1.5px solid #659ea560;
-border-radius: 10px; padding: 10px 14px;
-margin: 6px 10px 12px; font-size: 11px;
-color: #659ea5; font-weight: 600; line-height: 1.6;
+background: #f0f8f8; border: 1.5px solid #659ea560;
+border-radius: 10px; padding: 10px 14px; margin: 6px 10px 12px;
+font-size: 11px; color: #659ea5; font-weight: 600; line-height: 1.6;
 display: flex; gap: 8px; align-items: flex-start;
 }
 
+/* ── Candle Sequence Visual ── */
 .candle-sequence {
-background: #f0f8f8;
-border: 1.5px solid #659ea5;
-border-radius: 14px; padding: 16px 18px;
-margin: 6px 10px 14px;
+background: #f0f8f8; border: 1.5px solid #659ea5;
+border-radius: 14px; padding: 16px 18px; margin: 6px 10px 14px;
 }
 .candle-sequence-title {
 font-size: 10px; font-weight: 700; letter-spacing: 2px;
@@ -122,8 +292,10 @@ box-shadow: 0 2px 8px #659ea510;
 .candle-step .candle-icon { font-size: 22px; line-height: 1; }
 .candle-step .candle-label { font-size: 10px; font-weight: 700; text-align: center; line-height: 1.4; color: #659ea5; }
 .candle-arrow { font-size: 18px; color: #659ea5; flex-shrink: 0; }
+/* Entry step highlight */
 .candle-step.entry-step { border-color: #659ea5; background: #f0f8f8; }
 
+/* ── Checklist Items ── */
 .item {
 display: flex; align-items: flex-start; gap: 12px;
 padding: 10px 8px; border-radius: 10px;
@@ -132,6 +304,8 @@ margin-bottom: 3px; user-select: none;
 }
 .item:hover { background: #f4fafa; }
 .item.checked { background: #f8fcfc; }
+
+/* Checkbox circle */
 .checkbox {
 width: 20px; height: 20px; border-radius: 6px;
 border: 1.5px solid #659ea560; flex-shrink: 0; margin-top: 2px;
@@ -140,21 +314,30 @@ transition: all 0.2s; background: #ffffff;
 }
 .tick { display: none; color: #ffffff; font-size: 11px; font-weight: 900; }
 .item.checked .tick { display: block; }
+
+/* Main item text — change color here to adjust checklist text */
 .item-text { font-size: 12px; line-height: 1.65; color: #2a6478; transition: all 0.2s; font-weight: 500; }
 .item.checked .item-text { color: #659ea560; text-decoration: line-through; }
-.item-why { font-size: 12px; color: #03468F; margin-top: 4px; font-style: italic; line-height: 1.55; font-family: ‘Cormorant Garamond’, serif; opacity: 0.45; transition: opacity 0.2s; }
+
+/* Sub-text “why” explanation under each item */
+.item-why {
+font-size: 12px; color: #03468F; margin-top: 4px;
+font-style: italic; line-height: 1.55;
+font-family: ‘Cormorant Garamond’, serif; opacity: 0.45; transition: opacity 0.2s;
+}
 .item.checked .item-why { opacity: 0.2; }
 
+/* ── Bottom Reset Button ── */
 .reset-btn {
 width: 100%; padding: 14px; border-radius: 14px;
 border: 1.5px solid #659ea540; background: #ffffff;
 color: #03468F; font-family: ‘Montserrat’, sans-serif;
 font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
-cursor: pointer; margin-top: 8px; transition: all 0.2s; font-weight: 600;
-opacity: 0.5;
+cursor: pointer; margin-top: 8px; transition: all 0.2s; font-weight: 600; opacity: 0.5;
 }
 .reset-btn:hover { border-color: #659ea5; color: #659ea5; opacity: 1; box-shadow: 0 4px 16px #659ea520; }
 
+/* ── Utility ── */
 .hidden { display: none; }
 footer { text-align: center; font-size: 9px; color: #03468F; margin-top: 20px; letter-spacing: 2px; opacity: 0.35; }
 </style>
@@ -162,6 +345,9 @@ footer { text-align: center; font-size: 9px; color: #03468F; margin-top: 20px; l
 </head>
 <body>
 <div class="container">
+
+  <!-- ══ HEADER ══ -->
+
   <header>
     <div class="label">One Disciplined Trade At A Time</div>
     <h1>ICC Strategy</h1>
@@ -169,6 +355,8 @@ footer { text-align: center; font-size: 9px; color: #03468F; margin-top: 20px; l
     <div class="divider"></div>
     <span class="heart">🩵💙🩵</span>
   </header>
+
+  <!-- ══ PROGRESS BAR ══ -->
 
   <div class="progress-bar">
     <div class="progress-top">
@@ -179,17 +367,127 @@ footer { text-align: center; font-size: 9px; color: #03468F; margin-top: 20px; l
     <div class="pct" id="pct">0%</div>
   </div>
 
-  <div style="text-align:right;margin:-6px 0 14px">
-    <button onclick="resetAll()" style="background:none;border:none;cursor:pointer;font-size:10px;color:#03468F;letter-spacing:2px;font-family:'Montserrat',sans-serif;font-weight:600;padding:4px 8px;border-radius:8px;transition:all 0.2s;opacity:0.45" onmouseover="this.style.opacity='1';this.style.color='#659ea5'" onmouseout="this.style.opacity='0.45';this.style.color='#03468F'">↺ RESET</button>
+  <!-- ══ TOP RESET BUTTON (resets checklist + pre-market) ══ -->
+
+  <div class="top-reset-wrap">
+    <button class="top-reset-btn" onclick="resetAll()">↺ RESET</button>
   </div>
+
+  <!-- ══ BUY / SELL TAB BUTTONS ══ -->
 
   <div class="tab-row">
     <button class="tab active-buy" id="tab-buy" onclick="switchTab('buy')">💙 Buy Setup</button>
     <button class="tab" id="tab-sell" onclick="switchTab('sell')">💙 Sell Setup</button>
   </div>
 
+  <!-- ══ PRE-MARKET CHECK DROPDOWN ══ -->
+
+  <div class="premarket-wrap">
+
+```
+<!-- Dropdown trigger -->
+<button class="dropdown-trigger" id="trigger" onclick="toggleDropdown()">
+  <div class="trigger-left">
+    <!-- Title — change text here to rename the dropdown -->
+    <div class="trigger-title">Pre-Market <em>Check</em></div>
+  </div>
+  <div class="trigger-right">
+    <!-- Badge shows Pending / Cleared / Blocked based on answers -->
+    <span class="trigger-badge" id="triggerBadge">Pending</span>
+    <svg class="chevron" id="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="6 9 12 15 18 9"/>
+    </svg>
+  </div>
+</button>
+
+<!-- Dropdown panel -->
+<div class="dropdown-panel" id="pmPanel">
+  <div class="pm-card">
+
+    <!-- Question 1 — Am I calm? -->
+    <div class="question-item">
+      <span class="q-number">1</span>
+      <div class="q-text"><strong>Am I calm?</strong>No frustration, no excitement.</div>
+      <div class="toggle-group">
+        <button class="toggle-btn" data-q="1" data-val="yes" onclick="answer(1,'yes')">Yes</button>
+        <button class="toggle-btn" data-q="1" data-val="no"  onclick="answer(1,'no')">No</button>
+      </div>
+    </div>
+
+    <!-- Question 2 — Okay not trading? -->
+    <div class="question-item">
+      <span class="q-number">2</span>
+      <div class="q-text"><strong>Am I okay not trading today?</strong></div>
+      <div class="toggle-group">
+        <button class="toggle-btn" data-q="2" data-val="yes" onclick="answer(2,'yes')">Yes</button>
+        <button class="toggle-btn" data-q="2" data-val="no"  onclick="answer(2,'no')">No</button>
+      </div>
+    </div>
+
+    <!-- Question 3 — Stop after 2 losses? -->
+    <div class="question-item">
+      <span class="q-number">3</span>
+      <div class="q-text"><strong>If I lose 2 trades, will I stop?</strong></div>
+      <div class="toggle-group">
+        <button class="toggle-btn" data-q="3" data-val="yes" onclick="answer(3,'yes')">Yes</button>
+        <button class="toggle-btn" data-q="3" data-val="no"  onclick="answer(3,'no')">No</button>
+      </div>
+    </div>
+
+    <!-- Question 4 — Know exact setup? -->
+    <div class="question-item">
+      <span class="q-number">4</span>
+      <div class="q-text"><strong>Do I know my exact setup?</strong></div>
+      <div class="toggle-group">
+        <button class="toggle-btn" data-q="4" data-val="yes" onclick="answer(4,'yes')">Yes</button>
+        <button class="toggle-btn" data-q="4" data-val="no"  onclick="answer(4,'no')">No</button>
+      </div>
+    </div>
+
+    <!-- Question 5 — Max trades (number input) -->
+    <div class="question-item">
+      <span class="q-number">5</span>
+      <div class="q-text"><strong>Max trades today?</strong></div>
+      <div class="toggle-group">
+        <input class="q-input" id="maxTrades" type="number" min="1" max="10" placeholder="#" oninput="answerNum()" />
+      </div>
+    </div>
+
+    <!-- Question 6 — Stay off if miss setups? -->
+    <div class="question-item">
+      <span class="q-number">6</span>
+      <div class="q-text"><strong>If I miss setups, will I stay off?</strong></div>
+      <div class="toggle-group">
+        <button class="toggle-btn" data-q="6" data-val="yes" onclick="answer(6,'yes')">Yes</button>
+        <button class="toggle-btn" data-q="6" data-val="no"  onclick="answer(6,'no')">No</button>
+      </div>
+    </div>
+
+    <!-- Result verdict (auto-updates based on answers) -->
+    <div class="pm-result" id="pmResult">
+      <div class="result-verdict pending">Answer all six to proceed.</div>
+    </div>
+
+    <!-- Session Rule (inside dropdown, below verdict) -->
+    <!-- To edit the rule text, change the <p> content below -->
+    <div class="session-rule">
+      <div class="sr-label">Session Rule</div>
+      <p>Miss 1–2 clean setups → you're done for the day.<br>Any <strong>No</strong> = no trading.</p>
+    </div>
+
+  </div>
+</div>
+```
+
+  </div>
+  <!-- end premarket-wrap -->
+
+  <!-- ══ CHECKLIST (Buy tab shown by default, Sell hidden) ══ -->
+
   <div id="checklist-buy"></div>
   <div id="checklist-sell" class="hidden"></div>
+
+  <!-- ══ BOTTOM RESET BUTTON (resets checklist + pre-market) ══ -->
 
 <button class="reset-btn" onclick="resetAll()">↺ Reset Checklist</button>
 
@@ -197,27 +495,20 @@ footer { text-align: center; font-size: 9px; color: #03468F; margin-top: 20px; l
 </div>
 
 <script>
+/* ════════════════════════════════════════
+   CANDLE SEQUENCE VISUALS
+   Edit the labels/icons here if the
+   sequence logic changes.
+════════════════════════════════════════ */
 const candleSequenceBuy = `
   <div class="candle-sequence">
     <div class="candle-sequence-title">🕯️ Required 1M Candle Sequence — Buy</div>
     <div class="candle-steps">
-      <div class="candle-step">
-        <span class="num">CANDLE 1</span>
-        <span class="candle-icon">🟢</span>
-        <span class="candle-label">Close ABOVE<br/>Swing High</span>
-      </div>
+      <div class="candle-step"><span class="num">CANDLE 1</span><span class="candle-icon">🟢</span><span class="candle-label">Close ABOVE<br/>Swing High</span></div>
       <span class="candle-arrow">→</span>
-      <div class="candle-step">
-        <span class="num">CANDLE 2</span>
-        <span class="candle-icon">🔴</span>
-        <span class="candle-label">Close BELOW<br/>Swing High</span>
-      </div>
+      <div class="candle-step"><span class="num">CANDLE 2</span><span class="candle-icon">🔴</span><span class="candle-label">Close BELOW<br/>Swing High</span></div>
       <span class="candle-arrow">→</span>
-      <div class="candle-step entry-step">
-        <span class="num">CANDLE 3</span>
-        <span class="candle-icon">🟢</span>
-        <span class="candle-label">Close ABOVE<br/>Swing High<br/>= ENTER ✅</span>
-      </div>
+      <div class="candle-step entry-step"><span class="num">CANDLE 3</span><span class="candle-icon">🟢</span><span class="candle-label">Close ABOVE<br/>Swing High<br/>= ENTER ✅</span></div>
     </div>
   </div>`;
 
@@ -225,103 +516,138 @@ const candleSequenceSell = `
   <div class="candle-sequence">
     <div class="candle-sequence-title">🕯️ Required 1M Candle Sequence — Sell</div>
     <div class="candle-steps">
-      <div class="candle-step">
-        <span class="num">CANDLE 1</span>
-        <span class="candle-icon">🔴</span>
-        <span class="candle-label">Close BELOW<br/>Swing Low</span>
-      </div>
+      <div class="candle-step"><span class="num">CANDLE 1</span><span class="candle-icon">🔴</span><span class="candle-label">Close BELOW<br/>Swing Low</span></div>
       <span class="candle-arrow">→</span>
-      <div class="candle-step">
-        <span class="num">CANDLE 2</span>
-        <span class="candle-icon">🟢</span>
-        <span class="candle-label">Close ABOVE<br/>Swing Low</span>
-      </div>
+      <div class="candle-step"><span class="num">CANDLE 2</span><span class="candle-icon">🟢</span><span class="candle-label">Close ABOVE<br/>Swing Low</span></div>
       <span class="candle-arrow">→</span>
-      <div class="candle-step entry-step">
-        <span class="num">CANDLE 3</span>
-        <span class="candle-icon">🔴</span>
-        <span class="candle-label">Close BELOW<br/>Swing Low<br/>= ENTER ✅</span>
-      </div>
+      <div class="candle-step entry-step"><span class="num">CANDLE 3</span><span class="candle-icon">🔴</span><span class="candle-label">Close BELOW<br/>Swing Low<br/>= ENTER ✅</span></div>
     </div>
   </div>`;
 
+/* ════════════════════════════════════════
+   CHECKLIST STEPS — BUY SETUP
+   Each object = one section.
+   Fields:
+     title    — section header text
+     emoji    — icon next to title
+     tip      — italic tip shown at top
+     alert    — alert box text (or null)
+     candleSeq — "buy", "sell", or null
+     items    — array of { text, why }
+       text   — main checkbox label
+       why    — subtext explanation below
+════════════════════════════════════════ */
 const buySteps = [
-  { title:"Step 0 — Mark the 1H Chart", emoji:"🖊️", tip:"Always mark your chart before price reaches the level. Lines drawn in advance let you react instantly instead of scrambling.", alert:null, candleSeq:null, items:[
+  { title:"Step 0 — Mark the 1H Chart", emoji:"🖊️",
+    tip:"Always mark your chart before price reaches the level. Lines drawn in advance let you react instantly instead of scrambling.",
+    alert:null, candleSeq:null, items:[
     { text:"Open the 1H chart — this is your marking timeframe", why:"↳ The 1H gives you the key swing levels. You mark here, then drop to the 1M to execute." },
     { text:"Mark the most recent significant 1H swing high — the level price rejected from", why:"↳ This is the level you watch for a breakout. When price breaks above it, you drop to the 1M immediately." },
     { text:"Mark the most recent significant 1H swing low — where buyers previously stepped in", why:"↳ This is your limit order entry level on the 1M. Mark it now so it is ready before the setup triggers." },
     { text:"Confirm uptrend structure on the 1H: higher highs AND higher lows", why:"↳ ICC is trend-continuation only. No confirmed uptrend = no setup." },
     { text:"Mark any internal liquidity points between the swing low and swing high", why:"↳ Price may dip to these during the correction. Knowing them keeps you calm and in the trade." },
   ]},
-  { title:"Step 1 — Indication: 1H Break", emoji:"📈", tip:"You do not wait for the 1H candle to close. The moment price pushes above the 1H swing high is your alert to drop to the 1M.", alert:"⚡ Price breaks above the 1H swing high → Switch to the 1M chart immediately.", candleSeq:null, items:[
+  { title:"Step 1 — Indication: 1H Break", emoji:"📈",
+    tip:"You do not wait for the 1H candle to close. The moment price pushes above the 1H swing high is your alert to drop to the 1M.",
+    alert:"⚡ Price breaks above the 1H swing high → Switch to the 1M chart immediately.", candleSeq:null, items:[
     { text:"Price pushes above the 1H swing high you have marked", why:"↳ The break — not the close — is your cue. Drop to the 1M the moment you see this." },
     { text:"Switch to the 1M chart immediately", why:"↳ The 1H told you where. The 1M tells you when. All execution from here is on the 1M." },
     { text:"Confirm the 1H swing high level is visible and marked on the 1M chart", why:"↳ You need to track the exact candle closes above and below this level on the 1M." },
   ]},
-  { title:"Step 2 — Watch the 1M Candle Sequence", emoji:"🕯️", tip:"Wait for all three candle closes in order. Do not enter early — the sequence is the confirmation.", alert:null, candleSeq:"buy", items:[
+  { title:"Step 2 — Watch the 1M Candle Sequence", emoji:"🕯️",
+    tip:"Wait for all three candle closes in order. Do not enter early — the sequence is the confirmation.",
+    alert:null, candleSeq:"buy", items:[
     { text:"🟢 Candle 1: 1M candle closes ABOVE the swing high — Indication on the 1M confirmed", why:"↳ Buyers have pushed through on your entry timeframe. Stay alert — two more closes needed." },
     { text:"🔴 Candle 2: 1M candle closes BELOW the swing high — Correction underway", why:"↳ Sellers are testing the level. This is the pullback. Do not enter — wait for Candle 3." },
     { text:"🟢 Candle 3: 1M candle closes ABOVE the swing high — Continuation confirmed", why:"↳ Buyers have reclaimed the level. This is your entry signal. The sequence is complete." },
     { text:"All 3 closes confirmed in order before taking any action", why:"↳ Entering on Candle 1 or 2 is anticipating the setup, not trading it. Wait for the full sequence." },
   ]},
-  { title:"Step 3 — Entry", emoji:"✅", tip:"Candle 3 has closed above the swing high. That close is your entry signal — at or near that swing high level.", alert:null, candleSeq:null, items:[
+  { title:"Step 3 — Entry", emoji:"✅",
+    tip:"Candle 3 has closed above the swing high. That close is your entry signal — at or near that swing high level.",
+    alert:null, candleSeq:null, items:[
     { text:"Entry Option A — Market order: Enter on the close of Candle 3 above the swing high", why:"↳ Fast execution at the swing high level. Use when price is moving quickly." },
     { text:"Entry Option B (preferred) — Limit order: Set limit order AT the swing high level", why:"↳ Your primary method. You enter at the swing high — the level where Candle 3 just closed above. This is the ICC entry." },
     { text:"Place the limit order at the swing high during or after Candle 2 so it is ready", why:"↳ Setting it in advance means you don't miss the fill if price returns briefly to retest the level." },
     { text:"Confirm: entry is at the 1H swing high level — NOT below it at the swing low", why:"↳ The entry is at the swing high. The swing high is where the continuation is confirmed. That is your entry zone." },
   ]},
-  { title:"Stop Loss Placement", emoji:"🛡️", tip:"Place your stop where the setup is proven wrong — not where price might just temporarily dip.", alert:null, candleSeq:null, items:[
+  { title:"Stop Loss Placement", emoji:"🛡️",
+    tip:"Place your stop where the setup is proven wrong — not where price might just temporarily dip.",
+    alert:null, candleSeq:null, items:[
     { text:"Place stop loss BELOW the lowest point of the 1M correction", why:"↳ If price breaks below this, the correction was a reversal — not a retest. Setup is over." },
     { text:"If the correction has multiple swing lows, use the absolute lowest one", why:"↳ Maximum room. Keeps you in through normal volatility during a valid setup." },
     { text:"Add a small buffer of a few ticks below the swing low", why:"↳ Price often briefly dips below key lows to grab liquidity before reversing. The buffer protects you." },
   ]},
-  { title:"Take Profit — 1:3 RR", emoji:"🎯", tip:"At 1:3 RR you only need to win 25% of your trades to break even. Never compromise this.", alert:null, candleSeq:null, items:[
+  { title:"Take Profit — 1:3 RR", emoji:"🎯",
+    tip:"At 1:3 RR you only need to win 25% of your trades to break even. Never compromise this.",
+    alert:null, candleSeq:null, items:[
     { text:"Identify the next significant 1H resistance or swing high above entry as your TP", why:"↳ This is where sellers are likely to re-enter. Set TP just before that level." },
     { text:"Confirm: TP distance is at least 3× the distance from your entry to your stop", why:"↳ If the math doesn't give 1:3 or better, the trade does not meet your criteria." },
     { text:"If TP does NOT give 1:3 RR — skip the trade entirely", why:"↳ A setup with poor RR is a gamble, not a trade. Another setup will always come." },
   ]},
 ];
 
+/* ════════════════════════════════════════
+   CHECKLIST STEPS — SELL SETUP
+   Same structure as buySteps above.
+════════════════════════════════════════ */
 const sellSteps = [
-  { title:"Step 0 — Mark the 1H Chart", emoji:"🖊️", tip:"Always mark your chart before price reaches the level. Lines drawn in advance let you react instantly instead of scrambling.", alert:null, candleSeq:null, items:[
+  { title:"Step 0 — Mark the 1H Chart", emoji:"🖊️",
+    tip:"Always mark your chart before price reaches the level. Lines drawn in advance let you react instantly instead of scrambling.",
+    alert:null, candleSeq:null, items:[
     { text:"Open the 1H chart — this is your marking timeframe", why:"↳ The 1H gives you the key swing levels. You mark here, then drop to the 1M to execute." },
     { text:"Mark the most recent significant 1H swing low — the level price bounced from", why:"↳ This is the level you watch for a breakdown. When price breaks below it, you drop to the 1M immediately." },
     { text:"Mark the most recent significant 1H swing high — where sellers previously stepped in", why:"↳ This is your limit order entry level on the 1M. Mark it now so it is ready before the setup triggers." },
     { text:"Confirm downtrend structure on the 1H: lower highs AND lower lows", why:"↳ ICC is trend-continuation only. No confirmed downtrend = no setup." },
     { text:"Mark any internal liquidity points between the swing high and swing low", why:"↳ Price may bounce to these during the correction. Knowing them keeps you calm and in the trade." },
   ]},
-  { title:"Step 1 — Indication: 1H Break", emoji:"📉", tip:"You do not wait for the 1H candle to close. The moment price pushes below the 1H swing low is your alert to drop to the 1M.", alert:"⚡ Price breaks below the 1H swing low → Switch to the 1M chart immediately.", candleSeq:null, items:[
+  { title:"Step 1 — Indication: 1H Break", emoji:"📉",
+    tip:"You do not wait for the 1H candle to close. The moment price pushes below the 1H swing low is your alert to drop to the 1M.",
+    alert:"⚡ Price breaks below the 1H swing low → Switch to the 1M chart immediately.", candleSeq:null, items:[
     { text:"Price pushes below the 1H swing low you have marked", why:"↳ The break — not the close — is your cue. Drop to the 1M the moment you see this." },
     { text:"Switch to the 1M chart immediately", why:"↳ The 1H told you where. The 1M tells you when. All execution from here is on the 1M." },
     { text:"Confirm the 1H swing low level is visible and marked on the 1M chart", why:"↳ You need to track the exact candle closes above and below this level on the 1M." },
   ]},
-  { title:"Step 2 — Watch the 1M Candle Sequence", emoji:"🕯️", tip:"Wait for all three candle closes in order. Do not enter early — the sequence is the confirmation.", alert:null, candleSeq:"sell", items:[
+  { title:"Step 2 — Watch the 1M Candle Sequence", emoji:"🕯️",
+    tip:"Wait for all three candle closes in order. Do not enter early — the sequence is the confirmation.",
+    alert:null, candleSeq:"sell", items:[
     { text:"🔴 Candle 1: 1M candle closes BELOW the swing low — Indication on the 1M confirmed", why:"↳ Sellers have pushed through on your entry timeframe. Stay alert — two more closes needed." },
     { text:"🟢 Candle 2: 1M candle closes ABOVE the swing low — Correction underway", why:"↳ Buyers are testing the level. This is the pullback. Do not enter — wait for Candle 3." },
     { text:"🔴 Candle 3: 1M candle closes BELOW the swing low — Continuation confirmed", why:"↳ Sellers have reclaimed the level. This is your entry signal. The sequence is complete." },
     { text:"All 3 closes confirmed in order before taking any action", why:"↳ Entering on Candle 1 or 2 is anticipating the setup, not trading it. Wait for the full sequence." },
   ]},
-  { title:"Step 3 — Entry", emoji:"✅", tip:"Candle 3 has closed below the swing low. That close is your entry signal — at or near that swing low level.", alert:null, candleSeq:null, items:[
+  { title:"Step 3 — Entry", emoji:"✅",
+    tip:"Candle 3 has closed below the swing low. That close is your entry signal — at or near that swing low level.",
+    alert:null, candleSeq:null, items:[
     { text:"Entry Option A — Market order: Enter on the close of Candle 3 below the swing low", why:"↳ Fast execution at the swing low level. Use when price is moving quickly." },
     { text:"Entry Option B (preferred) — Limit order: Set limit order AT the swing low level", why:"↳ Your primary method. You enter at the swing low — the level where Candle 3 just closed below. This is the ICC entry." },
     { text:"Place the limit order at the swing low during or after Candle 2 so it is ready", why:"↳ Setting it in advance means you don't miss the fill if price returns briefly to retest the level." },
     { text:"Confirm: entry is at the 1H swing low level — NOT above it at the swing high", why:"↳ The entry is at the swing low. The swing low is where the continuation is confirmed. That is your entry zone." },
   ]},
-  { title:"Stop Loss Placement", emoji:"🛡️", tip:"Place your stop where the setup is proven wrong — not where price might just temporarily spike.", alert:null, candleSeq:null, items:[
+  { title:"Stop Loss Placement", emoji:"🛡️",
+    tip:"Place your stop where the setup is proven wrong — not where price might just temporarily spike.",
+    alert:null, candleSeq:null, items:[
     { text:"Place stop loss ABOVE the highest point of the 1M correction", why:"↳ If price breaks above this, the correction was a reversal — not a retest. Setup is over." },
     { text:"If the correction has multiple swing highs, use the absolute highest one", why:"↳ Maximum room. Keeps you in through normal volatility during a valid setup." },
     { text:"Add a small buffer of a few ticks above the swing high", why:"↳ Price often briefly spikes above key highs to grab liquidity before reversing. The buffer protects you." },
   ]},
-  { title:"Take Profit — 1:3 RR", emoji:"🎯", tip:"At 1:3 RR you only need to win 25% of your trades to break even. Never compromise this.", alert:null, candleSeq:null, items:[
+  { title:"Take Profit — 1:3 RR", emoji:"🎯",
+    tip:"At 1:3 RR you only need to win 25% of your trades to break even. Never compromise this.",
+    alert:null, candleSeq:null, items:[
     { text:"Identify the next significant 1H support or swing low below entry as your TP", why:"↳ This is where buyers are likely to re-enter. Set TP just before that level." },
     { text:"Confirm: TP distance is at least 3× the distance from your entry to your stop", why:"↳ If the math doesn't give 1:3 or better, the trade does not meet your criteria." },
     { text:"If TP does NOT give 1:3 RR — skip the trade entirely", why:"↳ A setup with poor RR is a gamble, not a trade. Another setup will always come." },
   ]},
 ];
 
+/* ════════════════════════════════════════
+   CHECKLIST STATE & COOKIE PERSISTENCE
+   Progress is saved to a cookie so it
+   survives closing/reopening on iOS PWA.
+════════════════════════════════════════ */
 let activeTab = 'buy';
 let checked = { buy: {}, sell: {} };
 
+// Save checklist state to cookie
 function saveProgress() {
   try {
     const val = encodeURIComponent(JSON.stringify(checked));
@@ -330,6 +656,7 @@ function saveProgress() {
   } catch(e) {}
 }
 
+// Load checklist state from cookie on page load
 function loadProgress() {
   try {
     const match = document.cookie.split(';').find(c => c.trim().startsWith('icc='));
@@ -337,6 +664,10 @@ function loadProgress() {
   } catch(e) {}
 }
 
+/* ════════════════════════════════════════
+   TAB SWITCHING
+   Toggles between Buy and Sell views.
+════════════════════════════════════════ */
 function switchTab(tab) {
   activeTab = tab;
   document.getElementById('tab-buy').className = 'tab' + (tab === 'buy' ? ' active-buy' : '');
@@ -346,12 +677,22 @@ function switchTab(tab) {
   updateProgress();
 }
 
+/* ════════════════════════════════════════
+   CHECKLIST ITEM TOGGLE
+   Checks/unchecks an item, re-renders,
+   updates progress, and saves to cookie.
+════════════════════════════════════════ */
 function toggle(tab, sIdx, iIdx) {
   const key = `${sIdx}-${iIdx}`;
   checked[tab][key] = !checked[tab][key];
   renderAll(tab); updateProgress(); saveProgress();
 }
 
+/* ════════════════════════════════════════
+   RENDER CHECKLIST
+   Builds the HTML for all sections
+   of a given tab (buy or sell).
+════════════════════════════════════════ */
 function renderAll(tab) {
   const steps = tab === 'buy' ? buySteps : sellSteps;
   const list = document.getElementById(`checklist-${tab}`);
@@ -360,27 +701,22 @@ function renderAll(tab) {
     const allDone = sec.items.every((_, ii) => checked[tab][`${si}-${ii}`]);
     const div = document.createElement('div');
     div.className = 'section' + (allDone ? ' complete' : '');
-
     const itemsHTML = sec.items.map((item, ii) => {
       const on = !!checked[tab][`${si}-${ii}`];
-      return `<div class="item${on ? ' checked' : ''}" onclick="toggle('${tab}',${si},${ii})">
-        <div class="checkbox" style="${on ? 'border-color:#659ea5;background:#659ea5' : ''}">
-          <span class="tick">✓</span>
-        </div>
-        <div style="flex:1">
-          <div class="item-text">${item.text}</div>
-          <div class="item-why">${item.why}</div>
-        </div>
+      return `<div class="item${on?' checked':''}" onclick="toggle('${tab}',${si},${ii})">
+        <div class="checkbox" style="${on?'border-color:#659ea5;background:#659ea5':''}"><span class="tick">✓</span></div>
+        <div style="flex:1"><div class="item-text">${item.text}</div><div class="item-why">${item.why}</div></div>
       </div>`;
     }).join('');
-
-    const alertHTML = sec.alert ? `<div class="alert-box"><span style="font-size:16px;flex-shrink:0">⚡</span><span>${sec.alert.replace('⚡ ','')}</span></div>` : '';
-    const seqHTML = sec.candleSeq === 'buy' ? candleSequenceBuy : sec.candleSeq === 'sell' ? candleSequenceSell : '';
-
+    const alertHTML = sec.alert
+      ? `<div class="alert-box"><span style="font-size:16px;flex-shrink:0">⚡</span><span>${sec.alert.replace('⚡ ','')}</span></div>`
+      : '';
+    const seqHTML = sec.candleSeq === 'buy' ? candleSequenceBuy
+                  : sec.candleSeq === 'sell' ? candleSequenceSell : '';
     div.innerHTML = `
       <div class="section-header">
-        <div class="dot" style="background:${allDone ? '#659ea5' : '#659ea5'}"></div>
-        <div class="section-title" style="color:${allDone ? '#659ea5' : '#659ea5'}">${sec.emoji} ${sec.title}</div>
+        <div class="dot"></div>
+        <div class="section-title">${sec.emoji} ${sec.title}</div>
         ${allDone ? '<span class="done-tag">✓ DONE</span>' : ''}
       </div>
       ${sec.tip ? `<div class="tip">${sec.tip}</div>` : ''}
@@ -390,6 +726,11 @@ function renderAll(tab) {
   });
 }
 
+/* ════════════════════════════════════════
+   PROGRESS BAR
+   Counts checked items for the active tab
+   and updates the bar + percentage.
+════════════════════════════════════════ */
 function getTotal(tab) {
   return (tab === 'buy' ? buySteps : sellSteps).reduce((a, s) => a + s.items.length, 0);
 }
@@ -403,10 +744,123 @@ function updateProgress() {
   document.getElementById('pct').textContent = pct + '%';
 }
 
-function resetAll() { checked[activeTab] = {}; renderAll(activeTab); updateProgress(); saveProgress(); }
+/* ════════════════════════════════════════
+   GLOBAL RESET
+   Resets the active checklist tab AND
+   the pre-market check questions.
+   Called by both top and bottom reset buttons.
+════════════════════════════════════════ */
+function resetAll() {
+  // Reset checklist
+  checked[activeTab] = {};
+  renderAll(activeTab);
+  updateProgress();
+  saveProgress();
+  // Reset pre-market check
+  resetForm();
+}
 
+/* ════════════════════════════════════════
+   PRE-MARKET DROPDOWN
+   Toggles open/close state.
+════════════════════════════════════════ */
+let pmOpen = false;
+
+function toggleDropdown() {
+  pmOpen = !pmOpen;
+  document.getElementById('pmPanel').classList.toggle('open', pmOpen);
+  document.getElementById('trigger').classList.toggle('open', pmOpen);
+  document.getElementById('chevron').classList.toggle('open', pmOpen);
+}
+
+/* ════════════════════════════════════════
+   PRE-MARKET ANSWERS
+   Tracks responses to all 6 questions.
+   null = unanswered, "yes"/"no" = answered.
+   Question 5 uses a number input instead.
+════════════════════════════════════════ */
+const pmAnswers = { 1:null, 2:null, 3:null, 4:null, 5:null, 6:null };
+
+// Handle Yes/No button clicks
+function answer(q, val) {
+  pmAnswers[q] = val;
+  document.querySelectorAll(`[data-q="${q}"]`).forEach(btn => {
+    btn.classList.remove('yes','no');
+    if (btn.dataset.val === val) btn.classList.add(val);
+  });
+  evaluate();
+}
+
+// Handle max trades number input
+function answerNum() {
+  const inp = document.getElementById('maxTrades');
+  const v = parseInt(inp.value);
+  pmAnswers[5] = v > 0 ? 'yes' : null;
+  inp.classList.toggle('filled', v > 0);
+  evaluate();
+}
+
+/* ════════════════════════════════════════
+   PRE-MARKET EVALUATE
+   Checks if all questions are answered,
+   then shows Cleared / Blocked verdict.
+   Any "no" = Blocked.
+════════════════════════════════════════ */
+function evaluate() {
+  const result = document.getElementById('pmResult');
+  const badge  = document.getElementById('triggerBadge');
+  const allAnswered = Object.values(pmAnswers).every(v => v !== null);
+
+  if (!allAnswered) {
+    result.innerHTML = `<div class="result-verdict pending">Answer all six to proceed.</div>`;
+    result.classList.add('visible');
+    badge.className = 'trigger-badge';
+    badge.textContent = 'Pending';
+    return;
+  }
+
+  const hasNo = Object.values(pmAnswers).some(v => v === 'no');
+  if (hasNo) {
+    result.innerHTML = `<div class="result-verdict stop">Do not trade today.</div><div class="result-sub">One or more conditions unmet</div>`;
+    badge.className = 'trigger-badge blocked';
+    badge.textContent = 'Blocked';
+  } else {
+    const num = document.getElementById('maxTrades').value;
+    result.innerHTML = `<div class="result-verdict go">Cleared to trade.</div><div class="result-sub">Max ${num} trade${num==1?'':'s'} · Stay disciplined</div>`;
+    badge.className = 'trigger-badge cleared';
+    badge.textContent = 'Cleared';
+  }
+  result.classList.add('visible');
+}
+
+/* ════════════════════════════════════════
+   PRE-MARKET RESET
+   Clears all answers and resets verdict.
+   Also called by the global resetAll().
+════════════════════════════════════════ */
+function resetForm() {
+  for (let k in pmAnswers) pmAnswers[k] = null;
+  document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('yes','no'));
+  const inp = document.getElementById('maxTrades');
+  inp.value = ''; inp.classList.remove('filled');
+  const result = document.getElementById('pmResult');
+  result.innerHTML = `<div class="result-verdict pending">Answer all six to proceed.</div>`;
+  result.classList.remove('visible');
+  setTimeout(() => result.classList.add('visible'), 50);
+  document.getElementById('triggerBadge').className = 'trigger-badge';
+  document.getElementById('triggerBadge').textContent = 'Pending';
+}
+
+/* ════════════════════════════════════════
+   INIT
+   Loads saved progress and renders
+   both checklists on page load.
+════════════════════════════════════════ */
+document.getElementById('pmResult').classList.add('visible');
 loadProgress();
-renderAll('buy'); renderAll('sell'); updateProgress();
+renderAll('buy');
+renderAll('sell');
+updateProgress();
 </script>
 
 </body>
