@@ -451,7 +451,6 @@ footer { text-align: center; font-size: 9px; color: #03468F; margin-top: 20px; l
 
   </div>
 </div>
-
   </div>
   <!-- end premarket-wrap -->
 
@@ -776,8 +775,7 @@ function resetAll() {
   renderAll(activeTab);
   updateProgress();
   saveProgress();
-  // Reset pre-market check
-  resetForm();
+  // Pre-market check is NOT reset by buttons — it resets on schedule (7am/4pm CST)
 }
 
 /* ════════════════════════════════════════
@@ -856,7 +854,8 @@ function evaluate() {
 /* ════════════════════════════════════════
    PRE-MARKET RESET
    Clears all answers and resets verdict.
-   Also called by global resetAll().
+   Called automatically at 7am and 4pm CST.
+   NOT called by the reset buttons anymore.
 ════════════════════════════════════════ */
 function resetForm() {
   for (let k in pmAnswers) pmAnswers[k] = null;
@@ -871,6 +870,57 @@ function resetForm() {
   document.getElementById('triggerBadge').textContent = 'Pending';
   saveProgress();
 }
+
+/* ════════════════════════════════════════
+   SCHEDULED PRE-MARKET RESET
+   Resets at 7:00am and 4:00pm CST daily.
+   To change times, edit the resetHours array
+   (24hr format in CST).
+   Checks every 30 seconds. Saves the last
+   reset time to cookie to avoid double-reset
+   if user reopens app within the same window.
+════════════════════════════════════════ */
+const resetHours = [7, 16]; // 7am and 4pm CST
+
+function getCSTHourMinute() {
+  // CST = UTC-6, CDT = UTC-5. Uses Intl to handle DST automatically.
+  const now = new Date();
+  const cst = new Date(now.toLocaleString('en-US', { timeZone: 'America/Chicago' }));
+  return { h: cst.getHours(), m: cst.getMinutes(), dateStr: cst.toDateString() };
+}
+
+function getLastResetCookie() {
+  try {
+    const match = document.cookie.split(';').find(c => c.trim().startsWith('icc_pm_reset='));
+    return match ? decodeURIComponent(match.split('=')[1]) : null;
+  } catch(e) { return null; }
+}
+
+function setLastResetCookie(key) {
+  try {
+    const exp = new Date(); exp.setFullYear(exp.getFullYear() + 2);
+    document.cookie = `icc_pm_reset=${encodeURIComponent(key)};expires=${exp.toUTCString()};path=/;SameSite=Lax`;
+  } catch(e) {}
+}
+
+function checkScheduledReset() {
+  const { h, m, dateStr } = getCSTHourMinute();
+  for (const resetHour of resetHours) {
+    if (h === resetHour && m === 0) {
+      // Build a unique key for this reset window (date + hour)
+      const key = `${dateStr}-${resetHour}`;
+      if (getLastResetCookie() !== key) {
+        setLastResetCookie(key);
+        resetForm();
+      }
+    }
+  }
+}
+
+// Check every 30 seconds
+setInterval(checkScheduledReset, 30000);
+// Also check immediately on load in case app was opened right at reset time
+checkScheduledReset();
 
 /* ════════════════════════════════════════
    INIT
