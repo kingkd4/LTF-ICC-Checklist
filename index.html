@@ -451,6 +451,7 @@ footer { text-align: center; font-size: 9px; color: #03468F; margin-top: 20px; l
 
   </div>
 </div>
+
   </div>
   <!-- end premarket-wrap -->
 
@@ -904,22 +905,43 @@ function setLastResetCookie(key) {
 }
 
 function checkScheduledReset() {
-  const { h, m, dateStr } = getCSTHourMinute();
+  const now = new Date();
+  const cst = new Date(now.toLocaleString('en-US', { timeZone: 'America/Chicago' }));
+  const today = cst.toDateString();
+  const currentMins = cst.getHours() * 60 + cst.getMinutes();
+
+  // Find the most recent reset time that has already passed today
+  // e.g. if it's 9am, the last reset point was 7am
+  // if it's 5pm, the last reset point was 4pm
+  // if it's 6am, the last reset point was 4pm yesterday
+  let lastResetKey = null;
+  let latestPassedMins = -1;
+
   for (const resetHour of resetHours) {
-    if (h === resetHour && m === 0) {
-      // Build a unique key for this reset window (date + hour)
-      const key = `${dateStr}-${resetHour}`;
-      if (getLastResetCookie() !== key) {
-        setLastResetCookie(key);
-        resetForm();
-      }
+    const resetMins = resetHour * 60;
+    if (resetMins <= currentMins && resetMins > latestPassedMins) {
+      latestPassedMins = resetMins;
+      lastResetKey = `${today}-${resetHour}`;
     }
+  }
+
+  // If no reset has passed today yet, use yesterday's last reset
+  if (!lastResetKey) {
+    const yesterday = new Date(cst); yesterday.setDate(yesterday.getDate() - 1);
+    const lastHour = resetHours[resetHours.length - 1];
+    lastResetKey = `${yesterday.toDateString()}-${lastHour}`;
+  }
+
+  // Reset if we haven't already reset for this window
+  if (getLastResetCookie() !== lastResetKey) {
+    setLastResetCookie(lastResetKey);
+    resetForm();
   }
 }
 
-// Check every 30 seconds
+// Check every 30 seconds while app is open
 setInterval(checkScheduledReset, 30000);
-// Also check immediately on load in case app was opened right at reset time
+// Always check on load — catches any missed resets while app was closed
 checkScheduledReset();
 
 /* ════════════════════════════════════════
