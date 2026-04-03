@@ -2,10 +2,18 @@
 
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ICC Strategy Checklist</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Montserrat:wght@400;500;600;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="ICC Checklist" />
+  <title>ICC Trade Checklist</title>
+
+  <!-- Google Fonts: Cormorant Garamond for display, DM Sans for body -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
 <!-- For browser tab icon -->
 <link rel="icon" href="IMG_5307.jpeg" type="image/x-icon">
@@ -16,945 +24,1969 @@
 <!-- Optional: For Android Chrome -->
 <link rel="manifest" href="manifest.json">
 
-<style>
-  /* ── Reset & Base ── */
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <style>
+    /* =============================================
+       CSS CUSTOM PROPERTIES (color palette & tokens)
+       To change the color scheme, edit these variables.
+    ============================================= */
+    :root {
+      --text-primary:   #2a6478;   /* main checklist item text */
+      --accent:         #659ea5;   /* borders, accents, rings */
+      --subtext:        #03468F;   /* subtext / descriptions */
+      --bg:             #f4f8fa;   /* page background */
+      --card-bg:        #ffffff;   /* card / section background */
+      --card-border:    #9fc8d0;   /* subtle card borders */
+      --tag-bg:         #e8f4f7;   /* pill/tag background */
+      --check-done:     #659ea5;   /* checked checkbox fill */
+      --check-border:   #a8cdd2;   /* unchecked checkbox border */
+      --reset-sm:       #b0cdd4;   /* small reset button */
+      --reset-lg:       #659ea5;   /* large reset button */
+      --buy-accent:     #5b9ecf;   /* buy/bullish accent */
+      --sell-accent:    #8fb4c8;   /* sell/bearish accent */
+      --phase1-bg:      #daeaf5;
+      --phase2-bg:      #fde8d8;
+      --phase3-bg:      #d5ede8;
+      --phase4-bg:      #d5e5ed;
+      --walk-bg:        #f5e8e8;
+      --premarket-open: #e8f4f7;
+      --font-display:   'Cormorant Garamond', serif;
+      --font-body:      'DM Sans', sans-serif;
+    }
 
-body {
-background: #ffffff;
-color: #659ea5;
-font-family: ‘Montserrat’, sans-serif;
-min-height: 100vh;
-padding: 36px 16px 60px;
-}
+    /* =============================================
+       RESET & BASE
+    ============================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-.container { max-width: 620px; margin: 0 auto; }
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text-primary);
+      min-height: 100vh;
+      padding: env(safe-area-inset-top, 0) 0 env(safe-area-inset-bottom, 0);
+    }
 
-/* ── Header ── */
-header { text-align: center; margin-bottom: 30px; }
-.label {
-font-size: 10px; letter-spacing: 5px; color: #03468F;
-text-transform: uppercase; margin-bottom: 8px; font-weight: 600; opacity: 0.6;
-}
-h1 {
-font-family: ‘Cormorant Garamond’, serif; font-size: 44px;
-font-weight: 700; color: #659ea5; line-height: 1; letter-spacing: 2px;
-}
-.subtitle {
-font-size: 10px; color: #03468F; margin-top: 6px;
-letter-spacing: 3px; font-weight: 500; opacity: 0.5;
-}
-.divider {
-width: 80px; height: 1.5px;
-background: linear-gradient(90deg, #659ea5, #03468F55, #659ea5);
-margin: 12px auto 0; border-radius: 99px;
-}
-.heart { font-size: 18px; display: block; margin-top: 8px; }
+    /* =============================================
+       STICKY HEADER — progress bar + small reset
+    ============================================= */
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 2px solid var(--card-border);
+      padding: 10px 18px 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-/* ── Pre-Market Check Dropdown ── */
-.premarket-wrap { margin-bottom: 20px; }
+    .progress-label {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      white-space: nowrap;
+    }
 
-/* Dropdown trigger button */
-.dropdown-trigger {
-width: 100%; display: flex; align-items: center; justify-content: space-between;
-background: #f8fcfc; border: 1.5px solid #659ea5;
-border-radius: 14px; padding: 0.85rem 1.2rem;
-cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s, border-radius 0.3s;
-box-shadow: 0 2px 12px #659ea515;
-}
-.dropdown-trigger.open { border-radius: 14px 14px 0 0; }
-.dropdown-trigger:hover { box-shadow: 0 3px 16px #659ea525; }
+    .progress-bar-wrap {
+      flex: 1;
+      height: 6px;
+      background: var(--card-border);
+      border-radius: 99px;
+      overflow: hidden;
+    }
 
-/* Left side: title */
-.trigger-left { display: flex; flex-direction: column; gap: 0.1rem; }
-.trigger-title {
-font-family: ‘Cormorant Garamond’, serif; font-size: 1.15rem;
-font-weight: 400; color: #2a6478; text-align: left;
-}
-.trigger-title em { font-style: italic; color: #03468F; opacity: 0.6; }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--buy-accent));
+      border-radius: 99px;
+      transition: width 0.4s cubic-bezier(.4,0,.2,1);
+      width: 0%;
+    }
 
-/* Right side: badge + chevron */
-.trigger-right { display: flex; align-items: center; gap: 0.6rem; }
-.trigger-badge {
-font-size: 0.58rem; font-weight: 500; letter-spacing: 0.1em;
-text-transform: uppercase; padding: 0.18rem 0.55rem;
-border-radius: 50px; border: 1px solid #659ea540;
-color: #03468F; opacity: 0.5; transition: all 0.25s;
-}
-/* Badge states */
-.trigger-badge.cleared { border-color: #659ea5; color: #659ea5; background: #659ea510; opacity: 1; }
-.trigger-badge.blocked { border-color: #c47a7a; color: #c47a7a; background: rgba(196,122,122,0.08); opacity: 1; }
+    .progress-count {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-primary);
+      white-space: nowrap;
+      min-width: 38px;
+      text-align: right;
+    }
 
-/* Animated chevron arrow */
-.chevron { width: 15px; height: 15px; color: #659ea5; transition: transform 0.3s; flex-shrink: 0; }
-.chevron.open { transform: rotate(180deg); }
+    /* Small reset button in header */
+    .btn-reset-sm {
+      background: none;
+      border: 1.5px solid var(--reset-sm);
+      color: var(--reset-sm);
+      border-radius: 99px;
+      padding: 4px 12px;
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .btn-reset-sm:active { background: var(--tag-bg); transform: scale(0.96); }
 
-/* Dropdown slide panel */
-.dropdown-panel {
-overflow: hidden; max-height: 0; opacity: 0;
-transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.25s ease;
-}
-.dropdown-panel.open { max-height: 900px; opacity: 1; }
+    /* =============================================
+       MAIN CONTENT WRAPPER
+    ============================================= */
+    .content {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 14px 14px 32px;
+    }
 
-/* Card inside dropdown */
-.pm-card {
-background: #f8fcfc; border: 1.5px solid #659ea5;
-border-top: none; border-radius: 0 0 14px 14px;
-padding: 0.4rem 1.4rem 1.4rem;
-box-shadow: 0 6px 24px #659ea510;
-}
+    /* =============================================
+       PAGE TITLE
+    ============================================= */
+    .page-title {
+      text-align: center;
+      margin-bottom: 16px;
+      padding-top: 4px;
+    }
 
-/* Each question row */
-.question-item {
-display: flex; align-items: flex-start; gap: 1rem;
-padding: 0.82rem 0; border-bottom: 1px solid #659ea520;
-}
-.question-item:last-of-type { border-bottom: none; }
+    .page-title .hearts {
+      font-size: 18px;
+      letter-spacing: 4px;
+      display: block;
+      margin-bottom: 6px;
+    }
 
-/* Question number */
-.q-number {
-font-family: ‘Cormorant Garamond’, serif; font-size: 0.85rem;
-color: #659ea5; min-width: 1.2rem; padding-top: 0.1rem;
-}
+    .page-title h1 {
+      font-family: var(--font-display);
+      font-size: 38px;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+    }
 
-/* Question text */
-.q-text {
-flex: 1; font-size: 0.87rem; line-height: 1.5;
-color: #03468F; opacity: 0.6; font-family: ‘Jost’, sans-serif; font-weight: 300;
-}
-.q-text strong { display: block; font-weight: 400; color: #2a6478; font-size: 0.9rem; margin-bottom: 0.05rem; }
+    .page-title h1 em {
+      font-style: italic;
+      color: var(--buy-accent);
+    }
 
-/* Yes / No toggle buttons */
-.toggle-group { display: flex; gap: 0.35rem; align-items: center; }
-.toggle-btn {
-width: 44px; height: 27px; border-radius: 50px;
-border: 1px solid #659ea540; background: transparent;
-cursor: pointer; font-family: ‘Jost’, sans-serif;
-font-size: 0.63rem; font-weight: 500; letter-spacing: 0.06em;
-color: #03468F; opacity: 0.5; transition: all 0.2s;
-}
-/* Active toggle states */
-.toggle-btn.yes { border-color: #659ea5; background: #659ea510; color: #659ea5; opacity: 1; }
-.toggle-btn.no  { border-color: #c47a7a; background: rgba(196,122,122,0.1); color: #c47a7a; opacity: 1; }
-.toggle-btn:hover:not(.yes):not(.no) { border-color: #659ea5; color: #659ea5; opacity: 0.8; }
+    .page-title .subtitle {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-top: 2px;
+    }
 
-/* Max trades number input */
-.q-input {
-width: 54px; height: 27px; border-radius: 50px;
-border: 1px solid #659ea540; background: transparent;
-text-align: center; font-family: ‘Jost’, sans-serif;
-font-size: 0.8rem; color: #2a6478; outline: none;
-transition: border-color 0.2s; padding: 0 0.4rem;
-}
-.q-input:focus { border-color: #659ea5; }
-.q-input.filled { border-color: #659ea5; color: #659ea5; }
+    /* =============================================
+       PREMARKET CHECK CARD
+    ============================================= */
+    .premarket-card {
+      background: var(--card-bg);
+      border: 2px solid var(--accent);
+      border-radius: 18px;
+      margin-bottom: 16px;
+      overflow: hidden;
+      transition: box-shadow 0.3s;
+      box-shadow: 0 2px 12px rgba(101,158,165,0.08);
+    }
 
-/* Pre-market result verdict */
-.pm-result {
-margin-top: 1rem; padding-top: 1rem;
-border-top: 1px solid #659ea520;
-text-align: center; min-height: 58px;
-display: flex; flex-direction: column;
-align-items: center; justify-content: center; gap: 0.25rem;
-opacity: 0; transform: translateY(5px); transition: all 0.35s;
-}
-.pm-result.visible { opacity: 1; transform: translateY(0); }
-.result-verdict {
-font-family: ‘Cormorant Garamond’, serif; font-size: 1.3rem;
-font-weight: 400; letter-spacing: 0.02em;
-}
-/* Verdict color states */
-.result-verdict.go      { color: #659ea5; }
-.result-verdict.stop    { color: #c47a7a; }
-.result-verdict.pending { color: #03468F; opacity: 0.4; font-style: italic; font-size: 0.9rem; }
-.result-sub { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: #03468F; opacity: 0.4; }
+    /* Header row of the premarket card (always visible) */
+    .premarket-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      cursor: pointer;
+      user-select: none;
+      /* Tap highlight off */
+      -webkit-tap-highlight-color: transparent;
+    }
 
-/* ── Session Rule (inside dropdown) ── */
-.session-rule {
-margin-top: 1rem; padding: 0.85rem 1.1rem;
-background: #f0f8f8; border: 1.5px solid #659ea530;
-border-radius: 12px;
-}
-.session-rule .sr-label {
-font-size: 0.57rem; font-weight: 600; letter-spacing: 0.2em;
-text-transform: uppercase; color: #659ea5; margin-bottom: 0.3rem;
-font-family: ‘Montserrat’, sans-serif;
-}
-.session-rule p {
-font-size: 0.78rem; color: #03468F; opacity: 0.55;
-line-height: 1.65; font-family: ‘Jost’, sans-serif; font-weight: 300;
-}
+    .premarket-header-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-/* ── Progress Bar ── */
-.progress-bar {
-background: #ffffff; border: 1.5px solid #659ea5;
-border-radius: 18px; padding: 18px 22px; margin-bottom: 10px;
-box-shadow: 0 4px 20px #659ea520;
-}
-.progress-top {
-display: flex; justify-content: space-between;
-align-items: center; margin-bottom: 10px;
-}
-.progress-label { font-size: 10px; color: #03468F; letter-spacing: 2px; font-weight: 700; opacity: 0.5; }
-.progress-count { font-size: 13px; font-weight: 700; color: #659ea5; }
-.bar-track { background: #e6f2f3; border-radius: 99px; height: 7px; }
-.bar-fill {
-height: 7px; border-radius: 99px;
-background: linear-gradient(90deg, #659ea5, #03468F);
-transition: width 0.4s ease;
-}
-.pct {
-font-family: ‘Cormorant Garamond’, serif; font-size: 16px;
-font-weight: 700; color: #659ea5; margin-top: 8px; text-align: right;
-}
+    .premarket-title {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
 
-/* ── Top Reset Button (small, right-aligned under progress bar) ── */
-.top-reset-wrap { text-align: right; margin: -6px 0 14px; }
-.top-reset-btn {
-background: none; border: none; cursor: pointer; font-size: 10px;
-color: #03468F; letter-spacing: 2px; font-family: ‘Montserrat’, sans-serif;
-font-weight: 600; padding: 4px 8px; border-radius: 8px;
-transition: all 0.2s; opacity: 0.45;
-}
-.top-reset-btn:hover { opacity: 1; color: #659ea5; }
+    .premarket-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
 
-/* ── Buy / Sell Tab Buttons ── */
-.tab-row { display: flex; gap: 10px; margin-bottom: 16px; }
-.tab {
-flex: 1; padding: 13px; border-radius: 14px;
-border: 1.5px solid #659ea540; background: #ffffff;
-color: #03468F; font-family: ‘Montserrat’, sans-serif;
-font-size: 11px; font-weight: 700; letter-spacing: 2px;
-text-transform: uppercase; cursor: pointer; transition: all 0.25s; opacity: 0.5;
-}
-.tab.active-buy, .tab.active-sell {
-background: #f0f8f8; border-color: #659ea5; color: #659ea5;
-box-shadow: 0 4px 18px #659ea530; opacity: 1;
-}
+    /* Status badge: PENDING / PASS / FAIL */
+    .premarket-badge {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 99px;
+      border: 1.5px solid var(--accent);
+      color: var(--accent);
+      background: var(--premarket-open);
+      transition: all 0.3s;
+    }
+    .premarket-badge.pass {
+      background: #d5ede8;
+      border-color: #5baa96;
+      color: #2a7a65;
+    }
+    .premarket-badge.fail {
+      background: #f5e8e8;
+      border-color: #c07070;
+      color: #9a3a3a;
+    }
 
-/* ── Checklist Sections ── */
-.section {
-background: #ffffff; border: 1.5px solid #659ea5;
-border-radius: 18px; margin-bottom: 12px;
-overflow: hidden; transition: border-color 0.3s, box-shadow 0.3s;
-box-shadow: 0 2px 12px #659ea515;
-}
-.section.complete { box-shadow: 0 2px 20px #659ea535; }
+    /* Chevron toggle icon */
+    .chevron {
+      width: 20px;
+      height: 20px;
+      color: var(--accent);
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+    .chevron.open { transform: rotate(180deg); }
 
-/* Section header bar */
-.section-header {
-display: flex; align-items: center; gap: 10px;
-padding: 14px 18px; border-bottom: 1.5px solid #659ea520;
-background: #f8fcfc;
-}
-.dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; background: #659ea5; }
-.section-title {
-font-family: ‘Cormorant Garamond’, serif; font-size: 18px;
-font-weight: 700; flex: 1; color: #659ea5;
-}
-/* “Done” tag shown when all items in a section are checked */
-.done-tag { font-size: 9px; color: #659ea5; letter-spacing: 2px; font-weight: 700; white-space: nowrap; }
-.items { padding: 10px 14px 16px; }
+    /* Collapsible body */
+    .premarket-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(.4,0,.2,1);
+    }
+    .premarket-body.open {
+      max-height: 900px; /* large enough to not clip */
+    }
 
-/* Italic tip shown at top of each section */
-.tip {
-background: #f4fafa; border-left: 3px solid #659ea5;
-border-radius: 0 10px 10px 0; padding: 10px 14px; margin: 8px 10px 12px;
-font-size: 13px; color: #03468F; line-height: 1.7;
-font-style: italic; font-family: ‘Cormorant Garamond’, serif; opacity: 0.7;
-}
+    .premarket-inner {
+      padding: 0 16px 14px;
+      border-top: 1px solid var(--card-border);
+    }
 
-/* Alert box */
-.alert-box {
-background: #f0f8f8; border: 1.5px solid #659ea560;
-border-radius: 10px; padding: 10px 14px; margin: 6px 10px 12px;
-font-size: 11px; color: #659ea5; font-weight: 600; line-height: 1.6;
-display: flex; gap: 8px; align-items: flex-start;
-}
+    /* Individual premarket question rows */
+    .pm-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--card-border);
+      gap: 12px;
+    }
+    .pm-row:last-of-type { border-bottom: none; }
 
-/* ── Candle Sequence Visual ── */
-.candle-sequence {
-background: #f0f8f8; border: 1.5px solid #659ea5;
-border-radius: 14px; padding: 16px 18px; margin: 6px 10px 14px;
-}
-.candle-sequence-title {
-font-size: 10px; font-weight: 700; letter-spacing: 2px;
-color: #659ea5; text-transform: uppercase; margin-bottom: 12px;
-}
-.candle-steps { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
-.candle-step {
-display: flex; flex-direction: column; align-items: center; gap: 4px;
-background: #ffffff; border-radius: 10px; padding: 10px 12px;
-border: 1.5px solid #659ea540; flex: 1; min-width: 80px;
-box-shadow: 0 2px 8px #659ea510;
-}
-.candle-step .num { font-size: 9px; font-weight: 700; color: #03468F; letter-spacing: 1px; opacity: 0.5; }
-.candle-step .candle-icon { font-size: 22px; line-height: 1; }
-.candle-step .candle-label { font-size: 10px; font-weight: 700; text-align: center; line-height: 1.4; color: #659ea5; }
-.candle-arrow { font-size: 18px; color: #659ea5; flex-shrink: 0; }
-.candle-step.entry-step { border-color: #659ea5; background: #f0f8f8; }
+    .pm-num {
+      font-family: var(--font-display);
+      font-size: 17px;
+      color: var(--accent);
+      min-width: 18px;
+      padding-top: 1px;
+    }
 
-/* ── Checklist Items ── */
-.item {
-display: flex; align-items: flex-start; gap: 12px;
-padding: 10px 8px; border-radius: 10px;
-cursor: pointer; transition: background 0.15s;
-margin-bottom: 3px; user-select: none;
-}
-.item:hover { background: #f4fafa; }
-.item.checked { background: #f8fcfc; }
+    .pm-question {
+      flex: 1;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text-primary);
+      line-height: 1.4;
+    }
 
-/* Checkbox */
-.checkbox {
-width: 20px; height: 20px; border-radius: 6px;
-border: 1.5px solid #659ea560; flex-shrink: 0; margin-top: 2px;
-display: flex; align-items: center; justify-content: center;
-transition: all 0.2s; background: #ffffff;
-}
-.tick { display: none; color: #ffffff; font-size: 11px; font-weight: 900; }
-.item.checked .tick { display: block; }
+    .pm-question .pm-sub {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--subtext);
+      display: block;
+      margin-top: 2px;
+      opacity: 0.75;
+    }
 
-/* Main item text — change color here to adjust checklist text */
-.item-text { font-size: 12px; line-height: 1.65; color: #2a6478; transition: all 0.2s; font-weight: 500; }
-.item.checked .item-text { color: #659ea560; text-decoration: line-through; }
+    /* Yes/No button pair */
+    .pm-buttons {
+      display: flex;
+      gap: 6px;
+      flex-shrink: 0;
+      align-items: center;
+    }
 
-/* Sub-text “why” explanation */
-.item-why {
-font-size: 12px; color: #03468F; margin-top: 4px;
-font-style: italic; line-height: 1.55;
-font-family: ‘Cormorant Garamond’, serif; opacity: 0.45; transition: opacity 0.2s;
-}
-.item.checked .item-why { opacity: 0.2; }
+    .pm-btn {
+      background: none;
+      border: 1.5px solid var(--check-border);
+      color: var(--text-primary);
+      border-radius: 99px;
+      padding: 5px 14px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-/* ── Bottom Reset Button ── */
-.reset-btn {
-width: 100%; padding: 14px; border-radius: 14px;
-border: 1.5px solid #659ea540; background: #ffffff;
-color: #03468F; font-family: ‘Montserrat’, sans-serif;
-font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
-cursor: pointer; margin-top: 8px; transition: all 0.2s; font-weight: 600; opacity: 0.5;
-}
-.reset-btn:hover { border-color: #659ea5; color: #659ea5; opacity: 1; box-shadow: 0 4px 16px #659ea520; }
+    /* Number input for "Max trades" question */
+    .pm-input {
+      background: none;
+      border: 1.5px solid var(--check-border);
+      color: var(--text-primary);
+      border-radius: 99px;
+      padding: 5px 0;
+      width: 52px;
+      text-align: center;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      outline: none;
+    }
+    .pm-input:focus { border-color: var(--accent); }
 
-/* ── Utility ── */
-.hidden { display: none; }
-footer { text-align: center; font-size: 9px; color: #03468F; margin-top: 20px; letter-spacing: 2px; opacity: 0.35; }
-</style>
+    /* Selected states */
+    .pm-btn.selected-yes {
+      background: #d5ede8;
+      border-color: #5baa96;
+      color: #2a7a65;
+    }
+    .pm-btn.selected-no {
+      background: #f5e8e8;
+      border-color: #c07070;
+      color: #9a3a3a;
+    }
+
+    /* "Answer all six to proceed" note */
+    .pm-note {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 13px;
+      color: var(--accent);
+      text-align: center;
+      padding: 10px 0 6px;
+    }
+
+    /* Session rule box inside premarket */
+    .pm-rule-box {
+      background: var(--premarket-open);
+      border-radius: 12px;
+      padding: 10px 14px;
+      margin-top: 6px;
+    }
+    .pm-rule-box .rule-title {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--subtext);
+      margin-bottom: 4px;
+    }
+    .pm-rule-box p {
+      font-size: 12px;
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
+    .pm-rule-box strong { color: var(--subtext); }
+
+    /* Bottom collapse button inside premarket body */
+    .pm-collapse-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      margin-top: 12px;
+      background: none;
+      border: 1.5px solid var(--card-border);
+      border-radius: 99px;
+      padding: 7px 18px;
+      color: var(--accent);
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      cursor: pointer;
+      width: 100%;
+      -webkit-tap-highlight-color: transparent;
+      transition: background 0.2s;
+    }
+    .pm-collapse-btn:active { background: var(--tag-bg); }
+    .pm-collapse-btn svg { width: 14px; height: 14px; }
+
+    /* =============================================
+       SETUP TYPE — two separate standalone buttons
+       Active highlight matches the Pending badge style
+    ============================================= */
+    .setup-toggle {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .toggle-btn {
+      flex: 1;
+      padding: 10px 0;
+      border: 2px solid var(--card-border);
+      border-radius: 14px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.22s;
+      background: var(--card-bg);
+      color: var(--accent);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .toggle-btn.active-buy,
+    .toggle-btn.active-sell {
+      background: var(--premarket-open);
+      border-color: var(--accent);
+      color: var(--accent);
+      box-shadow: 0 2px 8px rgba(101,158,165,0.18);
+    }
+
+    /* =============================================
+       SECTION CARDS (phases)
+    ============================================= */
+    .section-card {
+      background: var(--card-bg);
+      border: 2px solid var(--card-border);
+      border-radius: 18px;
+      margin-bottom: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(101,158,165,0.05);
+    }
+
+    /* Section header strip */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+    }
+
+    .section-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .section-header-text { flex: 1; }
+
+    .section-phase-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: inherit;
+      opacity: 0.7;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1.1;
+    }
+
+    .section-tag {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 99px;
+      white-space: nowrap;
+    }
+
+    /* Phase color themes */
+    .phase-1 .section-header { background: var(--phase1-bg); color: #2a5a8a; }
+    .phase-1 .section-num    { background: #5b8ecf; }
+    .phase-1 .section-tag    { background: #5b8ecf22; color: #2a5a8a; }
+
+    .phase-2 .section-header { background: #ede8f5; color: #4a2a7a; }
+    .phase-2 .section-num    { background: #8b5fcf; }
+    .phase-2 .section-tag    { background: #8b5fcf; color: #fff; }
+
+    .phase-3 .section-header { background: var(--phase2-bg); color: #7a5020; }
+    .phase-3 .section-num    { background: #d4884a; }
+    .phase-3 .section-tag    { background: #d4884a22; color: #7a5020; }
+
+    .phase-4 .section-header { background: var(--phase3-bg); color: #2a6a5a; }
+    .phase-4 .section-num    { background: #4aaa8c; }
+    .phase-4 .section-tag    { background: #4aaa8c22; color: #2a6a5a; }
+
+    .walk-away .section-header { background: var(--walk-bg); color: #8a2a2a; }
+    .walk-away .section-num    { background: #c06060; }
+
+    /* =============================================
+       CHECKLIST ITEMS
+    ============================================= */
+    .items-list {
+      padding: 6px 0;
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 16px;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition: background 0.15s;
+    }
+    .checklist-item:active { background: var(--tag-bg); }
+    .checklist-item.checked { opacity: 0.6; }
+
+    /* Custom checkbox circle */
+    .custom-checkbox {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid var(--check-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+      transition: all 0.2s;
+      background: #fff;
+    }
+    .checklist-item.checked .custom-checkbox {
+      background: var(--check-done);
+      border-color: var(--check-done);
+    }
+    .custom-checkbox svg {
+      width: 12px;
+      height: 12px;
+      color: #fff;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .checklist-item.checked .custom-checkbox svg { opacity: 1; }
+
+    .item-content { flex: 1; }
+
+    /* Tag pills next to item titles */
+    .item-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-bottom: 4px;
+    }
+
+    .item-tag {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 99px;
+    }
+
+    /* Tag color variants */
+    .tag-tf    { background: #daeaf5; color: #2a5a8a; }
+    .tag-htf   { background: #daeaf5; color: #2a5a8a; }
+    .tag-key   { background: #e8eaf5; color: #3a3a8a; }
+    .tag-target{ background: #e5f5da; color: #2a6a2a; }
+    .tag-1m    { background: #fde8d8; color: #7a4010; }
+    .tag-bull  { background: #d5f0e8; color: #1a6a45; }
+    .tag-bear  { background: #f5dae0; color: #7a1a30; }
+    .tag-watch { background: #fff3d5; color: #7a5a10; }
+    .tag-inv   { background: #fde8e8; color: #8a1a1a; }
+    .tag-lim   { background: #e8f5ff; color: #1a5a8a; }
+    .tag-nofill{ background: #f0f0f0; color: #555; }
+    .tag-sl    { background: #ffe8e8; color: #9a2020; }
+    .tag-tp    { background: #e8ffe8; color: #1a6a1a; }
+    .tag-tp1   { background: #e8f5e8; color: #2a6a2a; }
+    .tag-in    { background: #e8eeff; color: #3030aa; }
+    .tag-ltf   { background: #fff0e8; color: #8a4010; }
+    .tag-donothing { background: #f5f5f5; color: #666; }
+
+    .item-title {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.35;
+    }
+    .checklist-item.checked .item-title {
+      text-decoration: line-through;
+      color: var(--accent);
+    }
+
+    .item-desc {
+      font-size: 11.5px;
+      font-weight: 400;
+      color: var(--subtext);
+      line-height: 1.5;
+      margin-top: 2px;
+      opacity: 0.85;
+    }
+
+    /* =============================================
+       WALK AWAY — grid layout
+    ============================================= */
+    .walk-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    /* Walk-away items are static — always show red X, no interaction */
+    .walk-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 10px 14px;
+    }
+
+    /* Always filled red X */
+    .walk-x {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #e09090;
+      border: 2px solid #e09090;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .walk-x svg {
+      width: 9px; height: 9px;
+      color: #fff;
+      opacity: 1;
+    }
+
+    .walk-text {
+      font-size: 12px;
+      font-weight: 500;
+      color: #8a2a2a;
+      line-height: 1.35;
+    }
+
+    /* =============================================
+       INFO NOTE — replaces alert banners
+       Same warm cream style as golden-rule-final
+    ============================================= */
+    .info-note {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.5;
+      text-align: center;
+      background: #fff8e8;
+      color: #7a5010;
+      border-radius: 10px;
+      padding: 10px 14px;
+      margin: 2px 16px 12px;
+    }
+
+    /* =============================================
+       ICC FLOW DIAGRAM
+    ============================================= */
+    .flow-card {
+      background: var(--card-bg);
+      border: 2px solid var(--card-border);
+      border-radius: 18px;
+      padding: 14px 16px;
+      margin-bottom: 14px;
+    }
+
+    .flow-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .flow-steps {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+
+    .flow-step {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-primary);
+      background: var(--tag-bg);
+      border-radius: 8px;
+      padding: 5px 8px;
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    .flow-arrow {
+      color: var(--accent);
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    /* =============================================
+       GOLDEN RULE CARD
+    ============================================= */
+    .golden-rule-card {
+      background: var(--card-bg);
+      border: 2px solid var(--card-border);
+      border-radius: 18px;
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+
+    .golden-rule-title {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--subtext);
+      margin-bottom: 10px;
+    }
+
+    .golden-rule-body p {
+      font-size: 12.5px;
+      color: var(--text-primary);
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+
+    .phase-note {
+      border-radius: 8px;
+      padding: 7px 12px;
+      font-size: 11.5px;
+      line-height: 1.5;
+      margin-bottom: 5px;
+      border-left: 3px solid;
+    }
+    .phase-note-1 { background: var(--phase1-bg); border-color: #5b8ecf; color: #2a5a8a; }
+    .phase-note-2 { background: #e2f0f8; border-color: var(--accent); color: #2a5a7a; }
+    .phase-note-3 { background: var(--phase3-bg); border-color: #4aaa8c; color: #2a6a5a; }
+    .phase-note strong { font-weight: 700; }
+
+    .golden-rule-final {
+      background: #fff8e8;
+      border-radius: 10px;
+      padding: 10px 14px;
+      text-align: center;
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 600;
+      color: #7a5010;
+      margin-top: 10px;
+      line-height: 1.4;
+    }
+
+    /* =============================================
+       FROM DAYLI QUOTE
+    ============================================= */
+    .dayli-quote {
+      background: #fef9f5;
+      border: 2px solid #e8c8b0;
+      border-radius: 18px;
+      padding: 16px 18px;
+      margin-bottom: 14px;
+    }
+
+    .dayli-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #c08060;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .dayli-quote p {
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--text-primary);
+      line-height: 1.55;
+    }
+
+    .dayli-quote p strong {
+      font-weight: 700;
+      color: var(--subtext);
+    }
+
+    /* =============================================
+       LARGE RESET BUTTON (bottom)
+    ============================================= */
+    .btn-reset-lg {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, var(--accent), var(--buy-accent));
+      color: #fff;
+      border: none;
+      border-radius: 14px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-top: 6px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 16px rgba(101,158,165,0.25);
+      -webkit-tap-highlight-color: transparent;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .btn-reset-lg:active { opacity: 0.85; transform: scale(0.98); }
+
+    /* =============================================
+       SETUP TYPE LABEL BADGE (Buy/Sell indicator)
+    ============================================= */
+    .setup-mode-indicator {
+      text-align: center;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+      opacity: 0.8;
+    }
+
+    /* =============================================
+       HIDDEN UTILITY
+    ============================================= */
+    .hidden { display: none !important; }
+  </style>
 
 </head>
 <body>
-<div class="container">
 
-  <!-- ══ HEADER ══ -->
+  <!-- =============================================
+       STICKY HEADER: progress bar + small reset
+  ============================================= -->
 
-  <header>
-    <div class="label">One Disciplined Trade At A Time</div>
-    <h1>ICC Strategy</h1>
-    <div class="subtitle">INDICATION · CORRECTION · CONTINUATION</div>
-    <div class="divider"></div>
-    <span class="heart">🩵💙🩵</span>
-  </header>
-
-  <!-- ══ PRE-MARKET CHECK DROPDOWN ══ -->
-
-  <div class="premarket-wrap">
-
-<!-- Dropdown trigger -->
-<button class="dropdown-trigger" id="trigger" onclick="toggleDropdown()">
-  <div class="trigger-left">
-    <!-- Title — change text here to rename the dropdown -->
-    <div class="trigger-title">Pre-Market <em>Check</em></div>
+  <div class="sticky-header">
+    <span class="progress-label">Progress</span>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progressFill"></div>
+    </div>
+    <span class="progress-count" id="progressCount">0 / 0</span>
+    <!-- Small reset triggers the confirmation modal -->
+    <button class="btn-reset-sm" onclick="confirmReset()">Reset</button>
   </div>
-  <div class="trigger-right">
-    <!-- Badge shows Pending / Cleared / Blocked based on answers -->
-    <span class="trigger-badge" id="triggerBadge">Pending</span>
-    <svg class="chevron" id="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="6 9 12 15 18 9"/>
-    </svg>
+
+  <!-- =============================================
+       MAIN CONTENT
+  ============================================= -->
+
+  <div class="content">
+
+```
+<!-- Page title — styled after the ICC Strategy brand header -->
+<div class="page-title">
+  <p class="subtitle" style="margin-bottom:6px;">One Disciplined Trade at a Time</p>
+  <h1>ICC Strategy</h1>
+  <div style="width:48px;height:2px;background:var(--accent);border-radius:2px;margin:10px auto 10px;opacity:0.5;"></div>
+  <p class="subtitle" style="margin-bottom:8px;">Indication · Correction · Continuation</p>
+  <span class="hearts">🩵💙🩵</span>
+</div>
+
+<!-- =============================================
+     PREMARKET CHECK SECTION
+     - Collapses/expands via header click
+     - Has a collapse button at the bottom too
+     - Resets at 7am and 4pm CST (checked on every open)
+============================================= -->
+<div class="premarket-card" id="premarketCard">
+
+  <!-- Always-visible clickable header -->
+  <div class="premarket-header" onclick="togglePremarket()" id="premarketHeader">
+    <div class="premarket-header-left">
+      <span class="premarket-title">Pre-Market <em>Check</em></span>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;">
+      <span class="premarket-badge" id="premarketBadge">Pending</span>
+      <!-- Chevron icon rotates when open -->
+      <svg class="chevron open" id="premarketChevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="18 15 12 9 6 15"></polyline>
+      </svg>
+    </div>
   </div>
-</button>
 
-<!-- Dropdown panel -->
-<div class="dropdown-panel" id="pmPanel">
-  <div class="pm-card">
+  <!-- Collapsible body -->
+  <div class="premarket-body open" id="premarketBody">
+    <div class="premarket-inner">
 
-    <!-- Question 1 — Am I calm? -->
-    <div class="question-item">
-      <span class="q-number">1</span>
-      <div class="q-text"><strong>Am I calm?</strong>No frustration, no excitement.</div>
-      <div class="toggle-group">
-        <button class="toggle-btn" data-q="1" data-val="yes" onclick="answer(1,'yes')">Yes</button>
-        <button class="toggle-btn" data-q="1" data-val="no"  onclick="answer(1,'no')">No</button>
+      <!-- Question 1: Am I calm? -->
+      <div class="pm-row">
+        <span class="pm-num">1</span>
+        <div class="pm-question">
+          Am I calm?
+          <span class="pm-sub">No frustration, no excitement.</span>
+        </div>
+        <div class="pm-buttons">
+          <button class="pm-btn" id="pm1-yes" onclick="pmAnswer(1,'yes')">Yes</button>
+          <button class="pm-btn" id="pm1-no"  onclick="pmAnswer(1,'no')">No</button>
+        </div>
+      </div>
+
+      <!-- Question 2: Am I okay not trading today? -->
+      <div class="pm-row">
+        <span class="pm-num">2</span>
+        <div class="pm-question">Am I okay not trading today?</div>
+        <div class="pm-buttons">
+          <button class="pm-btn" id="pm2-yes" onclick="pmAnswer(2,'yes')">Yes</button>
+          <button class="pm-btn" id="pm2-no"  onclick="pmAnswer(2,'no')">No</button>
+        </div>
+      </div>
+
+      <!-- Question 3: Stop after 2 losses? -->
+      <div class="pm-row">
+        <span class="pm-num">3</span>
+        <div class="pm-question">If I lose 2 trades, will I stop?</div>
+        <div class="pm-buttons">
+          <button class="pm-btn" id="pm3-yes" onclick="pmAnswer(3,'yes')">Yes</button>
+          <button class="pm-btn" id="pm3-no"  onclick="pmAnswer(3,'no')">No</button>
+        </div>
+      </div>
+
+      <!-- Question 4: Know my exact setup? -->
+      <div class="pm-row">
+        <span class="pm-num">4</span>
+        <div class="pm-question">Do I know my exact setup?</div>
+        <div class="pm-buttons">
+          <button class="pm-btn" id="pm4-yes" onclick="pmAnswer(4,'yes')">Yes</button>
+          <button class="pm-btn" id="pm4-no"  onclick="pmAnswer(4,'no')">No</button>
+        </div>
+      </div>
+
+      <!-- Question 5: Max trades (number input) -->
+      <div class="pm-row">
+        <span class="pm-num">5</span>
+        <div class="pm-question">Max trades today?</div>
+        <div class="pm-buttons">
+          <input class="pm-input" type="number" min="1" max="20" id="pm5-input"
+                 placeholder="#" oninput="pmNumber(5, this.value)" />
+        </div>
+      </div>
+
+      <!-- Question 6: Miss setups → stay off? -->
+      <div class="pm-row">
+        <span class="pm-num">6</span>
+        <div class="pm-question">If I miss setups, will I stay off?</div>
+        <div class="pm-buttons">
+          <button class="pm-btn" id="pm6-yes" onclick="pmAnswer(6,'yes')">Yes</button>
+          <button class="pm-btn" id="pm6-no"  onclick="pmAnswer(6,'no')">No</button>
+        </div>
+      </div>
+
+      <p class="pm-note">Answer all six to proceed.</p>
+
+      <!-- Session rule reminder -->
+      <div class="pm-rule-box">
+        <div class="rule-title">Session Rule</div>
+        <p>Miss 1–2 clean setups → you're done for the day. Any <strong>No</strong> = no trading.</p>
+      </div>
+
+      <!-- Bottom collapse button — lets user collapse without scrolling up -->
+      <button class="pm-collapse-btn" onclick="togglePremarket()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+        Collapse
+      </button>
+
+    </div>
+  </div>
+</div>
+<!-- / premarket card -->
+
+<!-- =============================================
+     BUY / SELL SETUP TOGGLE
+     Switching toggles which set of tagged items shows.
+     The checklist state is shared (same items, direction
+     matters for tag labels only). You can separate state
+     if you want fully independent buy/sell checklists.
+============================================= -->
+<div class="setup-toggle">
+  <button class="toggle-btn active-buy" id="toggleBuy" onclick="setSetup('buy')">🩵 Buy Setup</button>
+  <button class="toggle-btn" id="toggleSell" onclick="setSetup('sell')">🩵 Sell Setup</button>
+</div>
+
+<!-- Small label echoing current mode -->
+<div class="setup-mode-indicator" id="setupModeLabel">Bullish · Long Setup</div>
+
+<!-- =============================================
+     PHASE 1 — HTF Bias & Setup Conditions
+============================================= -->
+<div class="section-card phase-1">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <div class="section-header-text">
+      <div class="section-phase-label">First Thing When You Open a Chart</div>
+      <div class="section-title">HTF Bias & Setup Conditions</div>
+    </div>
+  </div>
+  <div class="items-list">
+
+    <div class="checklist-item" id="item-1" onclick="toggleItem('item-1')">
+      <div class="custom-checkbox">
+        <svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 5 4.5 8.5 11 1"/></svg>
+      </div>
+      <div class="item-content">
+        <div class="item-tags">
+          <span class="item-tag tag-tf">1H</span>
+          <span class="item-tag tag-htf">4H</span>
+        </div>
+        <div class="item-title">Check your bias</div>
+        <div class="item-desc" id="desc-1">Are we in an uptrend or downtrend? Higher highs and higher lows (bullish) or lower highs and lower lows (bearish)?</div>
       </div>
     </div>
 
-    <!-- Question 2 — Okay not trading? -->
-    <div class="question-item">
-      <span class="q-number">2</span>
-      <div class="q-text"><strong>Am I okay not trading today?</strong></div>
-      <div class="toggle-group">
-        <button class="toggle-btn" data-q="2" data-val="yes" onclick="answer(2,'yes')">Yes</button>
-        <button class="toggle-btn" data-q="2" data-val="no"  onclick="answer(2,'no')">No</button>
+    <div class="checklist-item" id="item-2" onclick="toggleItem('item-2')">
+      <div class="custom-checkbox">
+        <svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 5 4.5 8.5 11 1"/></svg>
+      </div>
+      <div class="item-content">
+        <div class="item-tags">
+          <span class="item-tag tag-htf">4H</span>
+        </div>
+        <div class="item-title">Identify your swing high and swing low levels</div>
+        <div class="item-desc">Mark the key swing highs and swing lows on the 4H timeframe. These are your structural reference points.</div>
       </div>
     </div>
 
-    <!-- Question 3 — Stop after 2 losses? -->
-    <div class="question-item">
-      <span class="q-number">3</span>
-      <div class="q-text"><strong>If I lose 2 trades, will I stop?</strong></div>
-      <div class="toggle-group">
-        <button class="toggle-btn" data-q="3" data-val="yes" onclick="answer(3,'yes')">Yes</button>
-        <button class="toggle-btn" data-q="3" data-val="no"  onclick="answer(3,'no')">No</button>
+    <div class="checklist-item" id="item-3" onclick="toggleItem('item-3')">
+      <div class="custom-checkbox">
+        <svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 5 4.5 8.5 11 1"/></svg>
+      </div>
+      <div class="item-content">
+        <div class="item-tags">
+          <span class="item-tag tag-tf">1H</span>
+        </div>
+        <div class="item-title">Mark your support and resistance levels</div>
+        <div class="item-desc">Identify key support and resistance on the 1H timeframe. Where has price reacted before?</div>
       </div>
     </div>
 
-    <!-- Question 4 — Know exact setup? -->
-    <div class="question-item">
-      <span class="q-number">4</span>
-      <div class="q-text"><strong>Do I know my exact setup?</strong></div>
-      <div class="toggle-group">
-        <button class="toggle-btn" data-q="4" data-val="yes" onclick="answer(4,'yes')">Yes</button>
-        <button class="toggle-btn" data-q="4" data-val="no"  onclick="answer(4,'no')">No</button>
+    <div class="checklist-item" id="item-4" onclick="toggleItem('item-4')">
+      <div class="custom-checkbox">
+        <svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 5 4.5 8.5 11 1"/></svg>
+      </div>
+      <div class="item-content">
+        <div class="item-tags">
+          <span class="item-tag tag-tf">1H</span>
+          <span class="item-tag tag-htf">4H</span>
+        </div>
+        <div class="item-title">Identify the most recent swing highs and swing lows</div>
+        <div class="item-desc">These can be marked on both 1H and 4H. These are the levels you are actively watching for a reaction.</div>
       </div>
     </div>
 
-    <!-- Question 5 — Max trades (number input) -->
-    <div class="question-item">
-      <span class="q-number">5</span>
-      <div class="q-text"><strong>Max trades today?</strong></div>
-      <div class="toggle-group">
-        <input class="q-input" id="maxTrades" type="number" min="1" max="10" placeholder="#" oninput="answerNum()" />
+    <div class="checklist-item" id="item-5" onclick="toggleItem('item-5')">
+      <div class="custom-checkbox">
+        <svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 5 4.5 8.5 11 1"/></svg>
+      </div>
+      <div class="item-content">
+        <div class="item-tags">
+          <span class="item-tag tag-key">Key Level</span>
+        </div>
+        <div class="item-title">Mark your Pre-Indication Level</div>
+        <div class="item-desc">The swing level that price has NOT broken or retested yet. This is the level you are watching for your indication. Mark it in advance.</div>
       </div>
     </div>
 
-    <!-- Question 6 — Stay off if miss setups? -->
-    <div class="question-item">
-      <span class="q-number">6</span>
-      <div class="q-text"><strong>If I miss setups, will I stay off?</strong></div>
-      <div class="toggle-group">
-        <button class="toggle-btn" data-q="6" data-val="yes" onclick="answer(6,'yes')">Yes</button>
-        <button class="toggle-btn" data-q="6" data-val="no"  onclick="answer(6,'no')">No</button>
+    <div class="checklist-item" id="item-6" onclick="toggleItem('item-6')">
+      <div class="custom-checkbox">
+        <svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 5 4.5 8.5 11 1"/></svg>
       </div>
-    </div>
-
-    <!-- Result verdict (auto-updates based on answers) -->
-    <div class="pm-result" id="pmResult">
-      <div class="result-verdict pending">Answer all six to proceed.</div>
-    </div>
-
-    <!-- Session Rule (inside dropdown, below verdict) -->
-    <!-- To edit the rule text, change the <p> content below -->
-    <div class="session-rule">
-      <div class="sr-label">Session Rule</div>
-      <p>Miss 1–2 clean setups → you're done for the day.<br>Any <strong>No</strong> = no trading.</p>
+      <div class="item-content">
+        <div class="item-tags">
+          <span class="item-tag tag-target">Target</span>
+        </div>
+        <div class="item-title">Identify where price is likely headed</div>
+        <!-- Direction-aware description: shows buy or sell version -->
+        <div class="item-desc" id="desc-6">Previous highs, equal highs, or liquidity pools above (bullish target).</div>
+      </div>
     </div>
 
   </div>
 </div>
+<!-- / Phase 1 -->
 
-  </div>
-  <!-- end premarket-wrap -->
-
-  <!-- ══ PROGRESS BAR ══ -->
-
-  <div class="progress-bar">
-    <div class="progress-top">
-      <span class="progress-label">Progress</span>
-      <span class="progress-count" id="count">0 / 0</span>
+<!-- =============================================
+     PHASE 2 — Indication (Drop to 1M)
+============================================= -->
+<div class="section-card phase-2">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <div class="section-header-text">
+      <div class="section-phase-label">Phase 1 · ICC</div>
+      <div class="section-title">Indication</div>
     </div>
-    <div class="bar-track"><div class="bar-fill" id="bar" style="width:0%"></div></div>
-    <div class="pct" id="pct">0%</div>
+    <span class="section-tag">Drop to 1M</span>
   </div>
+  <div class="items-list">
 
-  <!-- ══ TOP RESET BUTTON (resets checklist + pre-market) ══ -->
+    <div class="checklist-item" id="item-7" onclick="toggleItem('item-7')">
+      <div class="custom-checkbox">
+        <svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 5 4.5 8.5 11 1"/></svg>
+      </div>
+      <div class="item-content">
+        <div class="item-tags"><span class="item-tag tag-1m">1M</span></div>
+        <div class="item-title">A 1M candle CLOSES past the Pre-Indication Level</div>
+        <div class="item-desc">Body close only. A wick through does NOT count. Must be a full candle close.</div>
+      </div>
+    </div>
 
-  <div class="top-reset-wrap">
-    <button class="top-reset-btn" onclick="resetAll()">↺ RESET</button>
+    <!-- Buy-only item -->
+    <div class="checklist-item buy-only" id="item-8" onclick="toggleItem('item-8')">
+      <div class="custom-checkbox">
+        <svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 5 4.5 8.5 11 1"/></svg>
+      </div>
+      <div class="item-content">
+        <div class="item-tags"><span class="item-tag tag-bull">Bullish</span></div>
+        <div class="item-title">Candle closes ABOVE swing high</div>
+        <div class="item-desc">The Pre-Indication Level is now the Defended Swing. Direction is confirmed up.</div>
+      </div>
+    </div>
+
+    <!-- Sell-only item -->
+    <div class="checklist-item sell-only hidden" id="item-8s" onclick="toggleItem('item-8s')">
+      <div class="custom-checkbox">
+        <svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 5 4.5 8.5 11 1"/></svg>
+      </div>
+      <div class="item-content">
+        <div class="item-tags"><span class="item-tag tag-bear">Bearish</span></div>
+        <div class="item-title">Candle closes BELOW swing low</div>
+        <div class="item-desc">The Pre-Indication Level is now the Defended Swing. Direction is confirmed down.</div>
+      </div>
+    </div>
+
   </div>
-
-  <!-- ══ BUY / SELL TAB BUTTONS ══ -->
-
-  <div class="tab-row">
-    <button class="tab active-buy" id="tab-buy" onclick="switchTab('buy')">💙 Buy Setup</button>
-    <button class="tab" id="tab-sell" onclick="switchTab('sell')">💙 Sell Setup</button>
+  <div class="info-note">
+    Do NOT enter here. Wait for the correction. The indication is just confirmation of direction.
   </div>
+</div>
+<!-- / Phase 2 -->
 
-  <!-- ══ CHECKLIST (Buy tab shown by default, Sell hidden) ══ -->
+<!-- =============================================
+     PHASE 3 — Correction (Watch. Don't touch.)
+============================================= -->
+<div class="section-card phase-3">
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <div class="section-header-text">
+      <div class="section-phase-label">Phase 2 · ICC</div>
+      <div class="section-title">Correction</div>
+    </div>
+    <span class="section-tag">Watch. Don't touch.</span>
+  </div>
+  <div class="items-list">
 
-  <div id="checklist-buy"></div>
-  <div id="checklist-sell" class="hidden"></div>
+    <div class="checklist-item" id="item-9" onclick="toggleItem('item-9')">
+      <div class="custom-checkbox">
+        <svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 5 4.5 8.5 11 1"/></svg>
+      </div>
+      <div class="item-content">
+        <div class="item-tags"><span class="item-tag tag-donothing">Do Nothing</span></div>
+        <div class="item-title">Price pulls back against the trend</div>
+        <div class="item-desc">This is normal. Do nothing. The market is refueling (the private jet is landing).</div>
+      </div>
+    </div>
 
-  <!-- ══ BOTTOM RESET BUTTON (resets checklist + pre-market) ══ -->
+    <div class="checklist-item" id="item-10" onclick="toggleItem('item-10')">
+      <div class="custom-checkbox">
+        <svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 5 4.5 8.5 11 1"/></svg>
+      </div>
+      <div class="item-content">
+        <div class="item-tags"><span class="item-tag tag-1m">1M</span></div>
+        <div class="item-title">Observe the pullback</div>
+        <div class="item-desc" id="desc-10">Price moves against the trend back through the Pre-Indication Level. Bullish: sellers temporarily step in. Let it happen.</div>
+      </div>
+    </div>
 
-<button class="reset-btn" onclick="resetAll()">↺ Reset Checklist</button>
+    <div class="checklist-item" id="item-11" onclick="toggleItem('item-11')">
+      <div class="custom-checkbox">
+        <svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 5 4.5 8.5 11 1"/></svg>
+      </div>
+      <div class="item-content">
+        <div class="item-tags"><span class="item-tag tag-ltf">LTF Watch</span></div>
+        <div class="item-title">Watch for internal structure shift</div>
+        <div class="item-desc">The correction is losing steam and price is starting to shift back in the direction of the trend. This is your signal that the pullback may be ending.</div>
+      </div>
+    </div>
 
-  <footer>For educational purposes only · Not financial advice</footer>
+    <!-- Invalidation: yes/no question instead of checkbox -->
+    <div class="checklist-item inv-yesno" style="cursor:default;">
+      <div class="item-content" style="flex:1;">
+        <div class="item-tags"><span class="item-tag tag-inv">Invalidation</span></div>
+        <div class="item-title">Did structure break the WRONG way?</div>
+        <div class="item-desc" id="desc-12">If price breaks below a key swing (bullish setup) = correction failed. Walk away. Wait for new setup.</div>
+      </div>
+      <div class="pm-buttons" style="flex-shrink:0;align-self:center;">
+        <button class="pm-btn" id="inv-yes" onclick="invAnswer('yes')">Yes</button>
+        <button class="pm-btn" id="inv-no"  onclick="invAnswer('no')">No</button>
+      </div>
+    </div>
+
+  </div>
+  <div class="info-note">
+    The correction is not complete at the pullback. It is complete at the RETEST + CLOSE.
+  </div>
+</div>
+<!-- / Phase 3 -->
+
+<!-- =============================================
+     PHASE 4 — Continuation Entry
+============================================= -->
+<div class="section-card phase-4">
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <div class="section-header-text">
+      <div class="section-phase-label">Phase 3 · ICC</div>
+      <div class="section-title">Continuation Entry</div>
+    </div>
+    <span class="section-tag">Execute with precision</span>
+  </div>
+  <div class="items-list">
+
+    <div class="checklist-item" id="item-13" onclick="toggleItem('item-13')">
+      <div class="custom-checkbox">
+        <svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 5 4.5 8.5 11 1"/></svg>
+      </div>
+      <div class="item-content">
+        <div class="item-tags"><span class="item-tag tag-1m">1M Close</span></div>
+        <div class="item-title">Candle CLOSES back through the swing level</div>
+        <div class="item-desc" id="desc-13">Bullish: close back ABOVE the level. Bearish: close back BELOW. Correction is complete. Trend wants to continue.</div>
+      </div>
+    </div>
+
+    <div class="checklist-item" id="item-14" onclick="toggleItem('item-14')">
+      <div class="custom-checkbox">
+        <svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 5 4.5 8.5 11 1"/></svg>
+      </div>
+      <div class="item-content">
+        <div class="item-tags"><span class="item-tag tag-lim">Limit Order</span></div>
+        <!-- Direction-aware title -->
+        <div class="item-title" id="title-14">Place Buy Limit at the defended swing level</div>
+        <div class="item-desc">After the confirmation close, limit order at the defended swing level. Let price come to me.</div>
+      </div>
+    </div>
+
+    <!-- No fill — static reminder, no checkbox. Padded left to align with checkbox items -->
+    <div class="checklist-item" style="cursor:default;padding-left:50px;">
+      <div class="item-content">
+        <div class="item-tags"><span class="item-tag tag-nofill">No Fill</span></div>
+        <div class="item-title">If limit is not hit and price leaves: no trade</div>
+        <div class="item-desc">Do not market order after it. Mark it as a missed trade and move on. Another setup will come.</div>
+      </div>
+    </div>
+
+    <div class="checklist-item" id="item-16" onclick="toggleItem('item-16')">
+      <div class="custom-checkbox">
+        <svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 5 4.5 8.5 11 1"/></svg>
+      </div>
+      <div class="item-content">
+        <div class="item-tags"><span class="item-tag tag-sl">Stop Loss</span></div>
+        <div class="item-title">Set stop loss immediately</div>
+        <div class="item-desc" id="desc-16">Bullish: below the higher low of the correction. Bearish: above the lower high. This is your invalidation level.</div>
+      </div>
+    </div>
+
+    <div class="checklist-item" id="item-17" onclick="toggleItem('item-17')">
+      <div class="custom-checkbox">
+        <svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 5 4.5 8.5 11 1"/></svg>
+      </div>
+      <div class="item-content">
+        <div class="item-tags"><span class="item-tag tag-tp">Take Profit</span></div>
+        <div class="item-title">Set TP1 at 1:1 (partials) + TP2 at structure</div>
+        <div class="item-desc">Target liquidity pools, previous highs/lows, or external structure. Shoot for 1:2 minimum on MNQ.</div>
+      </div>
+    </div>
+
+    <div class="checklist-item" id="item-18" onclick="toggleItem('item-18')">
+      <div class="custom-checkbox">
+        <svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 5 4.5 8.5 11 1"/></svg>
+      </div>
+      <div class="item-content">
+        <div class="item-tags"><span class="item-tag tag-tp1">TP1 Hit</span></div>
+        <div class="item-title">Take partials + move SL to breakeven</div>
+        <div class="item-desc">Let the rest run to structure. Do not close the whole trade out of fear at TP1.</div>
+      </div>
+    </div>
+
+    <div class="checklist-item" id="item-19" onclick="toggleItem('item-19')">
+      <div class="custom-checkbox">
+        <svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 5 4.5 8.5 11 1"/></svg>
+      </div>
+      <div class="item-content">
+        <div class="item-tags"><span class="item-tag tag-in">In Trade</span></div>
+        <div class="item-title">Let it play out. Do not interfere.</div>
+        <div class="item-desc">No random stop moves. No emotional closes. You already planned this. Trust the structure.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- / Phase 4 -->
+
+<!-- =============================================
+     WALK AWAY CONDITIONS
+============================================= -->
+<div class="section-card walk-away">
+  <div class="section-header">
+    <div class="section-num">
+      <!-- Warning circle icon -->
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    <div class="section-header-text">
+      <div class="section-phase-label">Walk Away If Any Of These Are True</div>
+      <div class="section-title" style="font-size:16px;">Invalidation Conditions</div>
+    </div>
+  </div>
+  <!-- 2-column grid for walk-away items -->
+  <div class="walk-grid">
+    <div class="walk-item">
+      <div class="walk-x">
+        <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="2" y1="2" x2="8" y2="8"/><line x1="8" y1="2" x2="2" y2="8"/></svg>
+      </div>
+      <span class="walk-text">No clear 1H or 4H bias</span>
+    </div>
+    <div class="walk-item">
+      <div class="walk-x">
+        <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="2" y1="2" x2="8" y2="8"/><line x1="8" y1="2" x2="2" y2="8"/></svg>
+      </div>
+      <span class="walk-text">Wick through level (not a candle close)</span>
+    </div>
+    <div class="walk-item">
+      <div class="walk-x">
+        <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="2" y1="2" x2="8" y2="8"/><line x1="8" y1="2" x2="2" y2="8"/></svg>
+      </div>
+      <span class="walk-text">Structure broke the wrong way</span>
+    </div>
+    <div class="walk-item">
+      <div class="walk-x">
+        <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="2" y1="2" x2="8" y2="8"/><line x1="8" y1="2" x2="2" y2="8"/></svg>
+      </div>
+      <span class="walk-text">Limit wasn't filled. No market orders.</span>
+    </div>
+    <div class="walk-item">
+      <div class="walk-x">
+        <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="2" y1="2" x2="8" y2="8"/><line x1="8" y1="2" x2="2" y2="8"/></svg>
+      </div>
+      <span class="walk-text">Entering during Phase 1 (the pullback)</span>
+    </div>
+    <div class="walk-item">
+      <div class="walk-x">
+        <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="2" y1="2" x2="8" y2="8"/><line x1="8" y1="2" x2="2" y2="8"/></svg>
+      </div>
+      <span class="walk-text">You feel rushed or uncertain</span>
+    </div>
+  </div>
+</div>
+<!-- / Walk away -->
+
+<!-- =============================================
+     ICC FLOW DIAGRAM
+============================================= -->
+<div class="flow-card">
+  <div class="flow-label">Full ICC Flow — Lock This In</div>
+  <div class="flow-steps">
+    <div class="flow-step">HTF Bias +<br>Pre-Indication</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-step">1M Close<br>Indication</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-step">Watch<br>Correction</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-step">2nd Close<br>Confirmation</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-step">Below HL<br>Stop Loss</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-step">Limit<br>Entry</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-step">1:1 / 1:2<br>TP1 + TP2</div>
+  </div>
 </div>
 
-<script>
-/* ════════════════════════════════════════
-   CANDLE SEQUENCE VISUALS
-   Edit labels/icons here if logic changes.
-════════════════════════════════════════ */
-const candleSequenceBuy = `
-  <div class="candle-sequence">
-    <div class="candle-sequence-title">🕯️ Required 1M Candle Sequence — Buy</div>
-    <div class="candle-steps">
-      <div class="candle-step"><span class="num">CANDLE 1</span><span class="candle-icon">🟢</span><span class="candle-label">Close ABOVE<br/>Swing High</span></div>
-      <span class="candle-arrow">→</span>
-      <div class="candle-step"><span class="num">CANDLE 2</span><span class="candle-icon">🔴</span><span class="candle-label">Close BELOW<br/>Swing High</span></div>
-      <span class="candle-arrow">→</span>
-      <div class="candle-step entry-step"><span class="num">CANDLE 3</span><span class="candle-icon">🟢</span><span class="candle-label">Close ABOVE<br/>Swing High<br/>= ENTER ✅</span></div>
-    </div>
-  </div>`;
+<!-- =============================================
+     GOLDEN RULE CARD
+============================================= -->
+<div class="golden-rule-card">
+  <div class="golden-rule-title">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    The Golden Rule — Candle Closure Confirmation
+  </div>
+  <div class="golden-rule-body">
+    <p>Every phase of ICC must be confirmed with a <strong>candle closure</strong> through the Pre-Indication Level. A wick does not count. Price must fully close through the level.</p>
+    <div class="phase-note phase-note-1"><strong>Phase 1</strong> — A 1M candle closes through the Pre-Indication Level. This confirms the Indication.</div>
+    <div class="phase-note phase-note-2"><strong>Phase 2</strong> — Price pulls back and retests the Pre-Indication Level. The retest confirms this is a valid ICC setup.</div>
+    <div class="phase-note phase-note-3"><strong>Phase 3</strong> — A 1M candle closes back through the level in the direction of the trend. This is your entry trigger.</div>
+    <div class="golden-rule-final">No candle closure = no confirmation = no trade. Every time.</div>
+  </div>
+</div>
 
-const candleSequenceSell = `
-  <div class="candle-sequence">
-    <div class="candle-sequence-title">🕯️ Required 1M Candle Sequence — Sell</div>
-    <div class="candle-steps">
-      <div class="candle-step"><span class="num">CANDLE 1</span><span class="candle-icon">🔴</span><span class="candle-label">Close BELOW<br/>Swing Low</span></div>
-      <span class="candle-arrow">→</span>
-      <div class="candle-step"><span class="num">CANDLE 2</span><span class="candle-icon">🟢</span><span class="candle-label">Close ABOVE<br/>Swing Low</span></div>
-      <span class="candle-arrow">→</span>
-      <div class="candle-step entry-step"><span class="num">CANDLE 3</span><span class="candle-icon">🔴</span><span class="candle-label">Close BELOW<br/>Swing Low<br/>= ENTER ✅</span></div>
-    </div>
-  </div>`;
+<!-- =============================================
+     FROM DAYLI QUOTE
+============================================= -->
+<div class="dayli-quote">
+  <div class="dayli-label">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+    From Dayli
+  </div>
+  <p>You don't enter because price is moving. You enter because <strong>the setup is complete.</strong> Run the checklist every time. No exceptions. If any box is missing a check, there is no trade.</p>
+</div>
 
-/* ════════════════════════════════════════
-   CHECKLIST STEPS — BUY SETUP
-   Each object = one collapsible section.
-   Fields: title, emoji, tip, alert,
-   candleSeq ("buy"/"sell"/null), items[]
-     items: { text, why }
-════════════════════════════════════════ */
-const buySteps = [
-  { title:"Step 0 — Mark the 1H Chart", emoji:"🖊️",
-    tip:"Always mark your chart before price reaches the level. Lines drawn in advance let you react instantly instead of scrambling.",
-    alert:null, candleSeq:null, items:[
-    { text:"Open the 1H chart — this is your marking timeframe", why:"↳ The 1H gives you the key swing levels. You mark here, then drop to the 1M to execute." },
-    { text:"Mark the most recent significant 1H swing high — the level price rejected from", why:"↳ This is the level you watch for a breakout. When price breaks above it, you drop to the 1M immediately." },
-    { text:"Mark the most recent significant 1H swing low — where buyers previously stepped in", why:"↳ This is your limit order entry level on the 1M. Mark it now so it is ready before the setup triggers." },
-    { text:"Confirm uptrend structure on the 1H: higher highs AND higher lows", why:"↳ ICC is trend-continuation only. No confirmed uptrend = no setup." },
-    { text:"Mark any internal liquidity points between the swing low and swing high", why:"↳ Price may dip to these during the correction. Knowing them keeps you calm and in the trade." },
-  ]},
-  { title:"Step 1 — Indication: 1H Break", emoji:"📈",
-    tip:"You do not wait for the 1H candle to close. The moment price pushes above the 1H swing high is your alert to drop to the 1M.",
-    alert:"⚡ Price breaks above the 1H swing high → Switch to the 1M chart immediately.", candleSeq:null, items:[
-    { text:"Price pushes above the 1H swing high you have marked", why:"↳ The break — not the close — is your cue. Drop to the 1M the moment you see this." },
-    { text:"Switch to the 1M chart immediately", why:"↳ The 1H told you where. The 1M tells you when. All execution from here is on the 1M." },
-    { text:"Confirm the 1H swing high level is visible and marked on the 1M chart", why:"↳ You need to track the exact candle closes above and below this level on the 1M." },
-  ]},
-  { title:"Step 2 — Watch the 1M Candle Sequence", emoji:"🕯️",
-    tip:"Wait for all three candle closes in order. Do not enter early — the sequence is the confirmation.",
-    alert:null, candleSeq:"buy", items:[
-    { text:"🟢 Candle 1: 1M candle closes ABOVE the swing high — Indication on the 1M confirmed", why:"↳ Buyers have pushed through on your entry timeframe. Stay alert — two more closes needed." },
-    { text:"🔴 Candle 2: 1M candle closes BELOW the swing high — Correction underway", why:"↳ Sellers are testing the level. This is the pullback. Do not enter — wait for Candle 3." },
-    { text:"🟢 Candle 3: 1M candle closes ABOVE the swing high — Continuation confirmed", why:"↳ Buyers have reclaimed the level. This is your entry signal. The sequence is complete." },
-    { text:"All 3 closes confirmed in order before taking any action", why:"↳ Entering on Candle 1 or 2 is anticipating the setup, not trading it. Wait for the full sequence." },
-  ]},
-  { title:"Step 3 — Entry", emoji:"✅",
-    tip:"Candle 3 has closed above the swing high. That close is your entry signal — at or near that swing high level.",
-    alert:null, candleSeq:null, items:[
-    { text:"Entry Option A — Market order: Enter on the close of Candle 3 above the swing high", why:"↳ Fast execution at the swing high level. Use when price is moving quickly." },
-    { text:"Entry Option B (preferred) — Limit order: Set limit order AT the swing high level", why:"↳ Your primary method. You enter at the swing high — the level where Candle 3 just closed above. This is the ICC entry." },
-    { text:"Place the limit order at the swing high during or after Candle 2 so it is ready", why:"↳ Setting it in advance means you don't miss the fill if price returns briefly to retest the level." },
-    { text:"Confirm: entry is at the 1H swing high level — NOT below it at the swing low", why:"↳ The entry is at the swing high. The swing high is where the continuation is confirmed. That is your entry zone." },
-  ]},
-  { title:"Stop Loss Placement", emoji:"🛡️",
-    tip:"Place your stop where the setup is proven wrong — not where price might just temporarily dip.",
-    alert:null, candleSeq:null, items:[
-    { text:"Place stop loss BELOW the lowest point of the 1M correction", why:"↳ If price breaks below this, the correction was a reversal — not a retest. Setup is over." },
-    { text:"If the correction has multiple swing lows, use the absolute lowest one", why:"↳ Maximum room. Keeps you in through normal volatility during a valid setup." },
-    { text:"Add a small buffer of a few ticks below the swing low", why:"↳ Price often briefly dips below key lows to grab liquidity before reversing. The buffer protects you." },
-  ]},
-  { title:"Take Profit — 1:3 RR", emoji:"🎯",
-    tip:"At 1:3 RR you only need to win 25% of your trades to break even. Never compromise this.",
-    alert:null, candleSeq:null, items:[
-    { text:"Identify the next significant 1H resistance or swing high above entry as your TP", why:"↳ This is where sellers are likely to re-enter. Set TP just before that level." },
-    { text:"Confirm: TP distance is at least 3× the distance from your entry to your stop", why:"↳ If the math doesn't give 1:3 or better, the trade does not meet your criteria." },
-    { text:"If TP does NOT give 1:3 RR — skip the trade entirely", why:"↳ A setup with poor RR is a gamble, not a trade. Another setup will always come." },
-  ]},
-];
+<!-- =============================================
+     LARGE RESET BUTTON (bottom)
+============================================= -->
+<button class="btn-reset-lg" onclick="confirmReset()">↺ Reset Checklist</button>
+```
 
-/* ════════════════════════════════════════
-   CHECKLIST STEPS — SELL SETUP
-   Same structure as buySteps above.
-════════════════════════════════════════ */
-const sellSteps = [
-  { title:"Step 0 — Mark the 1H Chart", emoji:"🖊️",
-    tip:"Always mark your chart before price reaches the level. Lines drawn in advance let you react instantly instead of scrambling.",
-    alert:null, candleSeq:null, items:[
-    { text:"Open the 1H chart — this is your marking timeframe", why:"↳ The 1H gives you the key swing levels. You mark here, then drop to the 1M to execute." },
-    { text:"Mark the most recent significant 1H swing low — the level price bounced from", why:"↳ This is the level you watch for a breakdown. When price breaks below it, you drop to the 1M immediately." },
-    { text:"Mark the most recent significant 1H swing high — where sellers previously stepped in", why:"↳ This is your limit order entry level on the 1M. Mark it now so it is ready before the setup triggers." },
-    { text:"Confirm downtrend structure on the 1H: lower highs AND lower lows", why:"↳ ICC is trend-continuation only. No confirmed downtrend = no setup." },
-    { text:"Mark any internal liquidity points between the swing high and swing low", why:"↳ Price may bounce to these during the correction. Knowing them keeps you calm and in the trade." },
-  ]},
-  { title:"Step 1 — Indication: 1H Break", emoji:"📉",
-    tip:"You do not wait for the 1H candle to close. The moment price pushes below the 1H swing low is your alert to drop to the 1M.",
-    alert:"⚡ Price breaks below the 1H swing low → Switch to the 1M chart immediately.", candleSeq:null, items:[
-    { text:"Price pushes below the 1H swing low you have marked", why:"↳ The break — not the close — is your cue. Drop to the 1M the moment you see this." },
-    { text:"Switch to the 1M chart immediately", why:"↳ The 1H told you where. The 1M tells you when. All execution from here is on the 1M." },
-    { text:"Confirm the 1H swing low level is visible and marked on the 1M chart", why:"↳ You need to track the exact candle closes above and below this level on the 1M." },
-  ]},
-  { title:"Step 2 — Watch the 1M Candle Sequence", emoji:"🕯️",
-    tip:"Wait for all three candle closes in order. Do not enter early — the sequence is the confirmation.",
-    alert:null, candleSeq:"sell", items:[
-    { text:"🔴 Candle 1: 1M candle closes BELOW the swing low — Indication on the 1M confirmed", why:"↳ Sellers have pushed through on your entry timeframe. Stay alert — two more closes needed." },
-    { text:"🟢 Candle 2: 1M candle closes ABOVE the swing low — Correction underway", why:"↳ Buyers are testing the level. This is the pullback. Do not enter — wait for Candle 3." },
-    { text:"🔴 Candle 3: 1M candle closes BELOW the swing low — Continuation confirmed", why:"↳ Sellers have reclaimed the level. This is your entry signal. The sequence is complete." },
-    { text:"All 3 closes confirmed in order before taking any action", why:"↳ Entering on Candle 1 or 2 is anticipating the setup, not trading it. Wait for the full sequence." },
-  ]},
-  { title:"Step 3 — Entry", emoji:"✅",
-    tip:"Candle 3 has closed below the swing low. That close is your entry signal — at or near that swing low level.",
-    alert:null, candleSeq:null, items:[
-    { text:"Entry Option A — Market order: Enter on the close of Candle 3 below the swing low", why:"↳ Fast execution at the swing low level. Use when price is moving quickly." },
-    { text:"Entry Option B (preferred) — Limit order: Set limit order AT the swing low level", why:"↳ Your primary method. You enter at the swing low — the level where Candle 3 just closed below. This is the ICC entry." },
-    { text:"Place the limit order at the swing low during or after Candle 2 so it is ready", why:"↳ Setting it in advance means you don't miss the fill if price returns briefly to retest the level." },
-    { text:"Confirm: entry is at the 1H swing low level — NOT above it at the swing high", why:"↳ The entry is at the swing low. The swing low is where the continuation is confirmed. That is your entry zone." },
-  ]},
-  { title:"Stop Loss Placement", emoji:"🛡️",
-    tip:"Place your stop where the setup is proven wrong — not where price might just temporarily spike.",
-    alert:null, candleSeq:null, items:[
-    { text:"Place stop loss ABOVE the highest point of the 1M correction", why:"↳ If price breaks above this, the correction was a reversal — not a retest. Setup is over." },
-    { text:"If the correction has multiple swing highs, use the absolute highest one", why:"↳ Maximum room. Keeps you in through normal volatility during a valid setup." },
-    { text:"Add a small buffer of a few ticks above the swing high", why:"↳ Price often briefly spikes above key highs to grab liquidity before reversing. The buffer protects you." },
-  ]},
-  { title:"Take Profit — 1:3 RR", emoji:"🎯",
-    tip:"At 1:3 RR you only need to win 25% of your trades to break even. Never compromise this.",
-    alert:null, candleSeq:null, items:[
-    { text:"Identify the next significant 1H support or swing low below entry as your TP", why:"↳ This is where buyers are likely to re-enter. Set TP just before that level." },
-    { text:"Confirm: TP distance is at least 3× the distance from your entry to your stop", why:"↳ If the math doesn't give 1:3 or better, the trade does not meet your criteria." },
-    { text:"If TP does NOT give 1:3 RR — skip the trade entirely", why:"↳ A setup with poor RR is a gamble, not a trade. Another setup will always come." },
-  ]},
-];
+  </div>
+  <!-- / .content -->
 
-/* ════════════════════════════════════════
-   CHECKLIST STATE & COOKIE PERSISTENCE
-   Both checklist and pre-market answers
-   are saved to cookies so they survive
-   closing/reopening on iOS PWA.
-════════════════════════════════════════ */
-let activeTab = 'buy';
-let checked = { buy: {}, sell: {} };
+  <!-- =============================================
+       JAVASCRIPT — State, Storage, Logic
+  ============================================= -->
 
-// Save both checklist and pre-market state to cookies
-function saveProgress() {
-  try {
-    const exp = new Date(); exp.setFullYear(exp.getFullYear() + 2);
-    // Save checklist state
-    const val = encodeURIComponent(JSON.stringify(checked));
-    document.cookie = `icc=${val};expires=${exp.toUTCString()};path=/;SameSite=Lax`;
-    // Save pre-market answers + max trades input
-    const pm = encodeURIComponent(JSON.stringify({
-      answers: pmAnswers,
-      maxTrades: document.getElementById('maxTrades').value
-    }));
-    document.cookie = `icc_pm=${pm};expires=${exp.toUTCString()};path=/;SameSite=Lax`;
-  } catch(e) {}
-}
+  <script>
+    // =============================================
+    // STORAGE KEYS
+    // All data is stored in localStorage so it
+    // persists when the PWA is closed and reopened.
+    // =============================================
+    const KEYS = {
+      checklist:   'icc_checklist_v1',     // main checklist items
+      setup:       'icc_setup_v1',         // 'buy' or 'sell'
+      premarket:   'icc_premarket_v1',     // premarket answers
+      pmLastReset: 'icc_pm_last_reset_v1', // ISO timestamp of last premarket reset
+      pmOpen:      'icc_pm_open_v1',       // whether premarket panel is open
+    };
 
-// Load both checklist and pre-market state from cookies on page load
-function loadProgress() {
-  // Load checklist
-  try {
-    const match = document.cookie.split(';').find(c => c.trim().startsWith('icc='));
-    if (match) checked = JSON.parse(decodeURIComponent(match.split('=')[1]));
-  } catch(e) {}
-  // Load pre-market answers
-  try {
-    const pmMatch = document.cookie.split(';').find(c => c.trim().startsWith('icc_pm='));
-    if (pmMatch) {
-      const data = JSON.parse(decodeURIComponent(pmMatch.split('=').slice(1).join('=')));
-      Object.assign(pmAnswers, data.answers);
-      // Restore max trades input value
-      if (data.maxTrades) {
-        document.getElementById('maxTrades').value = data.maxTrades;
-        document.getElementById('maxTrades').classList.add('filled');
+    // =============================================
+    // PREMARKET RESET SCHEDULE (CST)
+    // These are the hour values in CST (UTC-5 or -6
+    // depending on daylight saving). We compute the
+    // CST hour on load and compare to last reset time.
+    // Reset triggers: 7:00 AM CST and 4:00 PM CST
+    // =============================================
+    const RESET_HOURS_CST = [7, 16]; // 7am, 4pm
+
+    // =============================================
+    // MAIN CHECKLIST ITEMS
+    // These are the IDs of all toggleable items
+    // in the main checklist (not walk-away or premarket)
+    // =============================================
+    const MAIN_ITEMS = [
+      'item-1','item-2','item-3','item-4','item-5','item-6',
+      'item-7','item-8','item-8s',
+      'item-9','item-10','item-11',
+      'item-13','item-14','item-16','item-17','item-18','item-19'
+    ];
+
+    // Walk-away items are now static (no interaction), excluded from progress
+    const WALK_ITEMS = [];
+
+    // Items that are direction-specific
+    // 'buy-only' items are hidden in sell mode; 'sell-only' hidden in buy mode
+    // item-8 is buy-only, item-8s is sell-only (different checklist item)
+    const BUY_ONLY_IDS  = ['item-8'];
+    const SELL_ONLY_IDS = ['item-8s'];
+
+    // =============================================
+    // STATE — loaded from localStorage on init
+    // =============================================
+    let state = {
+      checklist:  {},
+      walkAway:   {},
+      setup:      'buy',
+      premarket:  { 1: null, 2: null, 3: null, 4: null, 5: null, 6: null },
+      pmOpen:     true,
+      inv:        { buy: null, sell: null }, // invalidation yes/no per mode
+    };
+
+    // =============================================
+    // INIT — runs on page load
+    // =============================================
+    function init() {
+      loadState();
+      checkPremarketReset();  // reset premarket if schedule passed
+      applySetup(state.setup, false);
+      renderAll();
+    }
+
+    // =============================================
+    // LOAD STATE from localStorage
+    // =============================================
+    function loadState() {
+      try {
+        const cl = localStorage.getItem(KEYS.checklist);
+        if (cl) state.checklist = JSON.parse(cl);
+
+        const su = localStorage.getItem(KEYS.setup);
+        if (su) state.setup = su;
+
+        const pm = localStorage.getItem(KEYS.premarket);
+        if (pm) state.premarket = JSON.parse(pm);
+
+        const po = localStorage.getItem(KEYS.pmOpen);
+        if (po !== null) state.pmOpen = po === 'true';
+
+        const inv = localStorage.getItem('icc_inv_v1');
+        if (inv) state.inv = JSON.parse(inv);
+      } catch (e) {
+        console.warn('Error loading state:', e);
       }
-      // Re-highlight Yes/No buttons to match saved answers
-      for (let q in pmAnswers) {
-        if (pmAnswers[q]) {
-          document.querySelectorAll(`[data-q="${q}"]`).forEach(btn => {
-            btn.classList.remove('yes','no');
-            if (btn.dataset.val === pmAnswers[q]) btn.classList.add(pmAnswers[q]);
-          });
+    }
+
+    // =============================================
+    // SAVE STATE to localStorage
+    // =============================================
+    function saveChecklist() {
+      localStorage.setItem(KEYS.checklist, JSON.stringify(state.checklist));
+    }
+    function saveSetup() {
+      localStorage.setItem(KEYS.setup, state.setup);
+    }
+    function savePremarket() {
+      localStorage.setItem(KEYS.premarket, JSON.stringify(state.premarket));
+    }
+    function savePmOpen() {
+      localStorage.setItem(KEYS.pmOpen, String(state.pmOpen));
+    }
+
+    // =============================================
+    // PREMARKET RESET LOGIC
+    // On every open, check if a reset should have
+    // occurred since the last recorded reset time.
+    //
+    // CST = UTC-6 standard / UTC-5 daylight saving.
+    // We use a simple offset calculation. For exact
+    // DST accuracy you could use Intl.DateTimeFormat,
+    // but for trading purposes ±1 hour is acceptable.
+    // =============================================
+    function getCSTDate(utcDate) {
+      // Convert a UTC Date to CST (UTC-6) as a simple Date object
+      // Note: this is CST standard; CDT (daylight) is UTC-5.
+      // Using 'America/Chicago' via Intl if available for accuracy.
+      try {
+        const formatter = new Intl.DateTimeFormat('en-US', {
+          timeZone: 'America/Chicago',
+          year: 'numeric', month: '2-digit', day: '2-digit',
+          hour: '2-digit', minute: '2-digit', hour12: false
+        });
+        const parts = formatter.formatToParts(utcDate);
+        const p = {};
+        parts.forEach(x => p[x.type] = x.value);
+        return {
+          year:  parseInt(p.year),
+          month: parseInt(p.month),
+          day:   parseInt(p.day),
+          hour:  parseInt(p.hour === '24' ? '0' : p.hour),
+          minute:parseInt(p.minute)
+        };
+      } catch (e) {
+        // Fallback: UTC-6
+        const offset = -6 * 60;
+        const local = new Date(utcDate.getTime() + offset * 60000);
+        return {
+          year: local.getUTCFullYear(), month: local.getUTCMonth()+1,
+          day: local.getUTCDate(), hour: local.getUTCHours(), minute: local.getUTCMinutes()
+        };
+      }
+    }
+
+    function checkPremarketReset() {
+      const now = new Date();
+      const cstNow = getCSTDate(now);
+      const lastResetStr = localStorage.getItem(KEYS.pmLastReset);
+
+      if (!lastResetStr) {
+        // First run — record now as last reset time, don't clear data
+        localStorage.setItem(KEYS.pmLastReset, now.toISOString());
+        return;
+      }
+
+      const lastReset = new Date(lastResetStr);
+      const cstLast = getCSTDate(lastReset);
+
+      // Build all reset checkpoint timestamps between lastReset and now
+      // A reset checkpoint is any day at RESET_HOURS_CST hours
+      let shouldReset = false;
+
+      // Iterate each day from last reset date to today (in CST)
+      let checkDate = new Date(lastReset);
+      // Step through time in 1-hour increments from lastReset to now
+      // More efficient: check each reset hour for each day in range
+      const daysBetween = Math.ceil((now - lastReset) / (1000 * 60 * 60 * 24)) + 1;
+
+      for (let d = 0; d <= daysBetween; d++) {
+        const candidate = new Date(lastReset.getTime() + d * 24 * 60 * 60 * 1000);
+        const cstCand = getCSTDate(candidate);
+
+        for (const resetHour of RESET_HOURS_CST) {
+          // Build a CST-aligned timestamp for this reset hour on this day
+          // We approximate by adjusting UTC
+          // Check if this checkpoint falls AFTER lastReset and AT OR BEFORE now
+          const cstResetDt = {
+            year: cstCand.year, month: cstCand.month, day: cstCand.day,
+            hour: resetHour, minute: 0
+          };
+
+          // Convert CST time back to UTC for comparison
+          // Use Date constructor with explicit UTC offset for Chicago
+          // For simplicity: parse as CST string
+          const cstStr = `${cstResetDt.year}-${String(cstResetDt.month).padStart(2,'0')}-${String(cstResetDt.day).padStart(2,'0')}T${String(cstResetDt.hour).padStart(2,'0')}:00:00`;
+
+          // Use Intl to get current CST as a comparable string
+          const cstNowStr = `${cstNow.year}-${String(cstNow.month).padStart(2,'0')}-${String(cstNow.day).padStart(2,'0')}T${String(cstNow.hour).padStart(2,'0')}:${String(cstNow.minute).padStart(2,'0')}:00`;
+          const cstLastStr = `${cstLast.year}-${String(cstLast.month).padStart(2,'0')}-${String(cstLast.day).padStart(2,'0')}T${String(cstLast.hour).padStart(2,'0')}:${String(cstLast.minute).padStart(2,'0')}:00`;
+
+          // A reset should occur if checkpoint > lastReset AND checkpoint <= now (in CST strings)
+          if (cstStr > cstLastStr && cstStr <= cstNowStr) {
+            shouldReset = true;
+          }
         }
       }
-      // Restore verdict badge
-      evaluate();
+
+      if (shouldReset) {
+        // Clear premarket answers
+        state.premarket = { 1: null, 2: null, 3: null, 4: null, 5: null, 6: null };
+        state.pmOpen = true; // reopen on reset so trader sees it
+        savePremarket();
+        savePmOpen();
+        localStorage.setItem(KEYS.pmLastReset, now.toISOString());
+        console.log('Premarket check reset at scheduled time.');
+      } else {
+        // No reset needed — update the last-open timestamp so
+        // next open we only check from now forward
+        localStorage.setItem(KEYS.pmLastReset, now.toISOString());
+      }
     }
-  } catch(e) {}
-}
 
-/* ════════════════════════════════════════
-   TAB SWITCHING
-   Toggles between Buy and Sell views.
-════════════════════════════════════════ */
-function switchTab(tab) {
-  activeTab = tab;
-  document.getElementById('tab-buy').className = 'tab' + (tab === 'buy' ? ' active-buy' : '');
-  document.getElementById('tab-sell').className = 'tab' + (tab === 'sell' ? ' active-sell' : '');
-  document.getElementById('checklist-buy').className = tab === 'buy' ? '' : 'hidden';
-  document.getElementById('checklist-sell').className = tab === 'sell' ? '' : 'hidden';
-  updateProgress();
-}
-
-/* ════════════════════════════════════════
-   CHECKLIST ITEM TOGGLE
-   Checks/unchecks an item, re-renders,
-   updates progress, and saves to cookie.
-════════════════════════════════════════ */
-function toggle(tab, sIdx, iIdx) {
-  const key = `${sIdx}-${iIdx}`;
-  checked[tab][key] = !checked[tab][key];
-  renderAll(tab); updateProgress(); saveProgress();
-}
-
-/* ════════════════════════════════════════
-   RENDER CHECKLIST
-   Builds HTML for all sections of a tab.
-════════════════════════════════════════ */
-function renderAll(tab) {
-  const steps = tab === 'buy' ? buySteps : sellSteps;
-  const list = document.getElementById(`checklist-${tab}`);
-  list.innerHTML = '';
-  steps.forEach((sec, si) => {
-    const allDone = sec.items.every((_, ii) => checked[tab][`${si}-${ii}`]);
-    const div = document.createElement('div');
-    div.className = 'section' + (allDone ? ' complete' : '');
-    const itemsHTML = sec.items.map((item, ii) => {
-      const on = !!checked[tab][`${si}-${ii}`];
-      return `<div class="item${on?' checked':''}" onclick="toggle('${tab}',${si},${ii})">
-        <div class="checkbox" style="${on?'border-color:#659ea5;background:#659ea5':''}"><span class="tick">✓</span></div>
-        <div style="flex:1"><div class="item-text">${item.text}</div><div class="item-why">${item.why}</div></div>
-      </div>`;
-    }).join('');
-    const alertHTML = sec.alert
-      ? `<div class="alert-box"><span style="font-size:16px;flex-shrink:0">⚡</span><span>${sec.alert.replace('⚡ ','')}</span></div>`
-      : '';
-    const seqHTML = sec.candleSeq === 'buy' ? candleSequenceBuy
-                  : sec.candleSeq === 'sell' ? candleSequenceSell : '';
-    div.innerHTML = `
-      <div class="section-header">
-        <div class="dot"></div>
-        <div class="section-title">${sec.emoji} ${sec.title}</div>
-        ${allDone ? '<span class="done-tag">✓ DONE</span>' : ''}
-      </div>
-      ${sec.tip ? `<div class="tip">${sec.tip}</div>` : ''}
-      ${alertHTML}${seqHTML}
-      <div class="items">${itemsHTML}</div>`;
-    list.appendChild(div);
-  });
-}
-
-/* ════════════════════════════════════════
-   PROGRESS BAR
-   Counts checked items for the active tab.
-════════════════════════════════════════ */
-function getTotal(tab) {
-  return (tab === 'buy' ? buySteps : sellSteps).reduce((a, s) => a + s.items.length, 0);
-}
-
-function updateProgress() {
-  const total = getTotal(activeTab);
-  const done = Object.values(checked[activeTab]).filter(Boolean).length;
-  const pct = total === 0 ? 0 : Math.round((done / total) * 100);
-  document.getElementById('count').textContent = `${done} / ${total}`;
-  document.getElementById('bar').style.width = pct + '%';
-  document.getElementById('pct').textContent = pct + '%';
-}
-
-/* ════════════════════════════════════════
-   GLOBAL RESET
-   Resets checklist AND pre-market check.
-   Called by both top and bottom buttons.
-════════════════════════════════════════ */
-function resetAll() {
-  // Reset active checklist tab
-  checked[activeTab] = {};
-  renderAll(activeTab);
-  updateProgress();
-  saveProgress();
-  // Pre-market check is NOT reset by buttons — it resets on schedule (7am/4pm CST)
-}
-
-/* ════════════════════════════════════════
-   PRE-MARKET DROPDOWN
-   Toggles open/close state.
-════════════════════════════════════════ */
-let pmOpen = false;
-
-function toggleDropdown() {
-  pmOpen = !pmOpen;
-  document.getElementById('pmPanel').classList.toggle('open', pmOpen);
-  document.getElementById('trigger').classList.toggle('open', pmOpen);
-  document.getElementById('chevron').classList.toggle('open', pmOpen);
-}
-
-/* ════════════════════════════════════════
-   PRE-MARKET ANSWERS
-   null = unanswered, "yes"/"no" = answered.
-   Question 5 uses a number input.
-════════════════════════════════════════ */
-const pmAnswers = { 1:null, 2:null, 3:null, 4:null, 5:null, 6:null };
-
-// Handle Yes/No button clicks — saves to cookie after each answer
-function answer(q, val) {
-  pmAnswers[q] = val;
-  document.querySelectorAll(`[data-q="${q}"]`).forEach(btn => {
-    btn.classList.remove('yes','no');
-    if (btn.dataset.val === val) btn.classList.add(val);
-  });
-  evaluate();
-  saveProgress();
-}
-
-// Handle max trades number input — saves to cookie after each change
-function answerNum() {
-  const inp = document.getElementById('maxTrades');
-  const v = parseInt(inp.value);
-  pmAnswers[5] = v > 0 ? 'yes' : null;
-  inp.classList.toggle('filled', v > 0);
-  evaluate();
-  saveProgress();
-}
-
-/* ════════════════════════════════════════
-   PRE-MARKET EVALUATE
-   Shows Cleared / Blocked / Pending verdict.
-   Any "no" answer = Blocked.
-════════════════════════════════════════ */
-function evaluate() {
-  const result = document.getElementById('pmResult');
-  const badge  = document.getElementById('triggerBadge');
-  const allAnswered = Object.values(pmAnswers).every(v => v !== null);
-
-  if (!allAnswered) {
-    result.innerHTML = `<div class="result-verdict pending">Answer all six to proceed.</div>`;
-    result.classList.add('visible');
-    badge.className = 'trigger-badge';
-    badge.textContent = 'Pending';
-    return;
-  }
-
-  const hasNo = Object.values(pmAnswers).some(v => v === 'no');
-  if (hasNo) {
-    result.innerHTML = `<div class="result-verdict stop">Do not trade today.</div><div class="result-sub">One or more conditions unmet</div>`;
-    badge.className = 'trigger-badge blocked';
-    badge.textContent = 'Blocked';
-  } else {
-    const num = document.getElementById('maxTrades').value;
-    result.innerHTML = `<div class="result-verdict go">Cleared to trade.</div><div class="result-sub">Max ${num} trade${num==1?'':'s'} · Stay disciplined</div>`;
-    badge.className = 'trigger-badge cleared';
-    badge.textContent = 'Cleared';
-  }
-  result.classList.add('visible');
-}
-
-/* ════════════════════════════════════════
-   PRE-MARKET RESET
-   Clears all answers and resets verdict.
-   Called automatically at 7am and 4pm CST.
-   NOT called by the reset buttons anymore.
-════════════════════════════════════════ */
-function resetForm() {
-  for (let k in pmAnswers) pmAnswers[k] = null;
-  document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('yes','no'));
-  const inp = document.getElementById('maxTrades');
-  inp.value = ''; inp.classList.remove('filled');
-  const result = document.getElementById('pmResult');
-  result.innerHTML = `<div class="result-verdict pending">Answer all six to proceed.</div>`;
-  result.classList.remove('visible');
-  setTimeout(() => result.classList.add('visible'), 50);
-  document.getElementById('triggerBadge').className = 'trigger-badge';
-  document.getElementById('triggerBadge').textContent = 'Pending';
-  saveProgress();
-}
-
-/* ════════════════════════════════════════
-   SCHEDULED PRE-MARKET RESET
-   Resets at 7:00am and 4:00pm CST daily.
-   To change times, edit the resetHours array
-   (24hr format in CST).
-   Checks every 30 seconds. Saves the last
-   reset time to cookie to avoid double-reset
-   if user reopens app within the same window.
-════════════════════════════════════════ */
-const resetHours = [7, 16]; // 7am and 4pm CST
-
-function getCSTHourMinute() {
-  // CST = UTC-6, CDT = UTC-5. Uses Intl to handle DST automatically.
-  const now = new Date();
-  const cst = new Date(now.toLocaleString('en-US', { timeZone: 'America/Chicago' }));
-  return { h: cst.getHours(), m: cst.getMinutes(), dateStr: cst.toDateString() };
-}
-
-function getLastResetCookie() {
-  try {
-    const match = document.cookie.split(';').find(c => c.trim().startsWith('icc_pm_reset='));
-    return match ? decodeURIComponent(match.split('=')[1]) : null;
-  } catch(e) { return null; }
-}
-
-function setLastResetCookie(key) {
-  try {
-    const exp = new Date(); exp.setFullYear(exp.getFullYear() + 2);
-    document.cookie = `icc_pm_reset=${encodeURIComponent(key)};expires=${exp.toUTCString()};path=/;SameSite=Lax`;
-  } catch(e) {}
-}
-
-function checkScheduledReset() {
-  const now = new Date();
-  const cst = new Date(now.toLocaleString('en-US', { timeZone: 'America/Chicago' }));
-  const today = cst.toDateString();
-  const currentMins = cst.getHours() * 60 + cst.getMinutes();
-
-  // Find the most recent reset time that has already passed today
-  // e.g. if it's 9am, the last reset point was 7am
-  // if it's 5pm, the last reset point was 4pm
-  // if it's 6am, the last reset point was 4pm yesterday
-  let lastResetKey = null;
-  let latestPassedMins = -1;
-
-  for (const resetHour of resetHours) {
-    const resetMins = resetHour * 60;
-    if (resetMins <= currentMins && resetMins > latestPassedMins) {
-      latestPassedMins = resetMins;
-      lastResetKey = `${today}-${resetHour}`;
+    // =============================================
+    // RENDER ALL UI from state
+    // =============================================
+    function renderAll() {
+      renderChecklist();
+      renderWalkAway();
+      renderPremarket();
+      renderPmOpen();
+      renderProgress();
+      renderSetupToggle();
+      renderInv();
     }
-  }
 
-  // If no reset has passed today yet, use yesterday's last reset
-  if (!lastResetKey) {
-    const yesterday = new Date(cst); yesterday.setDate(yesterday.getDate() - 1);
-    const lastHour = resetHours[resetHours.length - 1];
-    lastResetKey = `${yesterday.toDateString()}-${lastHour}`;
-  }
+    // Render main checklist item checked states for CURRENT mode
+    function renderChecklist() {
+      MAIN_ITEMS.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const key = state.setup + '_' + id;
+        if (state.checklist[key]) {
+          el.classList.add('checked');
+        } else {
+          el.classList.remove('checked');
+        }
+      });
+    }
 
-  // Reset if we haven't already reset for this window
-  if (getLastResetCookie() !== lastResetKey) {
-    setLastResetCookie(lastResetKey);
-    resetForm();
-  }
-}
+    // Render walk-away checked states
+    function renderWalkAway() {
+      WALK_ITEMS.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        if (state.checklist[id]) {
+          el.classList.add('checked');
+        } else {
+          el.classList.remove('checked');
+        }
+      });
+    }
 
-// Check every 30 seconds while app is open
-setInterval(checkScheduledReset, 30000);
-// Always check on load — catches any missed resets while app was closed
-checkScheduledReset();
+    // Render premarket question button states
+    function renderPremarket() {
+      for (let i = 1; i <= 6; i++) {
+        const ans = state.premarket[i];
+        if (i === 5) {
+          // Number input
+          const inp = document.getElementById('pm5-input');
+          if (inp && ans !== null) inp.value = ans;
+        } else {
+          const yesBtn = document.getElementById(`pm${i}-yes`);
+          const noBtn  = document.getElementById(`pm${i}-no`);
+          if (!yesBtn || !noBtn) continue;
+          yesBtn.className = 'pm-btn' + (ans === 'yes' ? ' selected-yes' : '');
+          noBtn.className  = 'pm-btn' + (ans === 'no'  ? ' selected-no'  : '');
+        }
+      }
+      // Update badge
+      updatePmBadge();
+    }
 
-/* ════════════════════════════════════════
-   INIT
-   Loads saved state and renders everything
-   on page load.
-════════════════════════════════════════ */
-document.getElementById('pmResult').classList.add('visible');
-loadProgress();
-renderAll('buy');
-renderAll('sell');
-updateProgress();
-</script>
+    // Update the PENDING/PASS/FAIL badge
+    function updatePmBadge() {
+      const badge = document.getElementById('premarketBadge');
+      if (!badge) return;
+      const pm = state.premarket;
+      const allAnswered = pm[1] && pm[2] && pm[3] && pm[4] && pm[5] && pm[6];
+      const anyNo = pm[1]==='no' || pm[2]==='no' || pm[3]==='no' || pm[4]==='no' || pm[6]==='no';
+
+      if (!allAnswered) {
+        badge.textContent = 'Pending';
+        badge.className = 'premarket-badge';
+      } else if (anyNo) {
+        badge.textContent = 'No Trade';
+        badge.className = 'premarket-badge fail';
+      } else {
+        badge.textContent = 'Ready';
+        badge.className = 'premarket-badge pass';
+      }
+    }
+
+    // Render premarket open/collapsed state
+    function renderPmOpen() {
+      const body    = document.getElementById('premarketBody');
+      const chevron = document.getElementById('premarketChevron');
+      if (state.pmOpen) {
+        body.classList.add('open');
+        chevron.classList.add('open');
+      } else {
+        body.classList.remove('open');
+        chevron.classList.remove('open');
+      }
+    }
+
+    // Render progress bar and count — scoped to current setup mode
+    function renderProgress() {
+      let total = 0;
+      let done  = 0;
+      MAIN_ITEMS.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el || el.classList.contains('hidden')) return;
+        total++;
+        const key = state.setup + '_' + id;
+        if (state.checklist[key]) done++;
+      });
+
+      // Invalidation yes/no counts as 1 item toward progress
+      // It counts as "done" whether answered Yes or No (any answer = acknowledged)
+      total++;
+      if (state.inv[state.setup] !== null) done++;
+
+      const pct = total > 0 ? (done / total) * 100 : 0;
+      document.getElementById('progressFill').style.width = pct + '%';
+      document.getElementById('progressCount').textContent = `${done} / ${total}`;
+    }
+
+    // Render buy/sell toggle active states
+    function renderSetupToggle() {
+      const buyBtn  = document.getElementById('toggleBuy');
+      const sellBtn = document.getElementById('toggleSell');
+      const label   = document.getElementById('setupModeLabel');
+      if (state.setup === 'buy') {
+        buyBtn.className  = 'toggle-btn active-buy';
+        sellBtn.className = 'toggle-btn';
+        label.textContent = 'Bullish · Long Setup';
+      } else {
+        buyBtn.className  = 'toggle-btn';
+        sellBtn.className = 'toggle-btn active-sell';
+        label.textContent = 'Bearish · Short Setup';
+      }
+    }
+
+    // =============================================
+    // TOGGLE A CHECKLIST ITEM
+    // State key is namespaced by setup mode so
+    // buy and sell have fully independent progress.
+    // =============================================
+    function toggleItem(id) {
+      const key = state.setup + '_' + id;
+      state.checklist[key] = !state.checklist[key];
+      saveChecklist();
+      renderChecklist();
+      renderProgress();
+    }
+
+    // Toggle walk-away items (shared across both modes — not namespaced)
+    function toggleWalk(id) {
+      state.checklist[id] = !state.checklist[id];
+      saveChecklist();
+      renderWalkAway();
+      renderProgress();
+    }
+
+    // =============================================
+    // SETUP MODE (Buy / Sell)
+    // Shows/hides direction-specific items and
+    // updates direction-sensitive label text.
+    // =============================================
+    function setSetup(mode) {
+      state.setup = mode;
+      saveSetup();
+      applySetup(mode, true);
+      renderSetupToggle();
+      renderChecklist();
+      renderProgress();
+      renderInv();
+    }
+
+    function applySetup(mode, animated) {
+      // Show/hide directional items
+      BUY_ONLY_IDS.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.toggle('hidden', mode !== 'buy');
+      });
+      SELL_ONLY_IDS.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.toggle('hidden', mode !== 'sell');
+      });
+
+      // Update direction-sensitive descriptions
+      const isBuy = mode === 'buy';
+
+      // item-1 desc
+      const d1 = document.getElementById('desc-1');
+      if (d1) d1.textContent = isBuy
+        ? 'Are we in an uptrend? Higher highs and higher lows (bullish)?'
+        : 'Are we in a downtrend? Lower highs and lower lows (bearish)?';
+
+      // item-6 desc: target
+      const d6 = document.getElementById('desc-6');
+      if (d6) d6.textContent = isBuy
+        ? 'Previous highs, equal highs, or liquidity pools above (bullish target).'
+        : 'Previous lows, equal lows, or liquidity pools below (bearish target).';
+
+      // item-10 desc: correction observe
+      const d10 = document.getElementById('desc-10');
+      if (d10) d10.textContent = isBuy
+        ? 'Price moves against the trend back through the Pre-Indication Level. Sellers temporarily step in. Let it happen.'
+        : 'Price moves against the trend back through the Pre-Indication Level. Buyers temporarily step in. Let it happen.';
+
+      // item-12 desc: invalidation
+      const d12 = document.getElementById('desc-12');
+      if (d12) d12.textContent = isBuy
+        ? 'If price breaks below a key swing (bullish setup) = correction failed. Walk away. Wait for new setup.'
+        : 'If price breaks above a key swing (bearish setup) = correction failed. Walk away. Wait for new setup.';
+
+      // item-13 desc: entry close
+      const d13 = document.getElementById('desc-13');
+      if (d13) d13.textContent = isBuy
+        ? 'Bullish: close back ABOVE the level. Correction is complete. Trend wants to continue up.'
+        : 'Bearish: close back BELOW the level. Correction is complete. Trend wants to continue down.';
+
+      // item-14 title: limit order type
+      const t14 = document.getElementById('title-14');
+      if (t14) t14.textContent = isBuy
+        ? 'Place Buy Limit at the defended swing level'
+        : 'Place Sell Limit at the defended swing level';
+
+      // item-16 desc: stop loss placement
+      const d16 = document.getElementById('desc-16');
+      if (d16) d16.textContent = isBuy
+        ? 'Bullish: set stop below the higher low of the correction. This is your invalidation level.'
+        : 'Bearish: set stop above the lower high of the correction. This is your invalidation level.';
+    }
+
+    // =============================================
+    // INVALIDATION YES/NO ANSWER (Correction section)
+    // Stored per setup mode in state.inv
+    // =============================================
+    // INVALIDATION YES/NO — toggle off if same answer tapped again
+    function invAnswer(answer) {
+      // If tapping the already-selected answer, deselect it
+      const current = state.inv[state.setup];
+      state.inv[state.setup] = current === answer ? null : answer;
+      localStorage.setItem('icc_inv_v1', JSON.stringify(state.inv));
+      renderInv();
+      renderProgress(); // always update progress immediately
+    }
+
+    function renderInv() {
+      const ans = state.inv[state.setup] || null;
+      const yesBtn = document.getElementById('inv-yes');
+      const noBtn  = document.getElementById('inv-no');
+      if (!yesBtn || !noBtn) return;
+      yesBtn.className = 'pm-btn' + (ans === 'yes' ? ' selected-yes' : '');
+      noBtn.className  = 'pm-btn' + (ans === 'no'  ? ' selected-no'  : '');
+    }
+
+    // =============================================
+    // PREMARKET ANSWER HANDLERS
+    // =============================================
+    function pmAnswer(questionNum, answer) {
+      state.premarket[questionNum] = answer;
+      savePremarket();
+      renderPremarket();
+    }
+
+    function pmNumber(questionNum, value) {
+      // Store number input value; treat empty as null
+      state.premarket[questionNum] = value !== '' ? value : null;
+      savePremarket();
+      updatePmBadge();
+    }
+
+    // =============================================
+    // TOGGLE PREMARKET PANEL (open/collapse)
+    // Called from both the header and the bottom
+    // "Collapse" button inside the panel.
+    // =============================================
+    function togglePremarket() {
+      state.pmOpen = !state.pmOpen;
+      savePmOpen();
+      renderPmOpen();
+    }
+
+    // =============================================
+    // CONFIRM RESET — clears main checklist only
+    // Premarket is intentionally NOT reset here.
+    // =============================================
+    function confirmReset() {
+      // Clear checklist items for the current setup mode only
+      const prefix = state.setup + '_';
+      const newChecklist = {};
+      Object.keys(state.checklist).forEach(key => {
+        if (!key.startsWith(prefix) && !WALK_ITEMS.includes(key)) {
+          newChecklist[key] = state.checklist[key];
+        }
+      });
+      state.checklist = newChecklist;
+      saveChecklist();
+
+      // Also clear the invalidation yes/no for the current mode
+      state.inv[state.setup] = null;
+      localStorage.setItem('icc_inv_v1', JSON.stringify(state.inv));
+
+      renderAll();
+    }
+
+    // =============================================
+    // START THE APP
+    // =============================================
+    init();
+  </script>
 
 </body>
 </html>
