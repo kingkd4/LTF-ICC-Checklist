@@ -24,6 +24,7 @@
 <!-- Optional: For Android Chrome -->
 <link rel="manifest" href="manifest.json">
 
+
   <style>
     /* =============================================
        CSS CUSTOM PROPERTIES (color palette & tokens)
@@ -343,7 +344,7 @@
       width: 52px;
       text-align: center;
       font-family: var(--font-body);
-      font-size: 13px;
+      font-size: 16px; /* must be 16px+ to prevent iOS auto-zoom */
       font-weight: 500;
       outline: none;
     }
@@ -883,15 +884,15 @@
 
   <!-- =============================================
        STICKY HEADER: progress bar + small reset
+       Hidden until progress starts (no space reserved)
   ============================================= -->
 
-  <div class="sticky-header">
+  <div class="sticky-header" id="stickyHeader">
     <span class="progress-label">Progress</span>
     <div class="progress-bar-wrap">
       <div class="progress-bar-fill" id="progressFill"></div>
     </div>
     <span class="progress-count" id="progressCount">0 / 0</span>
-    <!-- Small reset triggers the confirmation modal -->
     <button class="btn-reset-sm" onclick="confirmReset()">Reset</button>
   </div>
 
@@ -902,21 +903,14 @@
   <div class="content">
 
 
-<!-- Page title — styled after the ICC Strategy brand header -->
-<div class="page-title">
+<!-- Page title -->
+<div class="page-title" style="padding-top:18px;">
   <p class="subtitle" style="margin-bottom:6px;">One Disciplined Trade at a Time</p>
   <h1>ICC Strategy</h1>
   <div style="width:48px;height:2px;background:var(--accent);border-radius:2px;margin:10px auto 10px;opacity:0.5;"></div>
   <p class="subtitle" style="margin-bottom:8px;">Indication · Correction · Continuation</p>
   <span class="hearts">🩵💙🩵</span>
 </div>
-
-<!-- =============================================
-     PREMARKET CHECK SECTION
-     - Collapses/expands via header click
-     - Has a collapse button at the bottom too
-     - Resets at 7am and 4pm CST (checked on every open)
-============================================= -->
 <div class="premarket-card" id="premarketCard">
 
   <!-- Always-visible clickable header -->
@@ -1798,6 +1792,14 @@
       const pct = total > 0 ? (done / total) * 100 : 0;
       document.getElementById('progressFill').style.width = pct + '%';
       document.getElementById('progressCount').textContent = `${done} / ${total}`;
+
+      // Only show the sticky header once at least one item is checked
+      const header = document.getElementById('stickyHeader');
+      if (done > 0) {
+        header.classList.add('visible');
+      } else {
+        header.classList.remove('visible');
+      }
     }
 
     // Render buy/sell toggle active states
